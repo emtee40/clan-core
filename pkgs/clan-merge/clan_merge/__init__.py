@@ -109,9 +109,7 @@ def clan_merge(
                 print(
                     f"Would merge PR {pr['number']} in repo {repo} from user {pr['user']['login']}"
                 )
-                print(url)
             else:
-                print(url)
                 print("Merging PR " + str(pr["id"]))
                 data = dict(
                     Do="merge",
