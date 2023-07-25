@@ -59,7 +59,7 @@ def list_prs_to_merge(prs: list, allowed_users: list[str]) -> list:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="my-tool")
+    parser = argparse.ArgumentParser(description="Merge PRs on clan.lol")
     # parse a list of allowed users
     parser.add_argument(
         "--allowed-users",
