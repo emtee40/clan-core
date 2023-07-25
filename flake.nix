@@ -23,6 +23,7 @@
         ./templates/flake-module.nix
         ./templates/python-project/flake-module.nix
         ./pkgs/clan-cli/flake-module.nix
+        ./pkgs/clan-merge/flake-module.nix
       ];
       flake = {
         nixosModules = {
