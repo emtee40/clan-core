@@ -19,6 +19,7 @@
       ];
       imports = [
         ./flake-parts/action-flake-update
+        ./flake-parts/action-open-pull-request
         ./flake-parts/packages.nix
         ./flake-parts/formatting.nix
         ./flake-parts/writers
