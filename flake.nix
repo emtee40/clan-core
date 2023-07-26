@@ -18,6 +18,7 @@
         "aarch64-linux"
       ];
       imports = [
+        ./flake-parts/action-flake-update
         ./flake-parts/packages.nix
         ./flake-parts/formatting.nix
         ./flake-parts/writers
