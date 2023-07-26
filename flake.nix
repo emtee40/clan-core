@@ -20,9 +20,11 @@
       imports = [
         ./flake-parts/packages.nix
         ./flake-parts/formatting.nix
+        ./flake-parts/writers
         ./templates/flake-module.nix
         ./templates/python-project/flake-module.nix
         ./pkgs/clan-cli/flake-module.nix
+        ./pkgs/action-flake-update/flake-module.nix
       ];
       flake = {
         nixosModules = {
