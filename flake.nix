@@ -25,6 +25,7 @@
         ./templates/python-project/flake-module.nix
         ./pkgs/clan-cli/flake-module.nix
         ./pkgs/action-flake-update/flake-module.nix
+        ./pkgs/action-open-pull-request/flake-module.nix
       ];
       flake = {
         nixosModules = {
