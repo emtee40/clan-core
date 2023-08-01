@@ -33,6 +33,10 @@ let
       ;
   };
 
+  # argparse-schema = pkgs.callPackage ./pkgs/argparse-schema.nix {
+  #   inherit python3;
+  # };
+
   package = python3.pkgs.buildPythonPackage {
     inherit name src;
     format = "pyproject";
