@@ -1,7 +1,7 @@
 import argparse
 import sys
 
-from . import admin, secrets, ssh
+from . import admin, secrets, ssh, zerotier
 from .errors import ClanError
 
 has_argcomplete = True
@@ -31,6 +31,9 @@ def main() -> None:
 
     parser_secrets = subparsers.add_parser("secrets", help="manage secrets")
     secrets.register_parser(parser_secrets)
+
+    parser_zerotier = subparsers.add_parser("zerotier", help="create zerotier network")
+    zerotier.register_parser(parser_zerotier)
 
     if has_argcomplete:
         argcomplete.autocomplete(parser)
