@@ -895,6 +895,18 @@
           version = "5.14.3";
         };
       };
+      "@mui/icons-material" = {
+        "5.14.3" = {
+          fetchInfo = {
+            type = "tarball";
+            url = "https://registry.npmjs.org/@mui/icons-material/-/icons-material-5.14.3.tgz";
+            narHash = "sha256-wmY7EzOahWuCF2g5vpcOeFZ8+iJKwyFLHsQiXh1R2jY=";
+          };
+          ident = "@mui/icons-material";
+          treeInfo = { };
+          version = "5.14.3";
+        };
+      };
       "@mui/material" = {
         "5.14.3" = {
           depInfo = {
@@ -6643,6 +6655,11 @@
               pin = "11.11.0";
               runtime = true;
             };
+            "@mui/icons-material" = {
+              descriptor = "^5.14.3";
+              pin = "5.14.3";
+              runtime = true;
+            };
             "@mui/material" = {
               descriptor = "^5.14.3";
               pin = "5.14.3";
@@ -6855,6 +6872,9 @@
             };
             "node_modules/@mui/core-downloads-tracker" = {
               key = "@mui/core-downloads-tracker/5.14.3";
+            };
+            "node_modules/@mui/icons-material" = {
+              key = "@mui/icons-material/5.14.3";
             };
             "node_modules/@mui/material" = {
               key = "@mui/material/5.14.3";
