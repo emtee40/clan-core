@@ -148,11 +148,11 @@ def zerotier_controller() -> Iterator[ZerotierController]:
 
 
 # TODO: allow merging more network configuration here
-def create_network(private: bool = False) -> dict:
+def create_network() -> dict:
     with zerotier_controller() as controller:
         network = controller.create_network()
         return {
-            "controller": controller,
+            "secret": controller.secret,
             "networkid": network["nwid"],
         }
 
@@ -164,7 +164,7 @@ def main(args: argparse.Namespace) -> None:
     with open(outpath / "network.id", "w+") as nwid_file:
         nwid_file.write(zerotier["networkid"])
     with open(outpath / "identity.secret", "w+") as secret_file:
-        secret_file.write(zerotier["controller"].secret)
+        secret_file.write(zerotier["secret"])
 
 
 def register_parser(parser: argparse.ArgumentParser) -> None:
