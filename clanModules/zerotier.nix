@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.clan.networking.zerotier;
 in
@@ -39,6 +39,10 @@ in
       joinNetworks = [ cfg.networkId ];
     };
   } // lib.mkIf cfg.controller.enable {
+    # only the controller needs to have the key in the repo, the other clients can be dynamic
+    # we generate the zerotier code manually for the controller, since it's part of the bootstrap command
+    clan.secrets."identity.secret".generator = null;
+
     systemd.tmpfiles.rules = [
       "L+ /var/lib/zerotierone/controller.d/network/${cfg.networkId}.json - - - - ${pkgs.writeText "net.json" builtins.toJSON {
         authTokens = [
