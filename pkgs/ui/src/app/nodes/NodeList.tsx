@@ -238,57 +238,57 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
     if (somethingSelected) {
       return (
 
-          <Toolbar
-            sx={{
-              pl: { sm: 2 },
-              pr: { xs: 1, sm: 1 },
-              bgcolor: (theme) =>
-                alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-            }}>
-            <Tooltip title="Clear">
-              <IconButton onClick={onClear}>
-                <ClearIcon />
-              </IconButton>
-            </Tooltip>
-            <Typography
-              sx={{ flex: '1 1 100%' }}
-              color="inherit"
-              style={{ fontSize: 18, marginBottom: 2.5, marginLeft: 3 }}
-              component="div"
-            >
-              {selected} selected
-            </Typography>
-            <Tooltip title="Edit">
-              <IconButton>
-                <ModeIcon />
-              </IconButton>
-            </Tooltip>
-          </Toolbar >
+        <Toolbar
+          sx={{
+            pl: { sm: 2 },
+            pr: { xs: 1, sm: 1 },
+            bgcolor: (theme) =>
+              alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+          }}>
+          <Tooltip title="Clear">
+            <IconButton onClick={onClear}>
+              <ClearIcon />
+            </IconButton>
+          </Tooltip>
+          <Typography
+            sx={{ flex: '1 1 100%' }}
+            color="inherit"
+            style={{ fontSize: 18, marginBottom: 2.5, marginLeft: 3 }}
+            component="div"
+          >
+            {selected} selected
+          </Typography>
+          <Tooltip title="Edit">
+            <IconButton>
+              <ModeIcon />
+            </IconButton>
+          </Tooltip>
+        </Toolbar >
 
 
       );
     } else {
       return (
-   
-          <Toolbar
-            sx={{
-              pl: { sm: 2 },
-              pr: { xs: 1, sm: 1 }
-            }}>
-            <Typography
-              sx={{ flex: '1 1 100%' }}
-              variant="h6"
-              id="tableTitle"
-              component="div"
-            >
-              Nodes
-            </Typography>
-            <Tooltip title="Filter list">
-              <IconButton>
-                <FilterListIcon />
-              </IconButton>
-            </Tooltip>
-          </Toolbar >
+
+        <Toolbar
+          sx={{
+            pl: { sm: 2 },
+            pr: { xs: 1, sm: 1 }
+          }}>
+          <Typography
+            sx={{ flex: '1 1 100%' }}
+            variant="h6"
+            id="tableTitle"
+            component="div"
+          >
+            Nodes
+          </Typography>
+          <Tooltip title="Filter list">
+            <IconButton>
+              <FilterListIcon />
+            </IconButton>
+          </Tooltip>
+        </Toolbar >
 
       );
     }
@@ -335,6 +335,7 @@ export default function EnhancedTable() {
     setDense(event.target.checked);
   };
 
+  // TODO: Make a number to increase comparison speed and ui performance
   const isSelected = (name: string) => name === selected;
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -352,7 +353,7 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
+      <Paper sx={{ width: '100%', mb: 2 }} id="test">
         <EnhancedTableToolbar selected={selected} onClear={() => setSelected(undefined)} />
         <TableContainer>
           <Table

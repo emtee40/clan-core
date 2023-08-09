@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  experimental: {
-    esmExternals: 'loose'
-  },
+
+  images: { unoptimized: true },
 };
 
 module.exports = nextConfig;

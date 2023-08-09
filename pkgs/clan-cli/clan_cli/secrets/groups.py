@@ -48,10 +48,21 @@ def list_command(args: argparse.Namespace) -> None:
                     print(f)
 
 
+def list_directory(directory: Path) -> str:
+    if not directory.exists():
+        return "{directory} does not exist"
+    msg = f"\n{directory} contains:"
+    for f in directory.iterdir():
+        msg += f"\n  {f.name}"
+    return msg
+
+
 def add_member(group_folder: Path, source_folder: Path, name: str) -> None:
     source = source_folder / name
     if not source.exists():
-        raise ClanError(f"{name} does not exist in {source_folder}")
+        msg = f"{name} does not exist in {source_folder}"
+        msg += list_directory(source_folder)
+        raise ClanError(msg)
     group_folder.mkdir(parents=True, exist_ok=True)
     user_target = group_folder / name
     if user_target.exists():
@@ -60,13 +71,15 @@ def add_member(group_folder: Path, source_folder: Path, name: str) -> None:
                 f"Cannot add user {name}. {user_target} exists but is not a symlink"
             )
         os.remove(user_target)
-    user_target.symlink_to(source)
+    user_target.symlink_to(os.path.relpath(source, user_target.parent))
 
 
 def remove_member(group_folder: Path, name: str) -> None:
     target = group_folder / name
     if not target.exists():
-        raise ClanError(f"{name} does not exist in group in {group_folder}")
+        msg = f"{name} does not exist in group in {group_folder}"
+        msg += list_directory(group_folder)
+        raise ClanError(msg)
     os.remove(target)
 
     if len(os.listdir(group_folder)) == 0:
@@ -102,12 +115,12 @@ def add_group_argument(parser: argparse.ArgumentParser) -> None:
 
 def add_secret_command(args: argparse.Namespace) -> None:
     secrets.allow_member(
-        secrets.groups_folder(args.group), sops_machines_folder(), args.group
+        secrets.groups_folder(args.secret), sops_groups_folder(), args.group
     )
 
 
 def remove_secret_command(args: argparse.Namespace) -> None:
-    secrets.disallow_member(secrets.groups_folder(args.group), args.group)
+    secrets.disallow_member(secrets.groups_folder(args.secret), args.group)
 
 
 def register_groups_parser(parser: argparse.ArgumentParser) -> None:

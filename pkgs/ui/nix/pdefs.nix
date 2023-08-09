@@ -32,6 +32,7 @@
           depInfo = {
             "@babel/highlight" = {
               descriptor = "^7.22.5";
+              pin = "7.22.5";
               runtime = true;
             };
           };
@@ -50,6 +51,7 @@
           depInfo = {
             "@babel/types" = {
               descriptor = "^7.22.5";
+              pin = "7.22.5";
               runtime = true;
             };
           };
@@ -94,14 +96,17 @@
           depInfo = {
             "@babel/helper-validator-identifier" = {
               descriptor = "^7.22.5";
+              pin = "7.22.5";
               runtime = true;
             };
             chalk = {
               descriptor = "^2.0.0";
+              pin = "2.4.2";
               runtime = true;
             };
             js-tokens = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
           };
@@ -120,6 +125,7 @@
           depInfo = {
             regenerator-runtime = {
               descriptor = "^0.13.11";
+              pin = "0.13.11";
               runtime = true;
             };
           };
@@ -138,14 +144,17 @@
           depInfo = {
             "@babel/helper-string-parser" = {
               descriptor = "^7.22.5";
+              pin = "7.22.5";
               runtime = true;
             };
             "@babel/helper-validator-identifier" = {
               descriptor = "^7.22.5";
+              pin = "7.22.5";
               runtime = true;
             };
             to-fast-properties = {
               descriptor = "^2.0.0";
+              pin = "2.0.0";
               runtime = true;
             };
           };
@@ -164,46 +173,57 @@
           depInfo = {
             "@babel/helper-module-imports" = {
               descriptor = "^7.16.7";
+              pin = "7.22.5";
               runtime = true;
             };
             "@babel/runtime" = {
               descriptor = "^7.18.3";
+              pin = "7.22.6";
               runtime = true;
             };
             "@emotion/hash" = {
               descriptor = "^0.9.1";
+              pin = "0.9.1";
               runtime = true;
             };
             "@emotion/memoize" = {
               descriptor = "^0.8.1";
+              pin = "0.8.1";
               runtime = true;
             };
             "@emotion/serialize" = {
               descriptor = "^1.1.2";
+              pin = "1.1.2";
               runtime = true;
             };
             babel-plugin-macros = {
               descriptor = "^3.1.0";
+              pin = "3.1.0";
               runtime = true;
             };
             convert-source-map = {
               descriptor = "^1.5.0";
+              pin = "1.9.0";
               runtime = true;
             };
             escape-string-regexp = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
             find-root = {
               descriptor = "^1.1.0";
+              pin = "1.1.0";
               runtime = true;
             };
             source-map = {
               descriptor = "^0.5.7";
+              pin = "0.5.7";
               runtime = true;
             };
             stylis = {
               descriptor = "4.2.0";
+              pin = "4.2.0";
               runtime = true;
             };
           };
@@ -222,22 +242,27 @@
           depInfo = {
             "@emotion/memoize" = {
               descriptor = "^0.8.1";
+              pin = "0.8.1";
               runtime = true;
             };
             "@emotion/sheet" = {
               descriptor = "^1.2.2";
+              pin = "1.2.2";
               runtime = true;
             };
             "@emotion/utils" = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
             "@emotion/weak-memoize" = {
               descriptor = "^0.3.1";
+              pin = "0.3.1";
               runtime = true;
             };
             stylis = {
               descriptor = "4.2.0";
+              pin = "4.2.0";
               runtime = true;
             };
           };
@@ -269,6 +294,7 @@
           depInfo = {
             "@emotion/memoize" = {
               descriptor = "^0.8.1";
+              pin = "0.8.1";
               runtime = true;
             };
           };
@@ -300,34 +326,42 @@
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.18.3";
+              pin = "7.22.6";
               runtime = true;
             };
             "@emotion/babel-plugin" = {
               descriptor = "^11.11.0";
+              pin = "11.11.0";
               runtime = true;
             };
             "@emotion/cache" = {
               descriptor = "^11.11.0";
+              pin = "11.11.0";
               runtime = true;
             };
             "@emotion/serialize" = {
               descriptor = "^1.1.2";
+              pin = "1.1.2";
               runtime = true;
             };
             "@emotion/use-insertion-effect-with-fallbacks" = {
               descriptor = "^1.0.1";
+              pin = "1.0.1";
               runtime = true;
             };
             "@emotion/utils" = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
             "@emotion/weak-memoize" = {
               descriptor = "^0.3.1";
+              pin = "0.3.1";
               runtime = true;
             };
             hoist-non-react-statics = {
               descriptor = "^3.3.1";
+              pin = "3.3.2";
               runtime = true;
             };
           };
@@ -355,22 +389,27 @@
           depInfo = {
             "@emotion/hash" = {
               descriptor = "^0.9.1";
+              pin = "0.9.1";
               runtime = true;
             };
             "@emotion/memoize" = {
               descriptor = "^0.8.1";
+              pin = "0.8.1";
               runtime = true;
             };
             "@emotion/unitless" = {
               descriptor = "^0.8.1";
+              pin = "0.8.1";
               runtime = true;
             };
             "@emotion/utils" = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
             csstype = {
               descriptor = "^3.0.2";
+              pin = "3.1.2";
               runtime = true;
             };
           };
@@ -402,26 +441,32 @@
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.18.3";
+              pin = "7.22.6";
               runtime = true;
             };
             "@emotion/babel-plugin" = {
               descriptor = "^11.11.0";
+              pin = "11.11.0";
               runtime = true;
             };
             "@emotion/is-prop-valid" = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
             "@emotion/serialize" = {
               descriptor = "^1.1.2";
+              pin = "1.1.2";
               runtime = true;
             };
             "@emotion/use-insertion-effect-with-fallbacks" = {
               descriptor = "^1.0.1";
+              pin = "1.0.1";
               runtime = true;
             };
             "@emotion/utils" = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
           };
@@ -509,6 +554,7 @@
           depInfo = {
             eslint-visitor-keys = {
               descriptor = "^3.3.0";
+              pin = "3.4.2";
               runtime = true;
             };
           };
@@ -545,38 +591,47 @@
           depInfo = {
             ajv = {
               descriptor = "^6.12.4";
+              pin = "6.12.6";
               runtime = true;
             };
             debug = {
               descriptor = "^4.3.2";
+              pin = "4.3.4";
               runtime = true;
             };
             espree = {
               descriptor = "^9.6.0";
+              pin = "9.6.1";
               runtime = true;
             };
             globals = {
               descriptor = "^13.19.0";
+              pin = "13.20.0";
               runtime = true;
             };
             ignore = {
               descriptor = "^5.2.0";
+              pin = "5.2.4";
               runtime = true;
             };
             import-fresh = {
               descriptor = "^3.2.1";
+              pin = "3.3.0";
               runtime = true;
             };
             js-yaml = {
               descriptor = "^4.1.0";
+              pin = "4.1.0";
               runtime = true;
             };
             minimatch = {
               descriptor = "^3.1.2";
+              pin = "3.1.2";
               runtime = true;
             };
             strip-json-comments = {
               descriptor = "^3.1.1";
+              pin = "3.1.1";
               runtime = true;
             };
           };
@@ -608,14 +663,17 @@
           depInfo = {
             "@humanwhocodes/object-schema" = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
             debug = {
               descriptor = "^4.1.1";
+              pin = "4.3.4";
               runtime = true;
             };
             minimatch = {
               descriptor = "^3.0.5";
+              pin = "3.1.2";
               runtime = true;
             };
           };
@@ -660,14 +718,17 @@
           depInfo = {
             "@jridgewell/set-array" = {
               descriptor = "^1.0.1";
+              pin = "1.1.2";
               runtime = true;
             };
             "@jridgewell/sourcemap-codec" = {
               descriptor = "^1.4.10";
+              pin = "1.4.15";
               runtime = true;
             };
             "@jridgewell/trace-mapping" = {
               descriptor = "^0.3.9";
+              pin = "0.3.18";
               runtime = true;
             };
           };
@@ -736,10 +797,12 @@
           depInfo = {
             "@jridgewell/resolve-uri" = {
               descriptor = "3.1.0";
+              pin = "3.1.0";
               runtime = true;
             };
             "@jridgewell/sourcemap-codec" = {
               descriptor = "1.4.14";
+              pin = "1.4.14";
               runtime = true;
             };
           };
@@ -758,34 +821,42 @@
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.22.6";
+              pin = "7.22.6";
               runtime = true;
             };
             "@emotion/is-prop-valid" = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
             "@mui/types" = {
               descriptor = "^7.2.4";
+              pin = "7.2.4";
               runtime = true;
             };
             "@mui/utils" = {
               descriptor = "^5.14.3";
+              pin = "5.14.3";
               runtime = true;
             };
             "@popperjs/core" = {
               descriptor = "^2.11.8";
+              pin = "2.11.8";
               runtime = true;
             };
             clsx = {
               descriptor = "^2.0.0";
+              pin = "2.0.0";
               runtime = true;
             };
             prop-types = {
               descriptor = "^15.8.1";
+              pin = "15.8.1";
               runtime = true;
             };
             react-is = {
               descriptor = "^18.2.0";
+              pin = "18.2.0";
               runtime = true;
             };
           };
@@ -829,6 +900,7 @@
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.22.6";
+              pin = "7.22.6";
               runtime = true;
             };
           };
@@ -859,50 +931,62 @@
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.22.6";
+              pin = "7.22.6";
               runtime = true;
             };
             "@mui/base" = {
               descriptor = "5.0.0-beta.9";
+              pin = "5.0.0-beta.9";
               runtime = true;
             };
             "@mui/core-downloads-tracker" = {
               descriptor = "^5.14.3";
+              pin = "5.14.3";
               runtime = true;
             };
             "@mui/system" = {
               descriptor = "^5.14.3";
+              pin = "5.14.3";
               runtime = true;
             };
             "@mui/types" = {
               descriptor = "^7.2.4";
+              pin = "7.2.4";
               runtime = true;
             };
             "@mui/utils" = {
               descriptor = "^5.14.3";
+              pin = "5.14.3";
               runtime = true;
             };
             "@types/react-transition-group" = {
               descriptor = "^4.4.6";
+              pin = "4.4.6";
               runtime = true;
             };
             clsx = {
               descriptor = "^2.0.0";
+              pin = "2.0.0";
               runtime = true;
             };
             csstype = {
               descriptor = "^3.1.2";
+              pin = "3.1.2";
               runtime = true;
             };
             prop-types = {
               descriptor = "^15.8.1";
+              pin = "15.8.1";
               runtime = true;
             };
             react-is = {
               descriptor = "^18.2.0";
+              pin = "18.2.0";
               runtime = true;
             };
             react-transition-group = {
               descriptor = "^4.4.5";
+              pin = "4.4.5";
               runtime = true;
             };
           };
@@ -941,14 +1025,17 @@
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.22.5";
+              pin = "7.22.6";
               runtime = true;
             };
             "@mui/utils" = {
               descriptor = "^5.13.7";
+              pin = "5.14.3";
               runtime = true;
             };
             prop-types = {
               descriptor = "^15.8.1";
+              pin = "15.8.1";
               runtime = true;
             };
           };
@@ -976,18 +1063,22 @@
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.21.0";
+              pin = "7.22.6";
               runtime = true;
             };
             "@emotion/cache" = {
               descriptor = "^11.11.0";
+              pin = "11.11.0";
               runtime = true;
             };
             csstype = {
               descriptor = "^3.1.2";
+              pin = "3.1.2";
               runtime = true;
             };
             prop-types = {
               descriptor = "^15.8.1";
+              pin = "15.8.1";
               runtime = true;
             };
           };
@@ -1019,34 +1110,42 @@
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.22.6";
+              pin = "7.22.6";
               runtime = true;
             };
             "@mui/private-theming" = {
               descriptor = "^5.13.7";
+              pin = "5.13.7";
               runtime = true;
             };
             "@mui/styled-engine" = {
               descriptor = "^5.13.2";
+              pin = "5.13.2";
               runtime = true;
             };
             "@mui/types" = {
               descriptor = "^7.2.4";
+              pin = "7.2.4";
               runtime = true;
             };
             "@mui/utils" = {
               descriptor = "^5.14.3";
+              pin = "5.14.3";
               runtime = true;
             };
             clsx = {
               descriptor = "^2.0.0";
+              pin = "2.0.0";
               runtime = true;
             };
             csstype = {
               descriptor = "^3.1.2";
+              pin = "3.1.2";
               runtime = true;
             };
             prop-types = {
               descriptor = "^15.8.1";
+              pin = "15.8.1";
               runtime = true;
             };
           };
@@ -1101,22 +1200,27 @@
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.22.6";
+              pin = "7.22.6";
               runtime = true;
             };
             "@types/prop-types" = {
               descriptor = "^15.7.5";
+              pin = "15.7.5";
               runtime = true;
             };
             "@types/react-is" = {
               descriptor = "^18.2.1";
+              pin = "18.2.1";
               runtime = true;
             };
             prop-types = {
               descriptor = "^15.8.1";
+              pin = "15.8.1";
               runtime = true;
             };
             react-is = {
               descriptor = "^18.2.0";
+              pin = "18.2.0";
               runtime = true;
             };
           };
@@ -1153,6 +1257,7 @@
           depInfo = {
             glob = {
               descriptor = "7.1.7";
+              pin = "7.1.7";
               runtime = true;
             };
           };
@@ -1355,455 +1460,17 @@
           version = "13.4.12";
         };
       };
-      "@nivo/annotations" = {
-        "0.83.0" = {
-          depInfo = {
-            "@nivo/colors" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@nivo/core" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@react-spring/web" = {
-              descriptor = "9.4.5 || ^9.7.2";
-              runtime = true;
-            };
-            "@types/prop-types" = {
-              descriptor = "^15.7.2";
-              runtime = true;
-            };
-            lodash = {
-              descriptor = "^4.17.21";
-              runtime = true;
-            };
-            prop-types = {
-              descriptor = "^15.7.2";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-YXcyMRPRpasPKPZF4h2gMUeOS9t8648hPLeyP8JAPuo=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@nivo/annotations/-/annotations-0.83.0.tgz";
-          };
-          ident = "@nivo/annotations";
-          ltype = "file";
-          peerInfo = {
-            react = {
-              descriptor = ">= 16.14.0 < 19.0.0";
-            };
-          };
-          version = "0.83.0";
-        };
-      };
-      "@nivo/axes" = {
-        "0.83.0" = {
-          depInfo = {
-            "@nivo/core" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@nivo/scales" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@react-spring/web" = {
-              descriptor = "9.4.5 || ^9.7.2";
-              runtime = true;
-            };
-            "@types/d3-format" = {
-              descriptor = "^1.4.1";
-              runtime = true;
-            };
-            "@types/d3-time-format" = {
-              descriptor = "^2.3.1";
-              runtime = true;
-            };
-            "@types/prop-types" = {
-              descriptor = "^15.7.2";
-              runtime = true;
-            };
-            d3-format = {
-              descriptor = "^1.4.4";
-              runtime = true;
-            };
-            d3-time-format = {
-              descriptor = "^3.0.0";
-              runtime = true;
-            };
-            prop-types = {
-              descriptor = "^15.7.2";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-2cZV+EZzOolZfZ9O0S7IZGypMQEJEaKiG0v9aXDVqsI=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@nivo/axes/-/axes-0.83.0.tgz";
-          };
-          ident = "@nivo/axes";
-          ltype = "file";
-          peerInfo = {
-            react = {
-              descriptor = ">= 16.14.0 < 19.0.0";
-            };
-          };
-          version = "0.83.0";
-        };
-      };
-      "@nivo/bar" = {
-        "0.83.0" = {
-          depInfo = {
-            "@nivo/annotations" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@nivo/axes" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@nivo/colors" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@nivo/core" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@nivo/legends" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@nivo/scales" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@nivo/tooltip" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@react-spring/web" = {
-              descriptor = "9.4.5 || ^9.7.2";
-              runtime = true;
-            };
-            "@types/d3-scale" = {
-              descriptor = "^3.2.3";
-              runtime = true;
-            };
-            "@types/d3-shape" = {
-              descriptor = "^2.0.0";
-              runtime = true;
-            };
-            d3-scale = {
-              descriptor = "^3.2.3";
-              runtime = true;
-            };
-            d3-shape = {
-              descriptor = "^1.3.5";
-              runtime = true;
-            };
-            lodash = {
-              descriptor = "^4.17.21";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-K56PaCqNuNgH8jbk+Irx6GcbR2fUeA98qTr4OghrJV0=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@nivo/bar/-/bar-0.83.0.tgz";
-          };
-          ident = "@nivo/bar";
-          ltype = "file";
-          peerInfo = {
-            react = {
-              descriptor = ">= 16.14.0 < 19.0.0";
-            };
-          };
-          version = "0.83.0";
-        };
-      };
-      "@nivo/colors" = {
-        "0.83.0" = {
-          depInfo = {
-            "@nivo/core" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@types/d3-color" = {
-              descriptor = "^2.0.0";
-              runtime = true;
-            };
-            "@types/d3-scale" = {
-              descriptor = "^3.2.3";
-              runtime = true;
-            };
-            "@types/d3-scale-chromatic" = {
-              descriptor = "^2.0.0";
-              runtime = true;
-            };
-            "@types/prop-types" = {
-              descriptor = "^15.7.2";
-              runtime = true;
-            };
-            d3-color = {
-              descriptor = "^3.1.0";
-              runtime = true;
-            };
-            d3-scale = {
-              descriptor = "^3.2.3";
-              runtime = true;
-            };
-            d3-scale-chromatic = {
-              descriptor = "^2.0.0";
-              runtime = true;
-            };
-            lodash = {
-              descriptor = "^4.17.21";
-              runtime = true;
-            };
-            prop-types = {
-              descriptor = "^15.7.2";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-S4KdDFTiPik/CgytZkiAeKznXPLD23BMHWLSfDi5lD8=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@nivo/colors/-/colors-0.83.0.tgz";
-          };
-          ident = "@nivo/colors";
-          ltype = "file";
-          peerInfo = {
-            react = {
-              descriptor = ">= 16.14.0 < 19.0.0";
-            };
-          };
-          version = "0.83.0";
-        };
-      };
-      "@nivo/core" = {
-        "0.83.0" = {
-          depInfo = {
-            "@nivo/recompose" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@nivo/tooltip" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@react-spring/web" = {
-              descriptor = "9.4.5 || ^9.7.2";
-              runtime = true;
-            };
-            "@types/d3-shape" = {
-              descriptor = "^2.0.0";
-              runtime = true;
-            };
-            d3-color = {
-              descriptor = "^3.1.0";
-              runtime = true;
-            };
-            d3-format = {
-              descriptor = "^1.4.4";
-              runtime = true;
-            };
-            d3-interpolate = {
-              descriptor = "^2.0.1";
-              runtime = true;
-            };
-            d3-scale = {
-              descriptor = "^3.2.3";
-              runtime = true;
-            };
-            d3-scale-chromatic = {
-              descriptor = "^2.0.0";
-              runtime = true;
-            };
-            d3-shape = {
-              descriptor = "^1.3.5";
-              runtime = true;
-            };
-            d3-time-format = {
-              descriptor = "^3.0.0";
-              runtime = true;
-            };
-            lodash = {
-              descriptor = "^4.17.21";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-fif60NnF/ikHgWKIpQ6X/SFFE+sqYw36tSEG3XluA2Y=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@nivo/core/-/core-0.83.0.tgz";
-          };
-          ident = "@nivo/core";
-          ltype = "file";
-          peerInfo = {
-            prop-types = {
-              descriptor = ">= 15.5.10 < 16.0.0";
-            };
-            react = {
-              descriptor = ">= 16.14.0 < 19.0.0";
-            };
-          };
-          version = "0.83.0";
-        };
-      };
-      "@nivo/legends" = {
-        "0.83.0" = {
-          depInfo = {
-            "@nivo/colors" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@nivo/core" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@types/d3-scale" = {
-              descriptor = "^3.2.3";
-              runtime = true;
-            };
-            "@types/prop-types" = {
-              descriptor = "^15.7.2";
-              runtime = true;
-            };
-            d3-scale = {
-              descriptor = "^3.2.3";
-              runtime = true;
-            };
-            prop-types = {
-              descriptor = "^15.7.2";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-5L1kGFIETl4++J0Fo8kPmNhZX98Yfm0CrjwsKG3BbXg=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@nivo/legends/-/legends-0.83.0.tgz";
-          };
-          ident = "@nivo/legends";
-          ltype = "file";
-          peerInfo = {
-            react = {
-              descriptor = ">= 16.14.0 < 19.0.0";
-            };
-          };
-          version = "0.83.0";
-        };
-      };
-      "@nivo/recompose" = {
-        "0.83.0" = {
-          depInfo = {
-            "@types/prop-types" = {
-              descriptor = "^15.7.2";
-              runtime = true;
-            };
-            "@types/react-lifecycles-compat" = {
-              descriptor = "^3.0.1";
-              runtime = true;
-            };
-            prop-types = {
-              descriptor = "^15.7.2";
-              runtime = true;
-            };
-            react-lifecycles-compat = {
-              descriptor = "^3.0.4";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-xAeN4xDZL12DBmiHHVg2UY383ZIcR6UzTXyzRWq74ew=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@nivo/recompose/-/recompose-0.83.0.tgz";
-          };
-          ident = "@nivo/recompose";
-          ltype = "file";
-          peerInfo = {
-            react = {
-              descriptor = ">= 16.14.0 < 19.0.0";
-            };
-          };
-          version = "0.83.0";
-        };
-      };
-      "@nivo/scales" = {
-        "0.83.0" = {
-          depInfo = {
-            "@types/d3-scale" = {
-              descriptor = "^3.2.3";
-              runtime = true;
-            };
-            "@types/d3-time" = {
-              descriptor = "^1.1.1";
-              runtime = true;
-            };
-            "@types/d3-time-format" = {
-              descriptor = "^3.0.0";
-              runtime = true;
-            };
-            d3-scale = {
-              descriptor = "^3.2.3";
-              runtime = true;
-            };
-            d3-time = {
-              descriptor = "^1.0.11";
-              runtime = true;
-            };
-            d3-time-format = {
-              descriptor = "^3.0.0";
-              runtime = true;
-            };
-            lodash = {
-              descriptor = "^4.17.21";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-ENXOAvNxWUy9oQyt3yRvXV4HQvbM8gQv9PWTHiJhUpo=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@nivo/scales/-/scales-0.83.0.tgz";
-          };
-          ident = "@nivo/scales";
-          ltype = "file";
-          version = "0.83.0";
-        };
-      };
-      "@nivo/tooltip" = {
-        "0.83.0" = {
-          depInfo = {
-            "@nivo/core" = {
-              descriptor = "0.83.0";
-              runtime = true;
-            };
-            "@react-spring/web" = {
-              descriptor = "9.4.5 || ^9.7.2";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-1VxoHwYfChs2AcdqSLWjBx4sYb+2okU13vA3d0Ynfzs=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@nivo/tooltip/-/tooltip-0.83.0.tgz";
-          };
-          ident = "@nivo/tooltip";
-          ltype = "file";
-          version = "0.83.0";
-        };
-      };
       "@nodelib/fs.scandir" = {
         "2.1.5" = {
           depInfo = {
             "@nodelib/fs.stat" = {
               descriptor = "2.0.5";
+              pin = "2.0.5";
               runtime = true;
             };
             run-parallel = {
               descriptor = "^1.1.9";
+              pin = "1.2.0";
               runtime = true;
             };
           };
@@ -1835,10 +1502,12 @@
           depInfo = {
             "@nodelib/fs.scandir" = {
               descriptor = "2.1.5";
+              pin = "2.1.5";
               runtime = true;
             };
             fastq = {
               descriptor = "^1.6.0";
+              pin = "1.15.0";
               runtime = true;
             };
           };
@@ -1857,26 +1526,32 @@
           depInfo = {
             cross-spawn = {
               descriptor = "^7.0.3";
+              pin = "7.0.3";
               runtime = true;
             };
             fast-glob = {
               descriptor = "^3.3.0";
+              pin = "3.3.1";
               runtime = true;
             };
             is-glob = {
               descriptor = "^4.0.3";
+              pin = "4.0.3";
               runtime = true;
             };
             open = {
               descriptor = "^9.1.0";
+              pin = "9.1.0";
               runtime = true;
             };
             picocolors = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             tslib = {
               descriptor = "^2.6.0";
+              pin = "2.6.1";
               runtime = true;
             };
           };
@@ -1903,138 +1578,6 @@
           version = "2.11.8";
         };
       };
-      "@react-spring/animated" = {
-        "9.7.3" = {
-          depInfo = {
-            "@react-spring/shared" = {
-              descriptor = "~9.7.3";
-              runtime = true;
-            };
-            "@react-spring/types" = {
-              descriptor = "~9.7.3";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-Q4dsKAcGhfmEkax4o4PnnSrK0nZq8Gyrvcgn/z+Vbcs=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@react-spring/animated/-/animated-9.7.3.tgz";
-          };
-          ident = "@react-spring/animated";
-          ltype = "file";
-          peerInfo = {
-            react = {
-              descriptor = "^16.8.0 || ^17.0.0 || ^18.0.0";
-            };
-          };
-          version = "9.7.3";
-        };
-      };
-      "@react-spring/core" = {
-        "9.7.3" = {
-          depInfo = {
-            "@react-spring/animated" = {
-              descriptor = "~9.7.3";
-              runtime = true;
-            };
-            "@react-spring/shared" = {
-              descriptor = "~9.7.3";
-              runtime = true;
-            };
-            "@react-spring/types" = {
-              descriptor = "~9.7.3";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-1QHKf9zPB32wsMUz739QXG2SEpv+aOblr7ORWr3KIHY=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@react-spring/core/-/core-9.7.3.tgz";
-          };
-          ident = "@react-spring/core";
-          ltype = "file";
-          peerInfo = {
-            react = {
-              descriptor = "^16.8.0 || ^17.0.0 || ^18.0.0";
-            };
-          };
-          version = "9.7.3";
-        };
-      };
-      "@react-spring/shared" = {
-        "9.7.3" = {
-          depInfo = {
-            "@react-spring/types" = {
-              descriptor = "~9.7.3";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-90lduuF/5chu1YvHJHuDxgPTdH9+M9DR71SwyKohDbQ=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@react-spring/shared/-/shared-9.7.3.tgz";
-          };
-          ident = "@react-spring/shared";
-          ltype = "file";
-          peerInfo = {
-            react = {
-              descriptor = "^16.8.0 || ^17.0.0 || ^18.0.0";
-            };
-          };
-          version = "9.7.3";
-        };
-      };
-      "@react-spring/types" = {
-        "9.7.3" = {
-          fetchInfo = {
-            narHash = "sha256-UQ3ectSF/Z0FVLnHWfxGZrtb6fNof74S/c02j3xf1Fc=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@react-spring/types/-/types-9.7.3.tgz";
-          };
-          ident = "@react-spring/types";
-          ltype = "file";
-          treeInfo = { };
-          version = "9.7.3";
-        };
-      };
-      "@react-spring/web" = {
-        "9.7.3" = {
-          depInfo = {
-            "@react-spring/animated" = {
-              descriptor = "~9.7.3";
-              runtime = true;
-            };
-            "@react-spring/core" = {
-              descriptor = "~9.7.3";
-              runtime = true;
-            };
-            "@react-spring/shared" = {
-              descriptor = "~9.7.3";
-              runtime = true;
-            };
-            "@react-spring/types" = {
-              descriptor = "~9.7.3";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-ngpI9l1yRxd1ilzhVU5tn+zaCN1AFUHo0H1VvXy0hzo=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@react-spring/web/-/web-9.7.3.tgz";
-          };
-          ident = "@react-spring/web";
-          ltype = "file";
-          peerInfo = {
-            react = {
-              descriptor = "^16.8.0 || ^17.0.0 || ^18.0.0";
-            };
-            react-dom = {
-              descriptor = "^16.8.0 || ^17.0.0 || ^18.0.0";
-            };
-          };
-          version = "9.7.3";
-        };
-      };
       "@rushstack/eslint-patch" = {
         "1.3.2" = {
           fetchInfo = {
@@ -2053,6 +1596,7 @@
           depInfo = {
             tslib = {
               descriptor = "^2.4.0";
+              pin = "2.6.1";
               runtime = true;
             };
           };
@@ -2064,142 +1608,6 @@
           ident = "@swc/helpers";
           ltype = "file";
           version = "0.5.1";
-        };
-      };
-      "@types/d3-color" = {
-        "2.0.3" = {
-          fetchInfo = {
-            narHash = "sha256-mHi/vHu6nuv3GfUDTKSg8E6NpgSZJ8c+K+GggRfOPw4=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@types/d3-color/-/d3-color-2.0.3.tgz";
-          };
-          ident = "@types/d3-color";
-          ltype = "file";
-          treeInfo = { };
-          version = "2.0.3";
-        };
-      };
-      "@types/d3-format" = {
-        "1.4.2" = {
-          fetchInfo = {
-            narHash = "sha256-KRusjbsHZ/z7qju7eTqOgYjxf0gkkhlMNkMf5afEMMA=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@types/d3-format/-/d3-format-1.4.2.tgz";
-          };
-          ident = "@types/d3-format";
-          ltype = "file";
-          treeInfo = { };
-          version = "1.4.2";
-        };
-      };
-      "@types/d3-path" = {
-        "2.0.2" = {
-          fetchInfo = {
-            narHash = "sha256-mc/tV7tdJQAQEuBi/n7/dEz+91xgGqO7+XitIBuEoqc=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@types/d3-path/-/d3-path-2.0.2.tgz";
-          };
-          ident = "@types/d3-path";
-          ltype = "file";
-          treeInfo = { };
-          version = "2.0.2";
-        };
-      };
-      "@types/d3-scale" = {
-        "3.3.2" = {
-          depInfo = {
-            "@types/d3-time" = {
-              descriptor = "^2";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-Z3oolHHnaSAnaKBXCd+h2PaErqgDg40hZbsB5IcumJk=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@types/d3-scale/-/d3-scale-3.3.2.tgz";
-          };
-          ident = "@types/d3-scale";
-          ltype = "file";
-          version = "3.3.2";
-        };
-      };
-      "@types/d3-scale-chromatic" = {
-        "2.0.1" = {
-          fetchInfo = {
-            narHash = "sha256-DSMicccq2pHLFrGNdZPSC6m8mq9VcECuZYwFpy/F0LM=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@types/d3-scale-chromatic/-/d3-scale-chromatic-2.0.1.tgz";
-          };
-          ident = "@types/d3-scale-chromatic";
-          ltype = "file";
-          treeInfo = { };
-          version = "2.0.1";
-        };
-      };
-      "@types/d3-shape" = {
-        "2.1.3" = {
-          depInfo = {
-            "@types/d3-path" = {
-              descriptor = "^2";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-lZrv1PDp/HsJvrmZrKuL8FWNy4vypJsrKAB+M9UX06Y=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@types/d3-shape/-/d3-shape-2.1.3.tgz";
-          };
-          ident = "@types/d3-shape";
-          ltype = "file";
-          version = "2.1.3";
-        };
-      };
-      "@types/d3-time" = {
-        "1.1.1" = {
-          fetchInfo = {
-            narHash = "sha256-tiK+a05PoUpy6q2TPxnhwoGA1+xoHtFKJWYPorBRm4o=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@types/d3-time/-/d3-time-1.1.1.tgz";
-          };
-          ident = "@types/d3-time";
-          ltype = "file";
-          treeInfo = { };
-          version = "1.1.1";
-        };
-        "2.1.1" = {
-          fetchInfo = {
-            narHash = "sha256-oVAfpdSRFNUGuK4KqUR35F3OeVaevr7L0u5g00aXrHY=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@types/d3-time/-/d3-time-2.1.1.tgz";
-          };
-          ident = "@types/d3-time";
-          ltype = "file";
-          treeInfo = { };
-          version = "2.1.1";
-        };
-      };
-      "@types/d3-time-format" = {
-        "2.3.1" = {
-          fetchInfo = {
-            narHash = "sha256-R2qquC9fI9QshyglFIUHOObwMQsXKFd2MXMTQI0QiuM=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@types/d3-time-format/-/d3-time-format-2.3.1.tgz";
-          };
-          ident = "@types/d3-time-format";
-          ltype = "file";
-          treeInfo = { };
-          version = "2.3.1";
-        };
-        "3.0.1" = {
-          fetchInfo = {
-            narHash = "sha256-S+EzvTdmz/NJCR0uk0bwerN4SYtKYKtslzV2M16S7gQ=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@types/d3-time-format/-/d3-time-format-3.0.1.tgz";
-          };
-          ident = "@types/d3-time-format";
-          ltype = "file";
-          treeInfo = { };
-          version = "3.0.1";
         };
       };
       "@types/json5" = {
@@ -2259,14 +1667,17 @@
           depInfo = {
             "@types/prop-types" = {
               descriptor = "*";
+              pin = "15.7.5";
               runtime = true;
             };
             "@types/scheduler" = {
               descriptor = "*";
+              pin = "0.16.3";
               runtime = true;
             };
             csstype = {
               descriptor = "^3.0.2";
+              pin = "3.1.2";
               runtime = true;
             };
           };
@@ -2285,6 +1696,7 @@
           depInfo = {
             "@types/react" = {
               descriptor = "*";
+              pin = "18.2.18";
               runtime = true;
             };
           };
@@ -2303,6 +1715,7 @@
           depInfo = {
             "@types/react" = {
               descriptor = "*";
+              pin = "18.2.18";
               runtime = true;
             };
           };
@@ -2316,29 +1729,12 @@
           version = "18.2.1";
         };
       };
-      "@types/react-lifecycles-compat" = {
-        "3.0.1" = {
-          depInfo = {
-            "@types/react" = {
-              descriptor = "*";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-80yGjrMkOevQnva1CYMGLdavieg+yZh59VlnEbYg3fc=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/@types/react-lifecycles-compat/-/react-lifecycles-compat-3.0.1.tgz";
-          };
-          ident = "@types/react-lifecycles-compat";
-          ltype = "file";
-          version = "3.0.1";
-        };
-      };
       "@types/react-transition-group" = {
         "4.4.6" = {
           depInfo = {
             "@types/react" = {
               descriptor = "*";
+              pin = "18.2.18";
               runtime = true;
             };
           };
@@ -2370,18 +1766,22 @@
           depInfo = {
             "@typescript-eslint/scope-manager" = {
               descriptor = "5.62.0";
+              pin = "5.62.0";
               runtime = true;
             };
             "@typescript-eslint/types" = {
               descriptor = "5.62.0";
+              pin = "5.62.0";
               runtime = true;
             };
             "@typescript-eslint/typescript-estree" = {
               descriptor = "5.62.0";
+              pin = "5.62.0";
               runtime = true;
             };
             debug = {
               descriptor = "^4.3.4";
+              pin = "4.3.4";
               runtime = true;
             };
           };
@@ -2409,10 +1809,12 @@
           depInfo = {
             "@typescript-eslint/types" = {
               descriptor = "5.62.0";
+              pin = "5.62.0";
               runtime = true;
             };
             "@typescript-eslint/visitor-keys" = {
               descriptor = "5.62.0";
+              pin = "5.62.0";
               runtime = true;
             };
           };
@@ -2444,30 +1846,37 @@
           depInfo = {
             "@typescript-eslint/types" = {
               descriptor = "5.62.0";
+              pin = "5.62.0";
               runtime = true;
             };
             "@typescript-eslint/visitor-keys" = {
               descriptor = "5.62.0";
+              pin = "5.62.0";
               runtime = true;
             };
             debug = {
               descriptor = "^4.3.4";
+              pin = "4.3.4";
               runtime = true;
             };
             globby = {
               descriptor = "^11.1.0";
+              pin = "11.1.0";
               runtime = true;
             };
             is-glob = {
               descriptor = "^4.0.3";
+              pin = "4.0.3";
               runtime = true;
             };
             semver = {
               descriptor = "^7.3.7";
+              pin = "7.5.4";
               runtime = true;
             };
             tsutils = {
               descriptor = "^3.21.0";
+              pin = "3.21.0";
               runtime = true;
             };
           };
@@ -2492,10 +1901,12 @@
           depInfo = {
             "@typescript-eslint/types" = {
               descriptor = "5.62.0";
+              pin = "5.62.0";
               runtime = true;
             };
             eslint-visitor-keys = {
               descriptor = "^3.3.0";
+              pin = "3.4.2";
               runtime = true;
             };
           };
@@ -2550,18 +1961,22 @@
           depInfo = {
             fast-deep-equal = {
               descriptor = "^3.1.1";
+              pin = "3.1.3";
               runtime = true;
             };
             fast-json-stable-stringify = {
               descriptor = "^2.0.0";
+              pin = "2.1.0";
               runtime = true;
             };
             json-schema-traverse = {
               descriptor = "^0.4.1";
+              pin = "0.4.1";
               runtime = true;
             };
             uri-js = {
               descriptor = "^4.2.2";
+              pin = "4.4.1";
               runtime = true;
             };
           };
@@ -2593,6 +2008,7 @@
           depInfo = {
             color-convert = {
               descriptor = "^1.9.0";
+              pin = "1.9.3";
               runtime = true;
             };
           };
@@ -2609,6 +2025,7 @@
           depInfo = {
             color-convert = {
               descriptor = "^2.0.1";
+              pin = "2.0.1";
               runtime = true;
             };
           };
@@ -2640,10 +2057,12 @@
           depInfo = {
             normalize-path = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
             picomatch = {
               descriptor = "^2.0.4";
+              pin = "2.3.1";
               runtime = true;
             };
           };
@@ -2688,6 +2107,7 @@
           depInfo = {
             dequal = {
               descriptor = "^2.0.3";
+              pin = "2.0.3";
               runtime = true;
             };
           };
@@ -2706,10 +2126,12 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             is-array-buffer = {
               descriptor = "^3.0.1";
+              pin = "3.0.2";
               runtime = true;
             };
           };
@@ -2728,22 +2150,27 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.1.3";
+              pin = "1.2.1";
               runtime = true;
             };
             is-string = {
               descriptor = "^1.0.7";
+              pin = "1.0.7";
               runtime = true;
             };
           };
@@ -2775,22 +2202,27 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
             es-shim-unscopables = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.1.3";
+              pin = "1.2.1";
               runtime = true;
             };
           };
@@ -2809,18 +2241,22 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
             es-shim-unscopables = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
@@ -2839,18 +2275,22 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
             es-shim-unscopables = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
@@ -2869,22 +2309,27 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
             es-shim-unscopables = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.1.3";
+              pin = "1.2.1";
               runtime = true;
             };
           };
@@ -2903,26 +2348,32 @@
           depInfo = {
             array-buffer-byte-length = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.2.0";
+              pin = "1.2.0";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
             is-array-buffer = {
               descriptor = "^3.0.2";
+              pin = "3.0.2";
               runtime = true;
             };
             is-shared-array-buffer = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
           };
@@ -2959,26 +2410,32 @@
           depInfo = {
             browserslist = {
               descriptor = "^4.21.5";
+              pin = "4.21.10";
               runtime = true;
             };
             caniuse-lite = {
               descriptor = "^1.0.30001464";
+              pin = "1.0.30001519";
               runtime = true;
             };
             "fraction.js" = {
               descriptor = "^4.2.0";
+              pin = "4.2.0";
               runtime = true;
             };
             normalize-range = {
               descriptor = "^0.1.2";
+              pin = "0.1.2";
               runtime = true;
             };
             picocolors = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             postcss-value-parser = {
               descriptor = "^4.2.0";
+              pin = "4.2.0";
               runtime = true;
             };
           };
@@ -3028,6 +2485,7 @@
           depInfo = {
             dequal = {
               descriptor = "^2.0.3";
+              pin = "2.0.3";
               runtime = true;
             };
           };
@@ -3046,14 +2504,17 @@
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.12.5";
+              pin = "7.22.6";
               runtime = true;
             };
             cosmiconfig = {
               descriptor = "^7.0.0";
+              pin = "7.1.0";
               runtime = true;
             };
             resolve = {
               descriptor = "^1.19.0";
+              pin = "1.22.4";
               runtime = true;
             };
           };
@@ -3111,6 +2572,7 @@
           depInfo = {
             big-integer = {
               descriptor = "^1.6.44";
+              pin = "1.6.51";
               runtime = true;
             };
           };
@@ -3129,10 +2591,12 @@
           depInfo = {
             balanced-match = {
               descriptor = "^1.0.0";
+              pin = "1.0.2";
               runtime = true;
             };
             concat-map = {
               descriptor = "0.0.1";
+              pin = "0.0.1";
               runtime = true;
             };
           };
@@ -3151,6 +2615,7 @@
           depInfo = {
             fill-range = {
               descriptor = "^7.0.1";
+              pin = "7.0.1";
               runtime = true;
             };
           };
@@ -3174,18 +2639,22 @@
           depInfo = {
             caniuse-lite = {
               descriptor = "^1.0.30001517";
+              pin = "1.0.30001519";
               runtime = true;
             };
             electron-to-chromium = {
               descriptor = "^1.4.477";
+              pin = "1.4.485";
               runtime = true;
             };
             node-releases = {
               descriptor = "^2.0.13";
+              pin = "2.0.13";
               runtime = true;
             };
             update-browserslist-db = {
               descriptor = "^1.0.11";
+              pin = "1.0.11";
               runtime = true;
             };
           };
@@ -3204,6 +2673,7 @@
           depInfo = {
             run-applescript = {
               descriptor = "^5.0.0";
+              pin = "5.0.0";
               runtime = true;
             };
           };
@@ -3222,6 +2692,7 @@
           depInfo = {
             streamsearch = {
               descriptor = "^1.1.0";
+              pin = "1.1.0";
               runtime = true;
             };
           };
@@ -3240,10 +2711,12 @@
           depInfo = {
             function-bind = {
               descriptor = "^1.1.1";
+              pin = "1.1.1";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.0.2";
+              pin = "1.2.1";
               runtime = true;
             };
           };
@@ -3301,14 +2774,17 @@
           depInfo = {
             ansi-styles = {
               descriptor = "^3.2.1";
+              pin = "3.2.1";
               runtime = true;
             };
             escape-string-regexp = {
               descriptor = "^1.0.5";
+              pin = "1.0.5";
               runtime = true;
             };
             supports-color = {
               descriptor = "^5.3.0";
+              pin = "5.5.0";
               runtime = true;
             };
           };
@@ -3325,10 +2801,12 @@
           depInfo = {
             ansi-styles = {
               descriptor = "^4.1.0";
+              pin = "4.3.0";
               runtime = true;
             };
             supports-color = {
               descriptor = "^7.1.0";
+              pin = "7.2.0";
               runtime = true;
             };
           };
@@ -3347,35 +2825,43 @@
           depInfo = {
             anymatch = {
               descriptor = "~3.1.2";
+              pin = "3.1.3";
               runtime = true;
             };
             braces = {
               descriptor = "~3.0.2";
+              pin = "3.0.2";
               runtime = true;
             };
             fsevents = {
               descriptor = "~2.3.2";
               optional = true;
+              pin = "2.3.2";
               runtime = true;
             };
             glob-parent = {
               descriptor = "~5.1.2";
+              pin = "5.1.2";
               runtime = true;
             };
             is-binary-path = {
               descriptor = "~2.1.0";
+              pin = "2.1.0";
               runtime = true;
             };
             is-glob = {
               descriptor = "~4.0.1";
+              pin = "4.0.3";
               runtime = true;
             };
             normalize-path = {
               descriptor = "~3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
             readdirp = {
               descriptor = "~3.6.0";
+              pin = "3.6.0";
               runtime = true;
             };
           };
@@ -3433,6 +2919,7 @@
           depInfo = {
             color-name = {
               descriptor = "1.1.3";
+              pin = "1.1.3";
               runtime = true;
             };
           };
@@ -3449,6 +2936,7 @@
           depInfo = {
             color-name = {
               descriptor = "~1.1.4";
+              pin = "1.1.4";
               runtime = true;
             };
           };
@@ -3530,22 +3018,27 @@
           depInfo = {
             "@types/parse-json" = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
             import-fresh = {
               descriptor = "^3.2.1";
+              pin = "3.3.0";
               runtime = true;
             };
             parse-json = {
               descriptor = "^5.0.0";
+              pin = "5.2.0";
               runtime = true;
             };
             path-type = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
             yaml = {
               descriptor = "^1.10.0";
+              pin = "1.10.2";
               runtime = true;
             };
           };
@@ -3564,14 +3057,17 @@
           depInfo = {
             path-key = {
               descriptor = "^3.1.0";
+              pin = "3.1.1";
               runtime = true;
             };
             shebang-command = {
               descriptor = "^2.0.0";
+              pin = "2.0.0";
               runtime = true;
             };
             which = {
               descriptor = "^2.0.1";
+              pin = "2.0.2";
               runtime = true;
             };
           };
@@ -3616,213 +3112,6 @@
           version = "3.1.2";
         };
       };
-      d3-array = {
-        "2.12.1" = {
-          depInfo = {
-            internmap = {
-              descriptor = "^1.0.0";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-AjqsUDFxmg09nq61Rn40arhRJm3sECDR5ktY58XTzhk=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/d3-array/-/d3-array-2.12.1.tgz";
-          };
-          ident = "d3-array";
-          ltype = "file";
-          version = "2.12.1";
-        };
-      };
-      d3-color = {
-        "2.0.0" = {
-          fetchInfo = {
-            narHash = "sha256-bByq98FyYAWUfbjhAUlDZAV/XIMEdin9MKgdikMYqrI=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/d3-color/-/d3-color-2.0.0.tgz";
-          };
-          ident = "d3-color";
-          ltype = "file";
-          treeInfo = { };
-          version = "2.0.0";
-        };
-        "3.1.0" = {
-          fetchInfo = {
-            narHash = "sha256-cT/t1XDkpwm9iza8haFGE4qVg6vqO856ubqZrrjGpT0=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/d3-color/-/d3-color-3.1.0.tgz";
-          };
-          ident = "d3-color";
-          ltype = "file";
-          treeInfo = { };
-          version = "3.1.0";
-        };
-      };
-      d3-format = {
-        "1.4.5" = {
-          fetchInfo = {
-            narHash = "sha256-+zw5SQ69cRolX0E8L3AVl/0G/dAd0pGfcZdj1zfrS14=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/d3-format/-/d3-format-1.4.5.tgz";
-          };
-          ident = "d3-format";
-          ltype = "file";
-          treeInfo = { };
-          version = "1.4.5";
-        };
-      };
-      d3-interpolate = {
-        "2.0.1" = {
-          depInfo = {
-            d3-color = {
-              descriptor = "1 - 2";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-I1xYVEDJmYBKR4DqUKZ3aP4Bj6kBCknQ74cRmYmWNX0=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-2.0.1.tgz";
-          };
-          ident = "d3-interpolate";
-          ltype = "file";
-          version = "2.0.1";
-        };
-      };
-      d3-path = {
-        "1.0.9" = {
-          fetchInfo = {
-            narHash = "sha256-fzeRHy3cgbUX0YzOSfK39oac8+t4x5QtqQKvCKcZmQY=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/d3-path/-/d3-path-1.0.9.tgz";
-          };
-          ident = "d3-path";
-          ltype = "file";
-          treeInfo = { };
-          version = "1.0.9";
-        };
-      };
-      d3-scale = {
-        "3.3.0" = {
-          depInfo = {
-            d3-array = {
-              descriptor = "^2.3.0";
-              runtime = true;
-            };
-            d3-format = {
-              descriptor = "1 - 2";
-              runtime = true;
-            };
-            d3-interpolate = {
-              descriptor = "1.2.0 - 2";
-              runtime = true;
-            };
-            d3-time = {
-              descriptor = "^2.1.1";
-              runtime = true;
-            };
-            d3-time-format = {
-              descriptor = "2 - 3";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-E3QdfVf1qHCprenMnAKkm06mkIqL5B2NB4IM7c4cDC4=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/d3-scale/-/d3-scale-3.3.0.tgz";
-          };
-          ident = "d3-scale";
-          ltype = "file";
-          version = "3.3.0";
-        };
-      };
-      d3-scale-chromatic = {
-        "2.0.0" = {
-          depInfo = {
-            d3-color = {
-              descriptor = "1 - 2";
-              runtime = true;
-            };
-            d3-interpolate = {
-              descriptor = "1 - 2";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-gTYLRyACN5Pn4SgjKsL1XlAc11D7hiCOdwm9NN10mpI=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/d3-scale-chromatic/-/d3-scale-chromatic-2.0.0.tgz";
-          };
-          ident = "d3-scale-chromatic";
-          ltype = "file";
-          version = "2.0.0";
-        };
-      };
-      d3-shape = {
-        "1.3.7" = {
-          depInfo = {
-            d3-path = {
-              descriptor = "1";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-9IW2w90hCeIkgPsB5Vg9El4SSN6MxNkFonol22ospew=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/d3-shape/-/d3-shape-1.3.7.tgz";
-          };
-          ident = "d3-shape";
-          ltype = "file";
-          version = "1.3.7";
-        };
-      };
-      d3-time = {
-        "1.1.0" = {
-          fetchInfo = {
-            narHash = "sha256-PR5wZ0CFDNBktnz2Xh+qEDuMXf/XKOYmNwp+kfjQUn4=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/d3-time/-/d3-time-1.1.0.tgz";
-          };
-          ident = "d3-time";
-          ltype = "file";
-          treeInfo = { };
-          version = "1.1.0";
-        };
-        "2.1.1" = {
-          depInfo = {
-            d3-array = {
-              descriptor = "2";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-c2WDgyAmlAUibZJ/AFDH2UzGgORQh6ljiT2IZzZlMh8=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/d3-time/-/d3-time-2.1.1.tgz";
-          };
-          ident = "d3-time";
-          ltype = "file";
-          version = "2.1.1";
-        };
-      };
-      d3-time-format = {
-        "3.0.0" = {
-          depInfo = {
-            d3-time = {
-              descriptor = "1 - 2";
-              runtime = true;
-            };
-          };
-          fetchInfo = {
-            narHash = "sha256-1MdhMf7nrRTic57Tb49dVBrltffI8QtLsVQW9od4P+U=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/d3-time-format/-/d3-time-format-3.0.0.tgz";
-          };
-          ident = "d3-time-format";
-          ltype = "file";
-          version = "3.0.0";
-        };
-      };
       damerau-levenshtein = {
         "1.0.8" = {
           fetchInfo = {
@@ -3841,6 +3130,7 @@
           depInfo = {
             ms = {
               descriptor = "^2.1.1";
+              pin = "2.1.2";
               runtime = true;
             };
           };
@@ -3857,6 +3147,7 @@
           depInfo = {
             ms = {
               descriptor = "2.1.2";
+              pin = "2.1.2";
               runtime = true;
             };
           };
@@ -3894,18 +3185,22 @@
           depInfo = {
             bundle-name = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
             default-browser-id = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
             execa = {
               descriptor = "^7.1.1";
+              pin = "7.2.0";
               runtime = true;
             };
             titleize = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
           };
@@ -3924,10 +3219,12 @@
           depInfo = {
             bplist-parser = {
               descriptor = "^0.2.0";
+              pin = "0.2.0";
               runtime = true;
             };
             untildify = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
           };
@@ -3959,10 +3256,12 @@
           depInfo = {
             has-property-descriptors = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             object-keys = {
               descriptor = "^1.1.1";
+              pin = "1.1.1";
               runtime = true;
             };
           };
@@ -4007,6 +3306,7 @@
           depInfo = {
             path-type = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
           };
@@ -4038,6 +3338,7 @@
           depInfo = {
             esutils = {
               descriptor = "^2.0.2";
+              pin = "2.0.3";
               runtime = true;
             };
           };
@@ -4054,6 +3355,7 @@
           depInfo = {
             esutils = {
               descriptor = "^2.0.2";
+              pin = "2.0.3";
               runtime = true;
             };
           };
@@ -4072,10 +3374,12 @@
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.8.7";
+              pin = "7.22.6";
               runtime = true;
             };
             csstype = {
               descriptor = "^3.0.2";
+              pin = "3.1.2";
               runtime = true;
             };
           };
@@ -4120,10 +3424,12 @@
           depInfo = {
             graceful-fs = {
               descriptor = "^4.2.4";
+              pin = "4.2.11";
               runtime = true;
             };
             tapable = {
               descriptor = "^2.2.0";
+              pin = "2.2.1";
               runtime = true;
             };
           };
@@ -4142,6 +3448,7 @@
           depInfo = {
             is-arrayish = {
               descriptor = "^0.2.1";
+              pin = "0.2.1";
               runtime = true;
             };
           };
@@ -4160,158 +3467,197 @@
           depInfo = {
             array-buffer-byte-length = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             "arraybuffer.prototype.slice" = {
               descriptor = "^1.0.1";
+              pin = "1.0.1";
               runtime = true;
             };
             available-typed-arrays = {
               descriptor = "^1.0.5";
+              pin = "1.0.5";
               runtime = true;
             };
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             es-set-tostringtag = {
               descriptor = "^2.0.1";
+              pin = "2.0.1";
               runtime = true;
             };
             es-to-primitive = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
             "function.prototype.name" = {
               descriptor = "^1.1.5";
+              pin = "1.1.5";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
             get-symbol-description = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             globalthis = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
             gopd = {
               descriptor = "^1.0.1";
+              pin = "1.0.1";
               runtime = true;
             };
             has = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
             has-property-descriptors = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             has-proto = {
               descriptor = "^1.0.1";
+              pin = "1.0.1";
               runtime = true;
             };
             has-symbols = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
             internal-slot = {
               descriptor = "^1.0.5";
+              pin = "1.0.5";
               runtime = true;
             };
             is-array-buffer = {
               descriptor = "^3.0.2";
+              pin = "3.0.2";
               runtime = true;
             };
             is-callable = {
               descriptor = "^1.2.7";
+              pin = "1.2.7";
               runtime = true;
             };
             is-negative-zero = {
               descriptor = "^2.0.2";
+              pin = "2.0.2";
               runtime = true;
             };
             is-regex = {
               descriptor = "^1.1.4";
+              pin = "1.1.4";
               runtime = true;
             };
             is-shared-array-buffer = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             is-string = {
               descriptor = "^1.0.7";
+              pin = "1.0.7";
               runtime = true;
             };
             is-typed-array = {
               descriptor = "^1.1.10";
+              pin = "1.1.12";
               runtime = true;
             };
             is-weakref = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             object-inspect = {
               descriptor = "^1.12.3";
+              pin = "1.12.3";
               runtime = true;
             };
             object-keys = {
               descriptor = "^1.1.1";
+              pin = "1.1.1";
               runtime = true;
             };
             "object.assign" = {
               descriptor = "^4.1.4";
+              pin = "4.1.4";
               runtime = true;
             };
             "regexp.prototype.flags" = {
               descriptor = "^1.5.0";
+              pin = "1.5.0";
               runtime = true;
             };
             safe-array-concat = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             safe-regex-test = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             "string.prototype.trim" = {
               descriptor = "^1.2.7";
+              pin = "1.2.7";
               runtime = true;
             };
             "string.prototype.trimend" = {
               descriptor = "^1.0.6";
+              pin = "1.0.6";
               runtime = true;
             };
             "string.prototype.trimstart" = {
               descriptor = "^1.0.6";
+              pin = "1.0.6";
               runtime = true;
             };
             typed-array-buffer = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             typed-array-byte-length = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             typed-array-byte-offset = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             typed-array-length = {
               descriptor = "^1.0.4";
+              pin = "1.0.4";
               runtime = true;
             };
             unbox-primitive = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             which-typed-array = {
               descriptor = "^1.1.10";
+              pin = "1.1.11";
               runtime = true;
             };
           };
@@ -4330,14 +3676,17 @@
           depInfo = {
             get-intrinsic = {
               descriptor = "^1.1.3";
+              pin = "1.2.1";
               runtime = true;
             };
             has = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
             has-tostringtag = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
@@ -4356,6 +3705,7 @@
           depInfo = {
             has = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
           };
@@ -4374,14 +3724,17 @@
           depInfo = {
             is-callable = {
               descriptor = "^1.1.4";
+              pin = "1.2.7";
               runtime = true;
             };
             is-date-object = {
               descriptor = "^1.0.1";
+              pin = "1.0.5";
               runtime = true;
             };
             is-symbol = {
               descriptor = "^1.0.2";
+              pin = "1.0.4";
               runtime = true;
             };
           };
@@ -4442,150 +3795,187 @@
           depInfo = {
             "@eslint-community/eslint-utils" = {
               descriptor = "^4.2.0";
+              pin = "4.4.0";
               runtime = true;
             };
             "@eslint-community/regexpp" = {
               descriptor = "^4.6.1";
+              pin = "4.6.2";
               runtime = true;
             };
             "@eslint/eslintrc" = {
               descriptor = "^2.1.1";
+              pin = "2.1.1";
               runtime = true;
             };
             "@eslint/js" = {
               descriptor = "^8.46.0";
+              pin = "8.46.0";
               runtime = true;
             };
             "@humanwhocodes/config-array" = {
               descriptor = "^0.11.10";
+              pin = "0.11.10";
               runtime = true;
             };
             "@humanwhocodes/module-importer" = {
               descriptor = "^1.0.1";
+              pin = "1.0.1";
               runtime = true;
             };
             "@nodelib/fs.walk" = {
               descriptor = "^1.2.8";
+              pin = "1.2.8";
               runtime = true;
             };
             ajv = {
               descriptor = "^6.12.4";
+              pin = "6.12.6";
               runtime = true;
             };
             chalk = {
               descriptor = "^4.0.0";
+              pin = "4.1.2";
               runtime = true;
             };
             cross-spawn = {
               descriptor = "^7.0.2";
+              pin = "7.0.3";
               runtime = true;
             };
             debug = {
               descriptor = "^4.3.2";
+              pin = "4.3.4";
               runtime = true;
             };
             doctrine = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
             escape-string-regexp = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
             eslint-scope = {
               descriptor = "^7.2.2";
+              pin = "7.2.2";
               runtime = true;
             };
             eslint-visitor-keys = {
               descriptor = "^3.4.2";
+              pin = "3.4.2";
               runtime = true;
             };
             espree = {
               descriptor = "^9.6.1";
+              pin = "9.6.1";
               runtime = true;
             };
             esquery = {
               descriptor = "^1.4.2";
+              pin = "1.5.0";
               runtime = true;
             };
             esutils = {
               descriptor = "^2.0.2";
+              pin = "2.0.3";
               runtime = true;
             };
             fast-deep-equal = {
               descriptor = "^3.1.3";
+              pin = "3.1.3";
               runtime = true;
             };
             file-entry-cache = {
               descriptor = "^6.0.1";
+              pin = "6.0.1";
               runtime = true;
             };
             find-up = {
               descriptor = "^5.0.0";
+              pin = "5.0.0";
               runtime = true;
             };
             glob-parent = {
               descriptor = "^6.0.2";
+              pin = "6.0.2";
               runtime = true;
             };
             globals = {
               descriptor = "^13.19.0";
+              pin = "13.20.0";
               runtime = true;
             };
             graphemer = {
               descriptor = "^1.4.0";
+              pin = "1.4.0";
               runtime = true;
             };
             ignore = {
               descriptor = "^5.2.0";
+              pin = "5.2.4";
               runtime = true;
             };
             imurmurhash = {
               descriptor = "^0.1.4";
+              pin = "0.1.4";
               runtime = true;
             };
             is-glob = {
               descriptor = "^4.0.0";
+              pin = "4.0.3";
               runtime = true;
             };
             is-path-inside = {
               descriptor = "^3.0.3";
+              pin = "3.0.3";
               runtime = true;
             };
             js-yaml = {
               descriptor = "^4.1.0";
+              pin = "4.1.0";
               runtime = true;
             };
             json-stable-stringify-without-jsonify = {
               descriptor = "^1.0.1";
+              pin = "1.0.1";
               runtime = true;
             };
             levn = {
               descriptor = "^0.4.1";
+              pin = "0.4.1";
               runtime = true;
             };
             "lodash.merge" = {
               descriptor = "^4.6.2";
+              pin = "4.6.2";
               runtime = true;
             };
             minimatch = {
               descriptor = "^3.1.2";
+              pin = "3.1.2";
               runtime = true;
             };
             natural-compare = {
               descriptor = "^1.4.0";
+              pin = "1.4.0";
               runtime = true;
             };
             optionator = {
               descriptor = "^0.9.3";
+              pin = "0.9.3";
               runtime = true;
             };
             strip-ansi = {
               descriptor = "^6.0.1";
+              pin = "6.0.1";
               runtime = true;
             };
             text-table = {
               descriptor = "^0.2.0";
+              pin = "0.2.0";
               runtime = true;
             };
           };
@@ -4604,38 +3994,47 @@
           depInfo = {
             "@next/eslint-plugin-next" = {
               descriptor = "13.4.12";
+              pin = "13.4.12";
               runtime = true;
             };
             "@rushstack/eslint-patch" = {
               descriptor = "^1.1.3";
+              pin = "1.3.2";
               runtime = true;
             };
             "@typescript-eslint/parser" = {
               descriptor = "^5.42.0";
+              pin = "5.62.0";
               runtime = true;
             };
             eslint-import-resolver-node = {
               descriptor = "^0.3.6";
+              pin = "0.3.8";
               runtime = true;
             };
             eslint-import-resolver-typescript = {
               descriptor = "^3.5.2";
+              pin = "3.5.5";
               runtime = true;
             };
             eslint-plugin-import = {
               descriptor = "^2.26.0";
+              pin = "2.28.0";
               runtime = true;
             };
             eslint-plugin-jsx-a11y = {
               descriptor = "^6.5.1";
+              pin = "6.7.1";
               runtime = true;
             };
             eslint-plugin-react = {
               descriptor = "^7.31.7";
+              pin = "7.33.1";
               runtime = true;
             };
             eslint-plugin-react-hooks = {
               descriptor = "5.0.0-canary-7118f5dd7-20230705";
+              pin = "5.0.0-canary-7118f5dd7-20230705";
               runtime = true;
             };
           };
@@ -4663,14 +4062,17 @@
           depInfo = {
             debug = {
               descriptor = "^3.2.7";
+              pin = "3.2.7";
               runtime = true;
             };
             is-core-module = {
               descriptor = "^2.13.0";
+              pin = "2.13.0";
               runtime = true;
             };
             resolve = {
               descriptor = "^1.22.4";
+              pin = "1.22.4";
               runtime = true;
             };
           };
@@ -4689,34 +4091,42 @@
           depInfo = {
             debug = {
               descriptor = "^4.3.4";
+              pin = "4.3.4";
               runtime = true;
             };
             enhanced-resolve = {
               descriptor = "^5.12.0";
+              pin = "5.15.0";
               runtime = true;
             };
             eslint-module-utils = {
               descriptor = "^2.7.4";
+              pin = "2.8.0";
               runtime = true;
             };
             get-tsconfig = {
               descriptor = "^4.5.0";
+              pin = "4.6.2";
               runtime = true;
             };
             globby = {
               descriptor = "^13.1.3";
+              pin = "13.2.2";
               runtime = true;
             };
             is-core-module = {
               descriptor = "^2.11.0";
+              pin = "2.13.0";
               runtime = true;
             };
             is-glob = {
               descriptor = "^4.0.3";
+              pin = "4.0.3";
               runtime = true;
             };
             synckit = {
               descriptor = "^0.8.5";
+              pin = "0.8.5";
               runtime = true;
             };
           };
@@ -4743,6 +4153,7 @@
           depInfo = {
             debug = {
               descriptor = "^3.2.7";
+              pin = "3.2.7";
               runtime = true;
             };
           };
@@ -4767,74 +4178,92 @@
           depInfo = {
             array-includes = {
               descriptor = "^3.1.6";
+              pin = "3.1.6";
               runtime = true;
             };
             "array.prototype.findlastindex" = {
               descriptor = "^1.2.2";
+              pin = "1.2.2";
               runtime = true;
             };
             "array.prototype.flat" = {
               descriptor = "^1.3.1";
+              pin = "1.3.1";
               runtime = true;
             };
             "array.prototype.flatmap" = {
               descriptor = "^1.3.1";
+              pin = "1.3.1";
               runtime = true;
             };
             debug = {
               descriptor = "^3.2.7";
+              pin = "3.2.7";
               runtime = true;
             };
             doctrine = {
               descriptor = "^2.1.0";
+              pin = "2.1.0";
               runtime = true;
             };
             eslint-import-resolver-node = {
               descriptor = "^0.3.7";
+              pin = "0.3.8";
               runtime = true;
             };
             eslint-module-utils = {
               descriptor = "^2.8.0";
+              pin = "2.8.0";
               runtime = true;
             };
             has = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
             is-core-module = {
               descriptor = "^2.12.1";
+              pin = "2.13.0";
               runtime = true;
             };
             is-glob = {
               descriptor = "^4.0.3";
+              pin = "4.0.3";
               runtime = true;
             };
             minimatch = {
               descriptor = "^3.1.2";
+              pin = "3.1.2";
               runtime = true;
             };
             "object.fromentries" = {
               descriptor = "^2.0.6";
+              pin = "2.0.6";
               runtime = true;
             };
             "object.groupby" = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             "object.values" = {
               descriptor = "^1.1.6";
+              pin = "1.1.6";
               runtime = true;
             };
             resolve = {
               descriptor = "^1.22.3";
+              pin = "1.22.4";
               runtime = true;
             };
             semver = {
               descriptor = "^6.3.1";
+              pin = "6.3.1";
               runtime = true;
             };
             tsconfig-paths = {
               descriptor = "^3.14.2";
+              pin = "3.14.2";
               runtime = true;
             };
           };
@@ -4858,66 +4287,82 @@
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.20.7";
+              pin = "7.22.6";
               runtime = true;
             };
             aria-query = {
               descriptor = "^5.1.3";
+              pin = "5.3.0";
               runtime = true;
             };
             array-includes = {
               descriptor = "^3.1.6";
+              pin = "3.1.6";
               runtime = true;
             };
             "array.prototype.flatmap" = {
               descriptor = "^1.3.1";
+              pin = "1.3.1";
               runtime = true;
             };
             ast-types-flow = {
               descriptor = "^0.0.7";
+              pin = "0.0.7";
               runtime = true;
             };
             axe-core = {
               descriptor = "^4.6.2";
+              pin = "4.7.2";
               runtime = true;
             };
             axobject-query = {
               descriptor = "^3.1.1";
+              pin = "3.2.1";
               runtime = true;
             };
             damerau-levenshtein = {
               descriptor = "^1.0.8";
+              pin = "1.0.8";
               runtime = true;
             };
             emoji-regex = {
               descriptor = "^9.2.2";
+              pin = "9.2.2";
               runtime = true;
             };
             has = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
             jsx-ast-utils = {
               descriptor = "^3.3.3";
+              pin = "3.3.5";
               runtime = true;
             };
             language-tags = {
               descriptor = "=1.0.5";
+              pin = "1.0.5";
               runtime = true;
             };
             minimatch = {
               descriptor = "^3.1.2";
+              pin = "3.1.2";
               runtime = true;
             };
             "object.entries" = {
               descriptor = "^1.1.6";
+              pin = "1.1.6";
               runtime = true;
             };
             "object.fromentries" = {
               descriptor = "^2.0.6";
+              pin = "2.0.6";
               runtime = true;
             };
             semver = {
               descriptor = "^6.3.0";
+              pin = "6.3.1";
               runtime = true;
             };
           };
@@ -4941,62 +4386,77 @@
           depInfo = {
             array-includes = {
               descriptor = "^3.1.6";
+              pin = "3.1.6";
               runtime = true;
             };
             "array.prototype.flatmap" = {
               descriptor = "^1.3.1";
+              pin = "1.3.1";
               runtime = true;
             };
             "array.prototype.tosorted" = {
               descriptor = "^1.1.1";
+              pin = "1.1.1";
               runtime = true;
             };
             doctrine = {
               descriptor = "^2.1.0";
+              pin = "2.1.0";
               runtime = true;
             };
             estraverse = {
               descriptor = "^5.3.0";
+              pin = "5.3.0";
               runtime = true;
             };
             jsx-ast-utils = {
               descriptor = "^2.4.1 || ^3.0.0";
+              pin = "3.3.5";
               runtime = true;
             };
             minimatch = {
               descriptor = "^3.1.2";
+              pin = "3.1.2";
               runtime = true;
             };
             "object.entries" = {
               descriptor = "^1.1.6";
+              pin = "1.1.6";
               runtime = true;
             };
             "object.fromentries" = {
               descriptor = "^2.0.6";
+              pin = "2.0.6";
               runtime = true;
             };
             "object.hasown" = {
               descriptor = "^1.1.2";
+              pin = "1.1.2";
               runtime = true;
             };
             "object.values" = {
               descriptor = "^1.1.6";
+              pin = "1.1.6";
               runtime = true;
             };
             prop-types = {
               descriptor = "^15.8.1";
+              pin = "15.8.1";
               runtime = true;
             };
             resolve = {
               descriptor = "^2.0.0-next.4";
+              pin = "2.0.0-next.4";
               runtime = true;
             };
             semver = {
               descriptor = "^6.3.1";
+              pin = "6.3.1";
               runtime = true;
             };
             "string.prototype.matchall" = {
               descriptor = "^4.0.8";
+              pin = "4.0.8";
               runtime = true;
             };
           };
@@ -5038,10 +4498,12 @@
           depInfo = {
             esrecurse = {
               descriptor = "^4.3.0";
+              pin = "4.3.0";
               runtime = true;
             };
             estraverse = {
               descriptor = "^5.2.0";
+              pin = "5.3.0";
               runtime = true;
             };
           };
@@ -5073,14 +4535,17 @@
           depInfo = {
             acorn = {
               descriptor = "^8.9.0";
+              pin = "8.10.0";
               runtime = true;
             };
             acorn-jsx = {
               descriptor = "^5.3.2";
+              pin = "5.3.2";
               runtime = true;
             };
             eslint-visitor-keys = {
               descriptor = "^3.4.1";
+              pin = "3.4.2";
               runtime = true;
             };
           };
@@ -5099,6 +4564,7 @@
           depInfo = {
             estraverse = {
               descriptor = "^5.1.0";
+              pin = "5.3.0";
               runtime = true;
             };
           };
@@ -5117,6 +4583,7 @@
           depInfo = {
             estraverse = {
               descriptor = "^5.2.0";
+              pin = "5.3.0";
               runtime = true;
             };
           };
@@ -5161,38 +4628,47 @@
           depInfo = {
             cross-spawn = {
               descriptor = "^7.0.3";
+              pin = "7.0.3";
               runtime = true;
             };
             get-stream = {
               descriptor = "^6.0.0";
+              pin = "6.0.1";
               runtime = true;
             };
             human-signals = {
               descriptor = "^2.1.0";
+              pin = "2.1.0";
               runtime = true;
             };
             is-stream = {
               descriptor = "^2.0.0";
+              pin = "2.0.1";
               runtime = true;
             };
             merge-stream = {
               descriptor = "^2.0.0";
+              pin = "2.0.0";
               runtime = true;
             };
             npm-run-path = {
               descriptor = "^4.0.1";
+              pin = "4.0.1";
               runtime = true;
             };
             onetime = {
               descriptor = "^5.1.2";
+              pin = "5.1.2";
               runtime = true;
             };
             signal-exit = {
               descriptor = "^3.0.3";
+              pin = "3.0.7";
               runtime = true;
             };
             strip-final-newline = {
               descriptor = "^2.0.0";
+              pin = "2.0.0";
               runtime = true;
             };
           };
@@ -5209,38 +4685,47 @@
           depInfo = {
             cross-spawn = {
               descriptor = "^7.0.3";
+              pin = "7.0.3";
               runtime = true;
             };
             get-stream = {
               descriptor = "^6.0.1";
+              pin = "6.0.1";
               runtime = true;
             };
             human-signals = {
               descriptor = "^4.3.0";
+              pin = "4.3.1";
               runtime = true;
             };
             is-stream = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
             merge-stream = {
               descriptor = "^2.0.0";
+              pin = "2.0.0";
               runtime = true;
             };
             npm-run-path = {
               descriptor = "^5.1.0";
+              pin = "5.1.0";
               runtime = true;
             };
             onetime = {
               descriptor = "^6.0.0";
+              pin = "6.0.0";
               runtime = true;
             };
             signal-exit = {
               descriptor = "^3.0.7";
+              pin = "3.0.7";
               runtime = true;
             };
             strip-final-newline = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
           };
@@ -5272,22 +4757,27 @@
           depInfo = {
             "@nodelib/fs.stat" = {
               descriptor = "^2.0.2";
+              pin = "2.0.5";
               runtime = true;
             };
             "@nodelib/fs.walk" = {
               descriptor = "^1.2.3";
+              pin = "1.2.8";
               runtime = true;
             };
             glob-parent = {
               descriptor = "^5.1.2";
+              pin = "5.1.2";
               runtime = true;
             };
             merge2 = {
               descriptor = "^1.3.0";
+              pin = "1.4.1";
               runtime = true;
             };
             micromatch = {
               descriptor = "^4.0.4";
+              pin = "4.0.5";
               runtime = true;
             };
           };
@@ -5332,6 +4822,7 @@
           depInfo = {
             reusify = {
               descriptor = "^1.0.4";
+              pin = "1.0.4";
               runtime = true;
             };
           };
@@ -5350,6 +4841,7 @@
           depInfo = {
             flat-cache = {
               descriptor = "^3.0.4";
+              pin = "3.0.4";
               runtime = true;
             };
           };
@@ -5368,6 +4860,7 @@
           depInfo = {
             to-regex-range = {
               descriptor = "^5.0.1";
+              pin = "5.0.1";
               runtime = true;
             };
           };
@@ -5399,10 +4892,12 @@
           depInfo = {
             locate-path = {
               descriptor = "^6.0.0";
+              pin = "6.0.0";
               runtime = true;
             };
             path-exists = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
           };
@@ -5421,10 +4916,12 @@
           depInfo = {
             flatted = {
               descriptor = "^3.1.0";
+              pin = "3.2.7";
               runtime = true;
             };
             rimraf = {
               descriptor = "^3.0.2";
+              pin = "3.0.2";
               runtime = true;
             };
           };
@@ -5456,6 +4953,7 @@
           depInfo = {
             is-callable = {
               descriptor = "^1.1.3";
+              pin = "1.2.7";
               runtime = true;
             };
           };
@@ -5534,18 +5032,22 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.3";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.19.0";
+              pin = "1.22.1";
               runtime = true;
             };
             functions-have-names = {
               descriptor = "^1.2.2";
+              pin = "1.2.3";
               runtime = true;
             };
           };
@@ -5577,18 +5079,22 @@
           depInfo = {
             function-bind = {
               descriptor = "^1.1.1";
+              pin = "1.1.1";
               runtime = true;
             };
             has = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
             has-proto = {
               descriptor = "^1.0.1";
+              pin = "1.0.1";
               runtime = true;
             };
             has-symbols = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
           };
@@ -5620,10 +5126,12 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.1.1";
+              pin = "1.2.1";
               runtime = true;
             };
           };
@@ -5642,6 +5150,7 @@
           depInfo = {
             resolve-pkg-maps = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
@@ -5660,26 +5169,32 @@
           depInfo = {
             "fs.realpath" = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             inflight = {
               descriptor = "^1.0.4";
+              pin = "1.0.6";
               runtime = true;
             };
             inherits = {
               descriptor = "2";
+              pin = "2.0.4";
               runtime = true;
             };
             minimatch = {
               descriptor = "^3.0.4";
+              pin = "3.1.2";
               runtime = true;
             };
             once = {
               descriptor = "^1.3.0";
+              pin = "1.4.0";
               runtime = true;
             };
             path-is-absolute = {
               descriptor = "^1.0.0";
+              pin = "1.0.1";
               runtime = true;
             };
           };
@@ -5696,26 +5211,32 @@
           depInfo = {
             "fs.realpath" = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             inflight = {
               descriptor = "^1.0.4";
+              pin = "1.0.6";
               runtime = true;
             };
             inherits = {
               descriptor = "2";
+              pin = "2.0.4";
               runtime = true;
             };
             minimatch = {
               descriptor = "^3.0.4";
+              pin = "3.1.2";
               runtime = true;
             };
             once = {
               descriptor = "^1.3.0";
+              pin = "1.4.0";
               runtime = true;
             };
             path-is-absolute = {
               descriptor = "^1.0.0";
+              pin = "1.0.1";
               runtime = true;
             };
           };
@@ -5734,6 +5255,7 @@
           depInfo = {
             is-glob = {
               descriptor = "^4.0.1";
+              pin = "4.0.3";
               runtime = true;
             };
           };
@@ -5750,6 +5272,7 @@
           depInfo = {
             is-glob = {
               descriptor = "^4.0.3";
+              pin = "4.0.3";
               runtime = true;
             };
           };
@@ -5781,6 +5304,7 @@
           depInfo = {
             type-fest = {
               descriptor = "^0.20.2";
+              pin = "0.20.2";
               runtime = true;
             };
           };
@@ -5799,6 +5323,7 @@
           depInfo = {
             define-properties = {
               descriptor = "^1.1.3";
+              pin = "1.2.0";
               runtime = true;
             };
           };
@@ -5817,26 +5342,32 @@
           depInfo = {
             array-union = {
               descriptor = "^2.1.0";
+              pin = "2.1.0";
               runtime = true;
             };
             dir-glob = {
               descriptor = "^3.0.1";
+              pin = "3.0.1";
               runtime = true;
             };
             fast-glob = {
               descriptor = "^3.2.9";
+              pin = "3.3.1";
               runtime = true;
             };
             ignore = {
               descriptor = "^5.2.0";
+              pin = "5.2.4";
               runtime = true;
             };
             merge2 = {
               descriptor = "^1.4.1";
+              pin = "1.4.1";
               runtime = true;
             };
             slash = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
           };
@@ -5853,22 +5384,27 @@
           depInfo = {
             dir-glob = {
               descriptor = "^3.0.1";
+              pin = "3.0.1";
               runtime = true;
             };
             fast-glob = {
               descriptor = "^3.3.0";
+              pin = "3.3.1";
               runtime = true;
             };
             ignore = {
               descriptor = "^5.2.4";
+              pin = "5.2.4";
               runtime = true;
             };
             merge2 = {
               descriptor = "^1.4.1";
+              pin = "1.4.1";
               runtime = true;
             };
             slash = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
           };
@@ -5887,6 +5423,7 @@
           depInfo = {
             get-intrinsic = {
               descriptor = "^1.1.3";
+              pin = "1.2.1";
               runtime = true;
             };
           };
@@ -5931,6 +5468,7 @@
           depInfo = {
             function-bind = {
               descriptor = "^1.1.1";
+              pin = "1.1.1";
               runtime = true;
             };
           };
@@ -5986,6 +5524,7 @@
           depInfo = {
             get-intrinsic = {
               descriptor = "^1.1.1";
+              pin = "1.2.1";
               runtime = true;
             };
           };
@@ -6030,6 +5569,7 @@
           depInfo = {
             has-symbols = {
               descriptor = "^1.0.2";
+              pin = "1.0.3";
               runtime = true;
             };
           };
@@ -6048,6 +5588,7 @@
           depInfo = {
             react-is = {
               descriptor = "^16.7.0";
+              pin = "16.13.1";
               runtime = true;
             };
           };
@@ -6103,10 +5644,12 @@
           depInfo = {
             parent-module = {
               descriptor = "^1.0.0";
+              pin = "1.0.1";
               runtime = true;
             };
             resolve-from = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
           };
@@ -6138,10 +5681,12 @@
           depInfo = {
             once = {
               descriptor = "^1.3.0";
+              pin = "1.4.0";
               runtime = true;
             };
             wrappy = {
               descriptor = "1";
+              pin = "1.0.2";
               runtime = true;
             };
           };
@@ -6173,14 +5718,17 @@
           depInfo = {
             get-intrinsic = {
               descriptor = "^1.2.0";
+              pin = "1.2.1";
               runtime = true;
             };
             has = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
             side-channel = {
               descriptor = "^1.0.4";
+              pin = "1.0.4";
               runtime = true;
             };
           };
@@ -6194,32 +5742,22 @@
           version = "1.0.5";
         };
       };
-      internmap = {
-        "1.0.1" = {
-          fetchInfo = {
-            narHash = "sha256-obIWFoN6IIGTe9sW7tvcNEFOdQ5UcQoWSM6auJUXVio=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/internmap/-/internmap-1.0.1.tgz";
-          };
-          ident = "internmap";
-          ltype = "file";
-          treeInfo = { };
-          version = "1.0.1";
-        };
-      };
       is-array-buffer = {
         "3.0.2" = {
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.2.0";
+              pin = "1.2.1";
               runtime = true;
             };
             is-typed-array = {
               descriptor = "^1.1.10";
+              pin = "1.1.12";
               runtime = true;
             };
           };
@@ -6251,6 +5789,7 @@
           depInfo = {
             has-bigints = {
               descriptor = "^1.0.1";
+              pin = "1.0.2";
               runtime = true;
             };
           };
@@ -6269,6 +5808,7 @@
           depInfo = {
             binary-extensions = {
               descriptor = "^2.0.0";
+              pin = "2.2.0";
               runtime = true;
             };
           };
@@ -6287,10 +5827,12 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             has-tostringtag = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
@@ -6322,6 +5864,7 @@
           depInfo = {
             has = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
           };
@@ -6340,6 +5883,7 @@
           depInfo = {
             has-tostringtag = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
@@ -6405,6 +5949,7 @@
           depInfo = {
             is-extglob = {
               descriptor = "^2.1.1";
+              pin = "2.1.1";
               runtime = true;
             };
           };
@@ -6428,6 +5973,7 @@
           depInfo = {
             is-docker = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
           };
@@ -6472,6 +6018,7 @@
           depInfo = {
             has-tostringtag = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
@@ -6503,10 +6050,12 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             has-tostringtag = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
@@ -6525,6 +6074,7 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
           };
@@ -6567,6 +6117,7 @@
           depInfo = {
             has-tostringtag = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
@@ -6585,6 +6136,7 @@
           depInfo = {
             has-symbols = {
               descriptor = "^1.0.2";
+              pin = "1.0.3";
               runtime = true;
             };
           };
@@ -6603,6 +6155,7 @@
           depInfo = {
             which-typed-array = {
               descriptor = "^1.1.11";
+              pin = "1.1.11";
               runtime = true;
             };
           };
@@ -6621,6 +6174,7 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
           };
@@ -6639,6 +6193,7 @@
           depInfo = {
             is-docker = {
               descriptor = "^2.0.0";
+              pin = "2.2.1";
               runtime = true;
             };
           };
@@ -6719,6 +6274,7 @@
           depInfo = {
             argparse = {
               descriptor = "^2.0.1";
+              pin = "2.0.1";
               runtime = true;
             };
           };
@@ -6781,6 +6337,7 @@
           depInfo = {
             minimist = {
               descriptor = "^1.2.0";
+              pin = "1.2.8";
               runtime = true;
             };
           };
@@ -6799,18 +6356,22 @@
           depInfo = {
             array-includes = {
               descriptor = "^3.1.6";
+              pin = "3.1.6";
               runtime = true;
             };
             "array.prototype.flat" = {
               descriptor = "^1.3.1";
+              pin = "1.3.1";
               runtime = true;
             };
             "object.assign" = {
               descriptor = "^4.1.4";
+              pin = "4.1.4";
               runtime = true;
             };
             "object.values" = {
               descriptor = "^1.1.6";
+              pin = "1.1.6";
               runtime = true;
             };
           };
@@ -6842,6 +6403,7 @@
           depInfo = {
             language-subtag-registry = {
               descriptor = "~0.3.2";
+              pin = "0.3.22";
               runtime = true;
             };
           };
@@ -6860,10 +6422,12 @@
           depInfo = {
             prelude-ls = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
             type-check = {
               descriptor = "~0.4.0";
+              pin = "0.4.0";
               runtime = true;
             };
           };
@@ -6908,6 +6472,7 @@
           depInfo = {
             p-locate = {
               descriptor = "^5.0.0";
+              pin = "5.0.0";
               runtime = true;
             };
           };
@@ -6919,19 +6484,6 @@
           ident = "locate-path";
           ltype = "file";
           version = "6.0.0";
-        };
-      };
-      lodash = {
-        "4.17.21" = {
-          fetchInfo = {
-            narHash = "sha256-amyN064Yh6psvOfLgcpktd5dRNQStUYHHoIqiI6DMek=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz";
-          };
-          ident = "lodash";
-          ltype = "file";
-          treeInfo = { };
-          version = "4.17.21";
         };
       };
       "lodash.merge" = {
@@ -6957,6 +6509,7 @@
           depInfo = {
             js-tokens = {
               descriptor = "^3.0.0 || ^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
           };
@@ -6975,6 +6528,7 @@
           depInfo = {
             yallist = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
           };
@@ -7019,10 +6573,12 @@
           depInfo = {
             braces = {
               descriptor = "^3.0.2";
+              pin = "3.0.2";
               runtime = true;
             };
             picomatch = {
               descriptor = "^2.3.1";
+              pin = "2.3.1";
               runtime = true;
             };
           };
@@ -7065,6 +6621,7 @@
           depInfo = {
             brace-expansion = {
               descriptor = "^1.1.7";
+              pin = "1.1.11";
               runtime = true;
             };
           };
@@ -7109,88 +6666,99 @@
           depInfo = {
             "@emotion/react" = {
               descriptor = "^11.11.1";
+              pin = "11.11.1";
               runtime = true;
             };
             "@emotion/styled" = {
               descriptor = "^11.11.0";
+              pin = "11.11.0";
               runtime = true;
             };
             "@mui/icons-material" = {
               descriptor = "^5.14.3";
+              pin = "5.14.3";
               runtime = true;
             };
             "@mui/material" = {
               descriptor = "^5.14.3";
-              runtime = true;
-            };
-            "@nivo/bar" = {
-              descriptor = "^0.83.0";
-              runtime = true;
-            };
-            "@nivo/core" = {
-              descriptor = "^0.83.0";
+              pin = "5.14.3";
               runtime = true;
             };
             "@types/node" = {
               descriptor = "20.4.7";
+              pin = "20.4.7";
               runtime = true;
             };
             "@types/react" = {
               descriptor = "18.2.18";
+              pin = "18.2.18";
               runtime = true;
             };
             "@types/react-dom" = {
               descriptor = "18.2.7";
+              pin = "18.2.7";
               runtime = true;
             };
             autoprefixer = {
               descriptor = "10.4.14";
+              pin = "10.4.14";
               runtime = true;
             };
             classnames = {
               descriptor = "^2.3.2";
+              pin = "2.3.2";
               runtime = true;
             };
             eslint = {
               descriptor = "8.46.0";
+              pin = "8.46.0";
               runtime = true;
             };
             eslint-config-next = {
               descriptor = "13.4.12";
+              pin = "13.4.12";
               runtime = true;
             };
             next = {
               descriptor = "13.4.12";
+              pin = "13.4.12";
               runtime = true;
             };
             postcss = {
               descriptor = "8.4.27";
+              pin = "8.4.27";
               runtime = true;
             };
             prettier = {
               descriptor = "^3.0.1";
+              pin = "3.0.1";
             };
             prettier-plugin-tailwindcss = {
               descriptor = "^0.4.1";
+              pin = "0.4.1";
             };
             react = {
               descriptor = "18.2.0";
+              pin = "18.2.0";
               runtime = true;
             };
             react-dom = {
               descriptor = "18.2.0";
+              pin = "18.2.0";
               runtime = true;
             };
             tailwindcss = {
               descriptor = "3.3.3";
+              pin = "3.3.3";
               runtime = true;
             };
             typescript = {
               descriptor = "5.1.6";
+              pin = "5.1.6";
               runtime = true;
             };
           };
-          fetchInfo = "path:.";
+          fetchInfo = "path:..";
           ident = "my-app";
           lifecycle = {
             build = true;
@@ -7401,36 +6969,6 @@
               key = "@next/swc-win32-x64-msvc/13.4.12";
               optional = true;
             };
-            "node_modules/@nivo/annotations" = {
-              key = "@nivo/annotations/0.83.0";
-            };
-            "node_modules/@nivo/axes" = {
-              key = "@nivo/axes/0.83.0";
-            };
-            "node_modules/@nivo/bar" = {
-              key = "@nivo/bar/0.83.0";
-            };
-            "node_modules/@nivo/colors" = {
-              key = "@nivo/colors/0.83.0";
-            };
-            "node_modules/@nivo/core" = {
-              key = "@nivo/core/0.83.0";
-            };
-            "node_modules/@nivo/legends" = {
-              key = "@nivo/legends/0.83.0";
-            };
-            "node_modules/@nivo/recompose" = {
-              key = "@nivo/recompose/0.83.0";
-            };
-            "node_modules/@nivo/scales" = {
-              key = "@nivo/scales/0.83.0";
-            };
-            "node_modules/@nivo/scales/node_modules/@types/d3-time-format" = {
-              key = "@types/d3-time-format/3.0.1";
-            };
-            "node_modules/@nivo/tooltip" = {
-              key = "@nivo/tooltip/0.83.0";
-            };
             "node_modules/@nodelib/fs.scandir" = {
               key = "@nodelib/fs.scandir/2.1.5";
             };
@@ -7446,53 +6984,11 @@
             "node_modules/@popperjs/core" = {
               key = "@popperjs/core/2.11.8";
             };
-            "node_modules/@react-spring/animated" = {
-              key = "@react-spring/animated/9.7.3";
-            };
-            "node_modules/@react-spring/core" = {
-              key = "@react-spring/core/9.7.3";
-            };
-            "node_modules/@react-spring/shared" = {
-              key = "@react-spring/shared/9.7.3";
-            };
-            "node_modules/@react-spring/types" = {
-              key = "@react-spring/types/9.7.3";
-            };
-            "node_modules/@react-spring/web" = {
-              key = "@react-spring/web/9.7.3";
-            };
             "node_modules/@rushstack/eslint-patch" = {
               key = "@rushstack/eslint-patch/1.3.2";
             };
             "node_modules/@swc/helpers" = {
               key = "@swc/helpers/0.5.1";
-            };
-            "node_modules/@types/d3-color" = {
-              key = "@types/d3-color/2.0.3";
-            };
-            "node_modules/@types/d3-format" = {
-              key = "@types/d3-format/1.4.2";
-            };
-            "node_modules/@types/d3-path" = {
-              key = "@types/d3-path/2.0.2";
-            };
-            "node_modules/@types/d3-scale" = {
-              key = "@types/d3-scale/3.3.2";
-            };
-            "node_modules/@types/d3-scale-chromatic" = {
-              key = "@types/d3-scale-chromatic/2.0.1";
-            };
-            "node_modules/@types/d3-scale/node_modules/@types/d3-time" = {
-              key = "@types/d3-time/2.1.1";
-            };
-            "node_modules/@types/d3-shape" = {
-              key = "@types/d3-shape/2.1.3";
-            };
-            "node_modules/@types/d3-time" = {
-              key = "@types/d3-time/1.1.1";
-            };
-            "node_modules/@types/d3-time-format" = {
-              key = "@types/d3-time-format/2.3.1";
             };
             "node_modules/@types/json5" = {
               key = "@types/json5/0.0.29";
@@ -7514,9 +7010,6 @@
             };
             "node_modules/@types/react-is" = {
               key = "@types/react-is/18.2.1";
-            };
-            "node_modules/@types/react-lifecycles-compat" = {
-              key = "@types/react-lifecycles-compat/3.0.1";
             };
             "node_modules/@types/react-transition-group" = {
               key = "@types/react-transition-group/4.4.6";
@@ -7697,45 +7190,6 @@
             };
             "node_modules/csstype" = {
               key = "csstype/3.1.2";
-            };
-            "node_modules/d3-array" = {
-              key = "d3-array/2.12.1";
-            };
-            "node_modules/d3-color" = {
-              key = "d3-color/3.1.0";
-            };
-            "node_modules/d3-format" = {
-              key = "d3-format/1.4.5";
-            };
-            "node_modules/d3-interpolate" = {
-              key = "d3-interpolate/2.0.1";
-            };
-            "node_modules/d3-interpolate/node_modules/d3-color" = {
-              key = "d3-color/2.0.0";
-            };
-            "node_modules/d3-path" = {
-              key = "d3-path/1.0.9";
-            };
-            "node_modules/d3-scale" = {
-              key = "d3-scale/3.3.0";
-            };
-            "node_modules/d3-scale-chromatic" = {
-              key = "d3-scale-chromatic/2.0.0";
-            };
-            "node_modules/d3-scale-chromatic/node_modules/d3-color" = {
-              key = "d3-color/2.0.0";
-            };
-            "node_modules/d3-scale/node_modules/d3-time" = {
-              key = "d3-time/2.1.1";
-            };
-            "node_modules/d3-shape" = {
-              key = "d3-shape/1.3.7";
-            };
-            "node_modules/d3-time" = {
-              key = "d3-time/1.1.0";
-            };
-            "node_modules/d3-time-format" = {
-              key = "d3-time-format/3.0.0";
             };
             "node_modules/damerau-levenshtein" = {
               key = "damerau-levenshtein/1.0.8";
@@ -8032,9 +7486,6 @@
             "node_modules/internal-slot" = {
               key = "internal-slot/1.0.5";
             };
-            "node_modules/internmap" = {
-              key = "internmap/1.0.1";
-            };
             "node_modules/is-array-buffer" = {
               key = "is-array-buffer/3.0.2";
             };
@@ -8157,9 +7608,6 @@
             };
             "node_modules/locate-path" = {
               key = "locate-path/6.0.0";
-            };
-            "node_modules/lodash" = {
-              key = "lodash/4.17.21";
             };
             "node_modules/lodash.merge" = {
               key = "lodash.merge/4.6.2";
@@ -8351,9 +7799,6 @@
             };
             "node_modules/react-is" = {
               key = "react-is/16.13.1";
-            };
-            "node_modules/react-lifecycles-compat" = {
-              key = "react-lifecycles-compat/3.0.4";
             };
             "node_modules/react-transition-group" = {
               key = "react-transition-group/4.4.5";
@@ -8604,14 +8049,17 @@
           depInfo = {
             any-promise = {
               descriptor = "^1.0.0";
+              pin = "1.3.0";
               runtime = true;
             };
             object-assign = {
               descriptor = "^4.0.1";
+              pin = "4.1.1";
               runtime = true;
             };
             thenify-all = {
               descriptor = "^1.0.0";
+              pin = "1.6.0";
               runtime = true;
             };
           };
@@ -8666,79 +8114,96 @@
           depInfo = {
             "@next/env" = {
               descriptor = "13.4.12";
+              pin = "13.4.12";
               runtime = true;
             };
             "@next/swc-darwin-arm64" = {
               descriptor = "13.4.12";
               optional = true;
+              pin = "13.4.12";
               runtime = true;
             };
             "@next/swc-darwin-x64" = {
               descriptor = "13.4.12";
               optional = true;
+              pin = "13.4.12";
               runtime = true;
             };
             "@next/swc-linux-arm64-gnu" = {
               descriptor = "13.4.12";
               optional = true;
+              pin = "13.4.12";
               runtime = true;
             };
             "@next/swc-linux-arm64-musl" = {
               descriptor = "13.4.12";
               optional = true;
+              pin = "13.4.12";
               runtime = true;
             };
             "@next/swc-linux-x64-gnu" = {
               descriptor = "13.4.12";
               optional = true;
+              pin = "13.4.12";
               runtime = true;
             };
             "@next/swc-linux-x64-musl" = {
               descriptor = "13.4.12";
               optional = true;
+              pin = "13.4.12";
               runtime = true;
             };
             "@next/swc-win32-arm64-msvc" = {
               descriptor = "13.4.12";
               optional = true;
+              pin = "13.4.12";
               runtime = true;
             };
             "@next/swc-win32-ia32-msvc" = {
               descriptor = "13.4.12";
               optional = true;
+              pin = "13.4.12";
               runtime = true;
             };
             "@next/swc-win32-x64-msvc" = {
               descriptor = "13.4.12";
               optional = true;
+              pin = "13.4.12";
               runtime = true;
             };
             "@swc/helpers" = {
               descriptor = "0.5.1";
+              pin = "0.5.1";
               runtime = true;
             };
             busboy = {
               descriptor = "1.6.0";
+              pin = "1.6.0";
               runtime = true;
             };
             caniuse-lite = {
               descriptor = "^1.0.30001406";
+              pin = "1.0.30001519";
               runtime = true;
             };
             postcss = {
               descriptor = "8.4.14";
+              pin = "8.4.14";
               runtime = true;
             };
             styled-jsx = {
               descriptor = "5.1.1";
+              pin = "5.1.1";
               runtime = true;
             };
             watchpack = {
               descriptor = "2.4.0";
+              pin = "2.4.0";
               runtime = true;
             };
             zod = {
               descriptor = "3.21.4";
+              pin = "3.21.4";
               runtime = true;
             };
           };
@@ -8816,6 +8281,7 @@
           depInfo = {
             path-key = {
               descriptor = "^3.0.0";
+              pin = "3.1.1";
               runtime = true;
             };
           };
@@ -8832,6 +8298,7 @@
           depInfo = {
             path-key = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
           };
@@ -8902,18 +8369,22 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             has-symbols = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
             object-keys = {
               descriptor = "^1.1.1";
+              pin = "1.1.1";
               runtime = true;
             };
           };
@@ -8932,14 +8403,17 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
           };
@@ -8958,14 +8432,17 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
           };
@@ -8984,18 +8461,22 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.2.0";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.21.2";
+              pin = "1.22.1";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
           };
@@ -9014,10 +8495,12 @@
           depInfo = {
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
           };
@@ -9036,14 +8519,17 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
           };
@@ -9062,6 +8548,7 @@
           depInfo = {
             wrappy = {
               descriptor = "1";
+              pin = "1.0.2";
               runtime = true;
             };
           };
@@ -9080,6 +8567,7 @@
           depInfo = {
             mimic-fn = {
               descriptor = "^2.1.0";
+              pin = "2.1.0";
               runtime = true;
             };
           };
@@ -9096,6 +8584,7 @@
           depInfo = {
             mimic-fn = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
           };
@@ -9114,18 +8603,22 @@
           depInfo = {
             default-browser = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
             define-lazy-prop = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
             is-inside-container = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             is-wsl = {
               descriptor = "^2.2.0";
+              pin = "2.2.0";
               runtime = true;
             };
           };
@@ -9144,26 +8637,32 @@
           depInfo = {
             "@aashutoshrathi/word-wrap" = {
               descriptor = "^1.2.3";
+              pin = "1.2.6";
               runtime = true;
             };
             deep-is = {
               descriptor = "^0.1.3";
+              pin = "0.1.4";
               runtime = true;
             };
             fast-levenshtein = {
               descriptor = "^2.0.6";
+              pin = "2.0.6";
               runtime = true;
             };
             levn = {
               descriptor = "^0.4.1";
+              pin = "0.4.1";
               runtime = true;
             };
             prelude-ls = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
             type-check = {
               descriptor = "^0.4.0";
+              pin = "0.4.0";
               runtime = true;
             };
           };
@@ -9182,6 +8681,7 @@
           depInfo = {
             yocto-queue = {
               descriptor = "^0.1.0";
+              pin = "0.1.0";
               runtime = true;
             };
           };
@@ -9200,6 +8700,7 @@
           depInfo = {
             p-limit = {
               descriptor = "^3.0.2";
+              pin = "3.1.0";
               runtime = true;
             };
           };
@@ -9218,6 +8719,7 @@
           depInfo = {
             callsites = {
               descriptor = "^3.0.0";
+              pin = "3.1.0";
               runtime = true;
             };
           };
@@ -9236,18 +8738,22 @@
           depInfo = {
             "@babel/code-frame" = {
               descriptor = "^7.0.0";
+              pin = "7.22.5";
               runtime = true;
             };
             error-ex = {
               descriptor = "^1.3.1";
+              pin = "1.3.2";
               runtime = true;
             };
             json-parse-even-better-errors = {
               descriptor = "^2.3.0";
+              pin = "2.3.1";
               runtime = true;
             };
             lines-and-columns = {
               descriptor = "^1.1.6";
+              pin = "1.2.4";
               runtime = true;
             };
           };
@@ -9394,14 +8900,17 @@
           depInfo = {
             nanoid = {
               descriptor = "^3.3.4";
+              pin = "3.3.6";
               runtime = true;
             };
             picocolors = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             source-map-js = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
           };
@@ -9418,14 +8927,17 @@
           depInfo = {
             nanoid = {
               descriptor = "^3.3.6";
+              pin = "3.3.6";
               runtime = true;
             };
             picocolors = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             source-map-js = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
           };
@@ -9444,14 +8956,17 @@
           depInfo = {
             postcss-value-parser = {
               descriptor = "^4.0.0";
+              pin = "4.2.0";
               runtime = true;
             };
             read-cache = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             resolve = {
               descriptor = "^1.1.7";
+              pin = "1.22.4";
               runtime = true;
             };
           };
@@ -9475,6 +8990,7 @@
           depInfo = {
             camelcase-css = {
               descriptor = "^2.0.1";
+              pin = "2.0.1";
               runtime = true;
             };
           };
@@ -9498,10 +9014,12 @@
           depInfo = {
             lilconfig = {
               descriptor = "^2.0.5";
+              pin = "2.1.0";
               runtime = true;
             };
             yaml = {
               descriptor = "^2.1.1";
+              pin = "2.3.1";
               runtime = true;
             };
           };
@@ -9530,6 +9048,7 @@
           depInfo = {
             postcss-selector-parser = {
               descriptor = "^6.0.11";
+              pin = "6.0.13";
               runtime = true;
             };
           };
@@ -9553,10 +9072,12 @@
           depInfo = {
             cssesc = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
             util-deprecate = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
           };
@@ -9697,14 +9218,17 @@
           depInfo = {
             loose-envify = {
               descriptor = "^1.4.0";
+              pin = "1.4.0";
               runtime = true;
             };
             object-assign = {
               descriptor = "^4.1.1";
+              pin = "4.1.1";
               runtime = true;
             };
             react-is = {
               descriptor = "^16.13.1";
+              pin = "16.13.1";
               runtime = true;
             };
           };
@@ -9749,6 +9273,7 @@
           depInfo = {
             loose-envify = {
               descriptor = "^1.1.0";
+              pin = "1.4.0";
               runtime = true;
             };
           };
@@ -9767,10 +9292,12 @@
           depInfo = {
             loose-envify = {
               descriptor = "^1.1.0";
+              pin = "1.4.0";
               runtime = true;
             };
             scheduler = {
               descriptor = "^0.23.0";
+              pin = "0.23.0";
               runtime = true;
             };
           };
@@ -9813,36 +9340,27 @@
           version = "18.2.0";
         };
       };
-      react-lifecycles-compat = {
-        "3.0.4" = {
-          fetchInfo = {
-            narHash = "sha256-XHLO6U5lwgBNKcuglPA22YDxh65I5OrvzJUAYXbophs=";
-            type = "tarball";
-            url = "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz";
-          };
-          ident = "react-lifecycles-compat";
-          ltype = "file";
-          treeInfo = { };
-          version = "3.0.4";
-        };
-      };
       react-transition-group = {
         "4.4.5" = {
           depInfo = {
             "@babel/runtime" = {
               descriptor = "^7.5.5";
+              pin = "7.22.6";
               runtime = true;
             };
             dom-helpers = {
               descriptor = "^5.0.1";
+              pin = "5.2.1";
               runtime = true;
             };
             loose-envify = {
               descriptor = "^1.4.0";
+              pin = "1.4.0";
               runtime = true;
             };
             prop-types = {
               descriptor = "^15.6.2";
+              pin = "15.8.1";
               runtime = true;
             };
           };
@@ -9869,6 +9387,7 @@
           depInfo = {
             pify = {
               descriptor = "^2.3.0";
+              pin = "2.3.0";
               runtime = true;
             };
           };
@@ -9887,6 +9406,7 @@
           depInfo = {
             picomatch = {
               descriptor = "^2.2.1";
+              pin = "2.3.1";
               runtime = true;
             };
           };
@@ -9918,14 +9438,17 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.2.0";
+              pin = "1.2.0";
               runtime = true;
             };
             functions-have-names = {
               descriptor = "^1.2.3";
+              pin = "1.2.3";
               runtime = true;
             };
           };
@@ -9949,14 +9472,17 @@
           depInfo = {
             is-core-module = {
               descriptor = "^2.13.0";
+              pin = "2.13.0";
               runtime = true;
             };
             path-parse = {
               descriptor = "^1.0.7";
+              pin = "1.0.7";
               runtime = true;
             };
             supports-preserve-symlinks-flag = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
@@ -9978,14 +9504,17 @@
           depInfo = {
             is-core-module = {
               descriptor = "^2.9.0";
+              pin = "2.13.0";
               runtime = true;
             };
             path-parse = {
               descriptor = "^1.0.7";
+              pin = "1.0.7";
               runtime = true;
             };
             supports-preserve-symlinks-flag = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
@@ -10048,6 +9577,7 @@
           depInfo = {
             glob = {
               descriptor = "^7.1.3";
+              pin = "7.1.7";
               runtime = true;
             };
           };
@@ -10066,6 +9596,7 @@
           depInfo = {
             execa = {
               descriptor = "^5.0.0";
+              pin = "5.1.1";
               runtime = true;
             };
           };
@@ -10084,6 +9615,7 @@
           depInfo = {
             queue-microtask = {
               descriptor = "^1.2.2";
+              pin = "1.2.3";
               runtime = true;
             };
           };
@@ -10102,18 +9634,22 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.2.0";
+              pin = "1.2.1";
               runtime = true;
             };
             has-symbols = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
             isarray = {
               descriptor = "^2.0.5";
+              pin = "2.0.5";
               runtime = true;
             };
           };
@@ -10132,14 +9668,17 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.1.3";
+              pin = "1.2.1";
               runtime = true;
             };
             is-regex = {
               descriptor = "^1.1.4";
+              pin = "1.1.4";
               runtime = true;
             };
           };
@@ -10158,6 +9697,7 @@
           depInfo = {
             loose-envify = {
               descriptor = "^1.1.0";
+              pin = "1.4.0";
               runtime = true;
             };
           };
@@ -10197,6 +9737,7 @@
           depInfo = {
             lru-cache = {
               descriptor = "^6.0.0";
+              pin = "6.0.0";
               runtime = true;
             };
           };
@@ -10215,6 +9756,7 @@
           depInfo = {
             shebang-regex = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
           };
@@ -10246,14 +9788,17 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.0";
+              pin = "1.0.2";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.0.2";
+              pin = "1.2.1";
               runtime = true;
             };
             object-inspect = {
               descriptor = "^1.9.0";
+              pin = "1.12.3";
               runtime = true;
             };
           };
@@ -10348,34 +9893,42 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.1.3";
+              pin = "1.2.1";
               runtime = true;
             };
             has-symbols = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
             internal-slot = {
               descriptor = "^1.0.3";
+              pin = "1.0.5";
               runtime = true;
             };
             "regexp.prototype.flags" = {
               descriptor = "^1.4.3";
+              pin = "1.5.0";
               runtime = true;
             };
             side-channel = {
               descriptor = "^1.0.4";
+              pin = "1.0.4";
               runtime = true;
             };
           };
@@ -10394,14 +9947,17 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
           };
@@ -10420,14 +9976,17 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
           };
@@ -10446,14 +10005,17 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             define-properties = {
               descriptor = "^1.1.4";
+              pin = "1.2.0";
               runtime = true;
             };
             es-abstract = {
               descriptor = "^1.20.4";
+              pin = "1.22.1";
               runtime = true;
             };
           };
@@ -10472,6 +10034,7 @@
           depInfo = {
             ansi-regex = {
               descriptor = "^5.0.1";
+              pin = "5.0.1";
               runtime = true;
             };
           };
@@ -10540,6 +10103,7 @@
           depInfo = {
             client-only = {
               descriptor = "0.0.1";
+              pin = "0.0.1";
               runtime = true;
             };
           };
@@ -10590,30 +10154,37 @@
           depInfo = {
             "@jridgewell/gen-mapping" = {
               descriptor = "^0.3.2";
+              pin = "0.3.3";
               runtime = true;
             };
             commander = {
               descriptor = "^4.0.0";
+              pin = "4.1.1";
               runtime = true;
             };
             glob = {
               descriptor = "7.1.6";
+              pin = "7.1.6";
               runtime = true;
             };
             lines-and-columns = {
               descriptor = "^1.1.6";
+              pin = "1.2.4";
               runtime = true;
             };
             mz = {
               descriptor = "^2.7.0";
+              pin = "2.7.0";
               runtime = true;
             };
             pirates = {
               descriptor = "^4.0.1";
+              pin = "4.0.6";
               runtime = true;
             };
             ts-interface-checker = {
               descriptor = "^0.1.9";
+              pin = "0.1.13";
               runtime = true;
             };
           };
@@ -10632,6 +10203,7 @@
           depInfo = {
             has-flag = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
           };
@@ -10648,6 +10220,7 @@
           depInfo = {
             has-flag = {
               descriptor = "^4.0.0";
+              pin = "4.0.0";
               runtime = true;
             };
           };
@@ -10679,10 +10252,12 @@
           depInfo = {
             "@pkgr/utils" = {
               descriptor = "^2.3.1";
+              pin = "2.4.2";
               runtime = true;
             };
             tslib = {
               descriptor = "^2.5.0";
+              pin = "2.6.1";
               runtime = true;
             };
           };
@@ -10707,90 +10282,112 @@
           depInfo = {
             "@alloc/quick-lru" = {
               descriptor = "^5.2.0";
+              pin = "5.2.0";
               runtime = true;
             };
             arg = {
               descriptor = "^5.0.2";
+              pin = "5.0.2";
               runtime = true;
             };
             chokidar = {
               descriptor = "^3.5.3";
+              pin = "3.5.3";
               runtime = true;
             };
             didyoumean = {
               descriptor = "^1.2.2";
+              pin = "1.2.2";
               runtime = true;
             };
             dlv = {
               descriptor = "^1.1.3";
+              pin = "1.1.3";
               runtime = true;
             };
             fast-glob = {
               descriptor = "^3.2.12";
+              pin = "3.3.1";
               runtime = true;
             };
             glob-parent = {
               descriptor = "^6.0.2";
+              pin = "6.0.2";
               runtime = true;
             };
             is-glob = {
               descriptor = "^4.0.3";
+              pin = "4.0.3";
               runtime = true;
             };
             jiti = {
               descriptor = "^1.18.2";
+              pin = "1.19.1";
               runtime = true;
             };
             lilconfig = {
               descriptor = "^2.1.0";
+              pin = "2.1.0";
               runtime = true;
             };
             micromatch = {
               descriptor = "^4.0.5";
+              pin = "4.0.5";
               runtime = true;
             };
             normalize-path = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
             object-hash = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
             picocolors = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
             postcss = {
               descriptor = "^8.4.23";
+              pin = "8.4.27";
               runtime = true;
             };
             postcss-import = {
               descriptor = "^15.1.0";
+              pin = "15.1.0";
               runtime = true;
             };
             postcss-js = {
               descriptor = "^4.0.1";
+              pin = "4.0.1";
               runtime = true;
             };
             postcss-load-config = {
               descriptor = "^4.0.1";
+              pin = "4.0.1";
               runtime = true;
             };
             postcss-nested = {
               descriptor = "^6.0.1";
+              pin = "6.0.1";
               runtime = true;
             };
             postcss-selector-parser = {
               descriptor = "^6.0.11";
+              pin = "6.0.13";
               runtime = true;
             };
             resolve = {
               descriptor = "^1.22.2";
+              pin = "1.22.4";
               runtime = true;
             };
             sucrase = {
               descriptor = "^3.32.0";
+              pin = "3.34.0";
               runtime = true;
             };
           };
@@ -10835,6 +10432,7 @@
           depInfo = {
             any-promise = {
               descriptor = "^1.0.0";
+              pin = "1.3.0";
               runtime = true;
             };
           };
@@ -10853,6 +10451,7 @@
           depInfo = {
             thenify = {
               descriptor = ">= 3.1.0 < 4";
+              pin = "3.3.1";
               runtime = true;
             };
           };
@@ -10897,6 +10496,7 @@
           depInfo = {
             is-number = {
               descriptor = "^7.0.0";
+              pin = "7.0.0";
               runtime = true;
             };
           };
@@ -10928,18 +10528,22 @@
           depInfo = {
             "@types/json5" = {
               descriptor = "^0.0.29";
+              pin = "0.0.29";
               runtime = true;
             };
             json5 = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             minimist = {
               descriptor = "^1.2.6";
+              pin = "1.2.8";
               runtime = true;
             };
             strip-bom = {
               descriptor = "^3.0.0";
+              pin = "3.0.0";
               runtime = true;
             };
           };
@@ -10982,6 +10586,7 @@
           depInfo = {
             tslib = {
               descriptor = "^1.8.1";
+              pin = "1.14.1";
               runtime = true;
             };
           };
@@ -11005,6 +10610,7 @@
           depInfo = {
             prelude-ls = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
           };
@@ -11036,14 +10642,17 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             get-intrinsic = {
               descriptor = "^1.2.1";
+              pin = "1.2.1";
               runtime = true;
             };
             is-typed-array = {
               descriptor = "^1.1.10";
+              pin = "1.1.12";
               runtime = true;
             };
           };
@@ -11062,18 +10671,22 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             for-each = {
               descriptor = "^0.3.3";
+              pin = "0.3.3";
               runtime = true;
             };
             has-proto = {
               descriptor = "^1.0.1";
+              pin = "1.0.1";
               runtime = true;
             };
             is-typed-array = {
               descriptor = "^1.1.10";
+              pin = "1.1.12";
               runtime = true;
             };
           };
@@ -11092,22 +10705,27 @@
           depInfo = {
             available-typed-arrays = {
               descriptor = "^1.0.5";
+              pin = "1.0.5";
               runtime = true;
             };
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             for-each = {
               descriptor = "^0.3.3";
+              pin = "0.3.3";
               runtime = true;
             };
             has-proto = {
               descriptor = "^1.0.1";
+              pin = "1.0.1";
               runtime = true;
             };
             is-typed-array = {
               descriptor = "^1.1.10";
+              pin = "1.1.12";
               runtime = true;
             };
           };
@@ -11126,14 +10744,17 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             for-each = {
               descriptor = "^0.3.3";
+              pin = "0.3.3";
               runtime = true;
             };
             is-typed-array = {
               descriptor = "^1.1.9";
+              pin = "1.1.12";
               runtime = true;
             };
           };
@@ -11171,18 +10792,22 @@
           depInfo = {
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             has-bigints = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             has-symbols = {
               descriptor = "^1.0.3";
+              pin = "1.0.3";
               runtime = true;
             };
             which-boxed-primitive = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
           };
@@ -11219,10 +10844,12 @@
           depInfo = {
             escalade = {
               descriptor = "^3.1.1";
+              pin = "3.1.1";
               runtime = true;
             };
             picocolors = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
@@ -11246,6 +10873,7 @@
           depInfo = {
             punycode = {
               descriptor = "^2.1.0";
+              pin = "2.3.0";
               runtime = true;
             };
           };
@@ -11277,10 +10905,12 @@
           depInfo = {
             glob-to-regexp = {
               descriptor = "^0.4.1";
+              pin = "0.4.1";
               runtime = true;
             };
             graceful-fs = {
               descriptor = "^4.1.2";
+              pin = "4.2.11";
               runtime = true;
             };
           };
@@ -11304,6 +10934,7 @@
           depInfo = {
             isexe = {
               descriptor = "^2.0.0";
+              pin = "2.0.0";
               runtime = true;
             };
           };
@@ -11322,22 +10953,27 @@
           depInfo = {
             is-bigint = {
               descriptor = "^1.0.1";
+              pin = "1.0.4";
               runtime = true;
             };
             is-boolean-object = {
               descriptor = "^1.1.0";
+              pin = "1.1.2";
               runtime = true;
             };
             is-number-object = {
               descriptor = "^1.0.4";
+              pin = "1.0.7";
               runtime = true;
             };
             is-string = {
               descriptor = "^1.0.5";
+              pin = "1.0.7";
               runtime = true;
             };
             is-symbol = {
               descriptor = "^1.0.3";
+              pin = "1.0.4";
               runtime = true;
             };
           };
@@ -11356,22 +10992,27 @@
           depInfo = {
             available-typed-arrays = {
               descriptor = "^1.0.5";
+              pin = "1.0.5";
               runtime = true;
             };
             call-bind = {
               descriptor = "^1.0.2";
+              pin = "1.0.2";
               runtime = true;
             };
             for-each = {
               descriptor = "^0.3.3";
+              pin = "0.3.3";
               runtime = true;
             };
             gopd = {
               descriptor = "^1.0.1";
+              pin = "1.0.1";
               runtime = true;
             };
             has-tostringtag = {
               descriptor = "^1.0.0";
+              pin = "1.0.0";
               runtime = true;
             };
           };
