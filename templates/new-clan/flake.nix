@@ -3,7 +3,6 @@
 
   inputs = {
     clan-core.url = "git+https://git.clan.lol/clan/clan-core";
-    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   outputs = inputs @ { flake-parts, ... }:

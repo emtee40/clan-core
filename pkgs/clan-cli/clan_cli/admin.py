@@ -3,9 +3,13 @@ import argparse
 import os
 import subprocess
 
+from .secrets.secrets import encrypt_secret, sops_secrets_folder
+from .zerotier import create_network
+
 
 def create(args: argparse.Namespace) -> None:
     os.makedirs(args.folder, exist_ok=True)
+    os.chdir(args.folder)
     # TODO create clan template in flake
     subprocess.Popen(
         [
@@ -16,6 +20,13 @@ def create(args: argparse.Namespace) -> None:
             "git+https://git.clan.lol/clan/clan-core#new-clan",
         ]
     )
+    network = create_network()
+    encrypt_secret(
+        sops_secrets_folder() / "zerotier.secret",
+        network["secret"],
+    )
+    with open(".zerotier.id", "w+") as id_file:
+        id_file.write(network["networkid"])
 
 
 def rebuild(args: argparse.Namespace) -> None:
