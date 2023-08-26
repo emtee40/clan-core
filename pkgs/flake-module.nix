@@ -12,7 +12,7 @@
         inherit (config.packages) tea-create-pr;
       };
       nix-unit = pkgs.callPackage ./nix-unit { };
-      inherit (pkgs.callPackages ./node-packages { }) prettier-plugin-tailwindcss;
+      prettier-plugin-tailwindcss = pkgs.callPackage ./prettier-plugin-tailwindcss { };
     };
   };
 }
