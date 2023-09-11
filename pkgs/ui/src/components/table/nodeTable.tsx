@@ -6,6 +6,7 @@ import {
   SetStateAction,
   Dispatch,
   useEffect,
+  useMemo,
 } from "react";
 import Box from "@mui/material/Box";
 import TablePagination from "@mui/material/TablePagination";
@@ -25,6 +26,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { useMachines } from "../hooks/useMachines";
 import { Machine } from "@/api/model/machine";
 import { Status } from "@/api/model";
+import { useDebounce } from "../hooks/useDebounce";
 
 export interface NodeTableProps {
   tableData: TableData[];
@@ -34,9 +36,6 @@ export function NodeTable() {
   // let { tableData } = props;
 
   const machines = useMachines();
-  const tableData = machines.data.map((machine) => {
-    return { name: machine.name, status: Status.online, last_seen: 0 };
-  });
 
   const theme = useTheme();
   const is_xs = useMediaQuery(theme.breakpoints.only("xs"));
@@ -46,9 +45,13 @@ export function NodeTable() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [filteredList, setFilteredList] = useState<readonly Machine[]>([]);
 
-  useEffect(() => {
+  const tableData = useMemo(() => {
+    const tableData = machines.data.map((machine) => {
+      return { name: machine.name, status: Status.online, last_seen: 0 };
+    });
     setFilteredList(tableData);
-  }, [tableData, machines.isLoading]);
+    return tableData;
+  }, [machines.data]);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);

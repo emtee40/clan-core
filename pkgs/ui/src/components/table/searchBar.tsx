@@ -1,30 +1,10 @@
 "use client";
 
-import {
-  SetStateAction,
-  Dispatch,
-  useState,
-  useEffect,
-  useRef,
-  useMemo,
-  ClassAttributes,
-  JSX,
-  Key,
-  LiHTMLAttributes,
-} from "react";
+import { SetStateAction, Dispatch, useState, useEffect, useMemo } from "react";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDebounce } from "../hooks/useDebounce";
-import { TableData } from "@/data/nodeData";
-import {
-  Autocomplete,
-  Box,
-  Container,
-  InputAdornment,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { Autocomplete, InputAdornment, TextField } from "@mui/material";
 import { Machine } from "@/api/model/machine";
 
 export interface SearchBarProps {
