@@ -15,10 +15,11 @@ import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { Collapse, useMediaQuery, useTheme } from "@mui/material";
 
 import { NodeStatus, NodeStatusKeys, TableData } from "@/data/nodeData";
+import { Machine, Status } from "@/api/model";
 
 function renderStatus(status: NodeStatusKeys) {
   switch (status) {
-    case NodeStatus.Online:
+    case Status.online:
       return (
         <Stack direction="row" alignItems="center" gap={1}>
           <CircleIcon color="success" style={{ fontSize: 15 }} />
@@ -28,7 +29,7 @@ function renderStatus(status: NodeStatusKeys) {
         </Stack>
       );
 
-    case NodeStatus.Offline:
+    case Status.offline:
       return (
         <Stack direction="row" alignItems="center" gap={1}>
           <CircleIcon color="error" style={{ fontSize: 15 }} />
@@ -37,7 +38,7 @@ function renderStatus(status: NodeStatusKeys) {
           </Typography>
         </Stack>
       );
-    case NodeStatus.Pending:
+    case Status.unknown:
       return (
         <Stack direction="row" alignItems="center" gap={1}>
           <CircleIcon color="warning" style={{ fontSize: 15 }} />
@@ -49,7 +50,7 @@ function renderStatus(status: NodeStatusKeys) {
   }
 }
 export function NodeRow(props: {
-  row: TableData;
+  row: Machine;
   selected: string | undefined;
   setSelected: (a: string | undefined) => void;
 }) {

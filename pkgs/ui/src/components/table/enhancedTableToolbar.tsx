@@ -10,9 +10,11 @@ import { useTheme } from "@mui/material";
 import { NodeStatus, TableData } from "@/data/nodeData";
 import { PieCards } from "./pieCards";
 import { PieData, NodePieChart } from "./nodePieChart";
+import { Machine } from "@/api/model/machine";
+import { Status } from "@/api/model";
 
 interface EnhancedTableToolbarProps {
-  tableData: TableData[];
+  tableData: readonly Machine[];
 }
 
 export function EnhancedTableToolbar(
@@ -24,13 +26,13 @@ export function EnhancedTableToolbar(
 
   const pieData: PieData[] = useMemo(() => {
     const online = tableData.filter(
-      (row) => row.status === NodeStatus.Online,
+      (row) => row.status === Status.online,
     ).length;
     const offline = tableData.filter(
-      (row) => row.status === NodeStatus.Offline,
+      (row) => row.status === Status.offline,
     ).length;
     const pending = tableData.filter(
-      (row) => row.status === NodeStatus.Pending,
+      (row) => row.status === Status.unknown,
     ).length;
 
     return [

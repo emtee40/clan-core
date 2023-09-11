@@ -15,6 +15,7 @@ import { NodeRow } from "./nodeRow";
 import { TableData } from "@/data/nodeData";
 
 import { useMediaQuery, useTheme } from "@mui/material";
+import { Machine } from "@/api/model/machine";
 
 interface HeadCell {
   disablePadding: boolean;
@@ -90,7 +91,7 @@ function stableSort<T>(
 interface EnhancedTableProps {
   onRequestSort: (
     event: React.MouseEvent<unknown>,
-    property: keyof TableData,
+    property: keyof Machine | "last_seen",
   ) => void;
   order: NodeOrder;
   orderBy: string;
@@ -100,7 +101,8 @@ interface EnhancedTableProps {
 function EnhancedTableHead(props: EnhancedTableProps) {
   const { order, orderBy, onRequestSort } = props;
   const createSortHandler =
-    (property: keyof TableData) => (event: React.MouseEvent<unknown>) => {
+    (property: keyof Machine | "last_seen") =>
+    (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
 
@@ -135,7 +137,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 }
 
 interface NodeTableContainerProps {
-  tableData: readonly TableData[];
+  tableData: readonly Machine[];
   page: number;
   rowsPerPage: number;
   dense: boolean;
@@ -185,7 +187,7 @@ export function NodeTableContainer(props: NodeTableContainerProps) {
           {visibleRows.map((row, index) => {
             return (
               <NodeRow
-                key={row.name}
+                key={index}
                 row={row}
                 selected={selected}
                 setSelected={setSelected}

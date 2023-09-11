@@ -25,10 +25,11 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
+import { Machine } from "@/api/model/machine";
 
 export interface SearchBarProps {
-  tableData: TableData[];
-  setFilteredList: Dispatch<SetStateAction<TableData[]>>;
+  tableData: readonly Machine[];
+  setFilteredList: Dispatch<SetStateAction<readonly Machine[]>>;
 }
 
 export function SearchBar(props: SearchBarProps) {
@@ -52,7 +53,7 @@ export function SearchBar(props: SearchBarProps) {
 
   useEffect(() => {
     if (debouncedSearch) {
-      const filtered: TableData[] = tableData.filter((row) => {
+      const filtered: Machine[] = tableData.filter((row) => {
         return row.name.toLowerCase().includes(debouncedSearch.toLowerCase());
       });
       setFilteredList(filtered);
