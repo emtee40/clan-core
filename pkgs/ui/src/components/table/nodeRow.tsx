@@ -10,14 +10,11 @@ import CircleIcon from "@mui/icons-material/Circle";
 import Stack from "@mui/material/Stack/Stack";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-
 import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
-import { Collapse, useMediaQuery, useTheme } from "@mui/material";
-
-import { NodeStatus, NodeStatusKeys, TableData } from "@/data/nodeData";
+import { Collapse } from "@mui/material";
 import { Machine, Status } from "@/api/model";
 
-function renderStatus(status: NodeStatusKeys) {
+function renderStatus(status: Status) {
   switch (status) {
     case Status.online:
       return (
@@ -54,12 +51,8 @@ export function NodeRow(props: {
   selected: string | undefined;
   setSelected: (a: string | undefined) => void;
 }) {
-  const theme = useTheme();
-  const is_phone = useMediaQuery(theme.breakpoints.down("md"));
-
   const { row, selected, setSelected } = props;
   const [open, setOpen] = React.useState(false);
-  //const labelId = `enhanced-table-checkbox-${index}`;
 
   // Speed optimization. We compare string pointers here instead of the string content.
   const isSelected = selected == row.name;
@@ -109,15 +102,6 @@ export function NodeRow(props: {
           onClick={(event) => handleClick(event, row.name)}
         >
           {renderStatus(row.status)}
-        </TableCell>
-        <TableCell
-          align="right"
-          onClick={(event) => handleClick(event, row.name)}
-        >
-          <Typography component="div" align="left" variant="body1">
-            {String(row.last_seen).padStart(3, "0")}{" "}
-            {is_phone ? "days" : "days ago"}
-          </Typography>
         </TableCell>
       </TableRow>
 

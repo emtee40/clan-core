@@ -2,12 +2,10 @@
 
 import React, { useMemo } from "react";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material";
 
-import { NodeStatus, TableData } from "@/data/nodeData";
 import { PieCards } from "./pieCards";
 import { PieData, NodePieChart } from "./nodePieChart";
 import { Machine } from "@/api/model/machine";

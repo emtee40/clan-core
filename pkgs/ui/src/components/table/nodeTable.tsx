@@ -1,23 +1,12 @@
 "use client";
 
-import {
-  useState,
-  ChangeEvent,
-  SetStateAction,
-  Dispatch,
-  useEffect,
-  useMemo,
-} from "react";
+import { useState, ChangeEvent, useMemo } from "react";
 import Box from "@mui/material/Box";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import SearchIcon from "@mui/icons-material/Search";
-import { CircularProgress, Container, Grid, useTheme } from "@mui/material";
+import { CircularProgress, Grid, useTheme } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import { TableData } from "@/data/nodeData";
 import { EnhancedTableToolbar } from "./enhancedTableToolbar";
 import { StickySpeedDial } from "./stickySpeedDial";
 import { NodeTableContainer } from "./nodeTableContainer";
@@ -25,16 +14,8 @@ import { SearchBar } from "./searchBar";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { useMachines } from "../hooks/useMachines";
 import { Machine } from "@/api/model/machine";
-import { Status } from "@/api/model";
-import { useDebounce } from "../hooks/useDebounce";
-
-export interface NodeTableProps {
-  tableData: TableData[];
-}
 
 export function NodeTable() {
-  // let { tableData } = props;
-
   const machines = useMachines();
 
   const theme = useTheme();
@@ -47,7 +28,7 @@ export function NodeTable() {
 
   const tableData = useMemo(() => {
     const tableData = machines.data.map((machine) => {
-      return { name: machine.name, status: Status.online, last_seen: 0 };
+      return { name: machine.name, status: machine.status };
     });
     setFilteredList(tableData);
     return tableData;
