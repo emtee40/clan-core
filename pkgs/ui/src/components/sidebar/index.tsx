@@ -138,9 +138,9 @@ export function Sidebar(props: SidebarProps) {
                   className="justify-center lg:justify-normal"
                   LinkComponent={Link}
                   href={menuEntry.missing ? "" : menuEntry.to}
-                  onClickCapture={
-                    menuEntry.missing ? () => handleClick() : undefined
-                  }
+                  onClickCapture={menuEntry.missing
+                    ? () => handleClick()
+                    : undefined}
                 >
                   <ListItemIcon
                     color="inherit"

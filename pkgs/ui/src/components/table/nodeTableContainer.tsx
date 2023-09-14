@@ -113,11 +113,15 @@ function EnhancedTableHead(props: EnhancedTableProps) {
               onClick={createSortHandler(headCell.id)}
             >
               {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </Box>
-              ) : null}
+              {orderBy === headCell.id
+                ? (
+                  <Box component="span" sx={visuallyHidden}>
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
+                  </Box>
+                )
+                : null}
             </TableSortLabel>
           </TableCell>
         ))}
@@ -141,8 +145,9 @@ export function NodeTableContainer(props: NodeTableContainerProps) {
   const [orderBy, setOrderBy] = React.useState<keyof Machine>("status");
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - tableData.length) : 0;
+  const emptyRows = page > 0
+    ? Math.max(0, (1 + page) * rowsPerPage - tableData.length)
+    : 0;
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,

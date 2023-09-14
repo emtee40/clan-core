@@ -1,8 +1,9 @@
 # cLAN config
 
 `clan config` allows you to manage your nixos configuration via the terminal.
-Similar as how `git config` reads and sets git options, `clan config` does the same with your nixos options
-It also supports auto completion making it easy to find the right options.
+Similar as how `git config` reads and sets git options, `clan config` does the
+same with your nixos options It also supports auto completion making it easy to
+find the right options.
 
 ## Set up clan-config
 
@@ -37,8 +38,6 @@ Import the clan-config module into your nixos configuration:
     (builtins.fromJSON (builtins.readFile ./clan-settings.json))
   ];
 }
-
-
 ```
 
 Make sure your nixos configuration is set a default

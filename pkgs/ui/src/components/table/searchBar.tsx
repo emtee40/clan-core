@@ -1,6 +1,6 @@
 "use client";
 
-import { SetStateAction, Dispatch, useState, useEffect, useMemo } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDebounce } from "../hooks/useDebounce";
@@ -92,7 +92,8 @@ export function SearchBar(props: SearchBarProps) {
               </InputAdornment>
             ),
           }}
-        ></TextField>
+        >
+        </TextField>
       )}
     />
   );

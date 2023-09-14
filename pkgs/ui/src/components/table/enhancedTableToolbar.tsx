@@ -7,7 +7,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material";
 
 import { PieCards } from "./pieCards";
-import { PieData, NodePieChart } from "./nodePieChart";
+import { NodePieChart, PieData } from "./nodePieChart";
 import { Machine } from "@/api/model/machine";
 import { Status } from "@/api/model";
 

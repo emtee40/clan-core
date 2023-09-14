@@ -12,7 +12,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { IChangeEvent, FormProps } from "@rjsf/core";
+import { FormProps, IChangeEvent } from "@rjsf/core";
 import { Form } from "@rjsf/mui";
 import validator from "@rjsf/validator-ajv8";
 import toast from "react-hot-toast";
@@ -57,17 +57,17 @@ export function CustomConfig(props: FormStepContentProps) {
     [schema],
   );
 
-  return isLoading ? (
-    <LinearProgress variant="indeterminate" />
-  ) : error?.message ? (
-    <div>{error?.message}</div>
-  ) : (
-    <PureCustomConfig
-      formHooks={formHooks}
-      initialValues={initialValues}
-      schema={schema}
-    />
-  );
+  return isLoading
+    ? <LinearProgress variant="indeterminate" />
+    : error?.message
+    ? <div>{error?.message}</div>
+    : (
+      <PureCustomConfig
+        formHooks={formHooks}
+        initialValues={initialValues}
+        schema={schema}
+      />
+    );
 }
 
 function ErrorList<

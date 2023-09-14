@@ -1,5 +1,5 @@
 import React from "react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
 

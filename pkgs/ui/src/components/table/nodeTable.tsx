@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ChangeEvent, useMemo } from "react";
+import { ChangeEvent, useMemo, useState } from "react";
 import Box from "@mui/material/Box";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";

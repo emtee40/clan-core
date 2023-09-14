@@ -1,6 +1,6 @@
 import { DashboardCard } from "@/components/card";
 import { NoDataOverlay } from "@/components/noDataOverlay";
-import { status, Status, clanStatus } from "@/data/dashboardData";
+import { clanStatus, Status, status } from "@/data/dashboardData";
 import {
   Chip,
   Divider,

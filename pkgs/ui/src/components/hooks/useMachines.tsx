@@ -19,21 +19,21 @@ type Filters = Filter[];
 
 type MachineContextType =
   | {
-      rawData: AxiosResponse<MachinesResponse, any> | undefined;
-      data: Machine[];
-      isLoading: boolean;
-      error: AxiosError<any> | undefined;
-      isValidating: boolean;
+    rawData: AxiosResponse<MachinesResponse, any> | undefined;
+    data: Machine[];
+    isLoading: boolean;
+    error: AxiosError<any> | undefined;
+    isValidating: boolean;
 
-      filters: Filters;
-      setFilters: Dispatch<SetStateAction<Filters>>;
-      mutate: KeyedMutator<AxiosResponse<MachinesResponse, any>>;
-      swrKey: string | false | Record<any, any>;
-    }
+    filters: Filters;
+    setFilters: Dispatch<SetStateAction<Filters>>;
+    mutate: KeyedMutator<AxiosResponse<MachinesResponse, any>>;
+    swrKey: string | false | Record<any, any>;
+  }
   | {
-      isLoading: true;
-      data: readonly [];
-    };
+    isLoading: true;
+    data: readonly [];
+  };
 
 const initialState = {
   isLoading: true,
@@ -62,7 +62,7 @@ export const MachineContextProvider = (props: MachineContextProviderProps) => {
     if (!isLoading && !error && !isValidating && rawData) {
       const { machines } = rawData.data;
       return machines.filter((m) =>
-        filters.every((f) => m[f.name] === f.value),
+        filters.every((f) => m[f.name] === f.value)
       );
     }
     return [];
