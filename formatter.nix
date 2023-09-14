@@ -10,11 +10,9 @@
     treefmt.flakeCheck = true;
     treefmt.flakeFormatter = true;
     treefmt.programs.shellcheck.enable = true;
-    treefmt.programs.prettier.enable = true;
-    treefmt.programs.prettier.settings.plugins = [
-      "${self'.packages.prettier-plugin-tailwindcss}/lib/node_modules/prettier-plugin-tailwindcss/dist/index.mjs"
-    ];
-    treefmt.settings.formatter.prettier.excludes = [
+
+    treefmt.programs.deno.enable = true;
+    treefmt.settings.formatter.deno.excludes = [
       "secrets.yaml"
       "key.json"
     ];
@@ -37,7 +35,6 @@
         "--" # this argument is ignored by bash
       ];
       includes = [ "*.nix" ];
-      excludes = [ "pkgs/node-packages/*.nix" ];
     };
     treefmt.settings.formatter.python = {
       command = "sh";
