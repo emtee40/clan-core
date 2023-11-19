@@ -106,12 +106,12 @@ export default function JoinPrequel() {
                       },
                       {
                         flake_dir: values.dest || "myclan",
-                      },
+                      }
                     );
                     setAppState((s) => ({ ...s, isJoined: true }));
                   } catch (error) {
                     toast.error(
-                      `Error: ${(error as AxiosError).message || ""}`,
+                      `Error: ${(error as AxiosError).message || ""}`
                     );
                   }
                 }
@@ -136,7 +136,7 @@ export default function JoinPrequel() {
                     }
                   } catch (error) {
                     toast.error(
-                      `Error: ${(error as AxiosError).message || ""}`,
+                      `Error: ${(error as AxiosError).message || ""}`
                     );
                   }
                 }
