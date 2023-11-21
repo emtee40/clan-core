@@ -6,7 +6,6 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import Optional
 
-from fastapi import HTTPException
 
 from clan_cli.dirs import (
     nixpkgs_source,
@@ -64,13 +63,7 @@ def machine_schema(
             )
         modules_not_found = json.loads(proc.stdout)
         if len(modules_not_found) > 0:
-            raise HTTPException(
-                status_code=400,
-                detail={
-                    "msg": "Some requested clan modules could not be found",
-                    "modules_not_found": modules_not_found,
-                },
-            )
+            raise ClanError("Some requested clan modules could not be found")
 
         # get the schema
         proc = subprocess.run(
