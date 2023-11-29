@@ -14,6 +14,7 @@
         nixosTests = lib.optionalAttrs (pkgs.stdenv.isLinux) {
           # import our test
           secrets = import ./secrets nixosTestArgs;
+          installer = import ./installer nixosTestArgs;
           container = import ./container nixosTestArgs;
           deltachat = import ./deltachat nixosTestArgs;
           meshnamed = import ./meshnamed nixosTestArgs;
