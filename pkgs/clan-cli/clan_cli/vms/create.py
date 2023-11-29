@@ -169,10 +169,6 @@ class BuildVmTask(BaseTask):
                 "virtio-blk-pci,bootindex=1,drive=drive1,serial=root",
                 "-device",
                 "virtio-keyboard",
-                # TODO: audio card
-                # "-audiodev", "spice,id=audio0",
-                # "-device", "intel-hda",
-                # "-device", "hda-duplex,audiodev=audio0",
                 # TODO: we also need to fixup timezone than...
                 # "-rtc", "base=localtime,clock=host,driftfix=slew",
                 "-vga",
@@ -187,8 +183,49 @@ class BuildVmTask(BaseTask):
                 "-append",
                 " ".join(cmdline),
             ]
-            if not self.vm.graphics:
+            if self.vm.graphics:
+                qemu_command.extend(
+                    [
+                        "-audiodev",
+                        "spice,id=audio0",
+                        "-device",
+                        "intel-hda",
+                        "-device",
+                        "hda-duplex,audiodev=audio0",
+                        "-device",
+                        "virtio-serial-pci",
+                        "-chardev",
+                        "spicevmc,id=vdagent0,name=vdagent",
+                        "-device",
+                        "virtserialport,chardev=vdagent0,name=com.redhat.spice.0",
+                        "-spice",
+                        "disable-ticketing=on,port=5930,addr=127.0.0.1",
+                        "-device",
+                        "qemu-xhci,id=spicepass",
+                        "-chardev",
+                        "spicevmc,id=usbredirchardev1,name=usbredir",
+                        "-device",
+                        "usb-redir,chardev=usbredirchardev1,id=usbredirdev1",
+                        "-chardev",
+                        "spicevmc,id=usbredirchardev2,name=usbredir",
+                        "-device",
+                        "usb-redir,chardev=usbredirchardev2,id=usbredirdev2",
+                        "-chardev",
+                        "spicevmc,id=usbredirchardev3,name=usbredir",
+                        "-device",
+                        "usb-redir,chardev=usbredirchardev3,id=usbredirdev3",
+                        "-device",
+                        "pci-ohci,id=smartpass",
+                        "-device",
+                        "usb-ccid",
+                        "-chardev",
+                        "spicevmc,id=ccid,name=smartcard",
+                    ]
+                )
+                print("nix shell nixpkgs#spice-gtk -c spicy --port 5930 --spice-shared-dir $HOME")
+            else:
                 qemu_command.append("-nographic")
+
             print("$ " + shlex.join(qemu_command))
             cmd.run(nix_shell(["qemu"], qemu_command), name="qemu")
 
