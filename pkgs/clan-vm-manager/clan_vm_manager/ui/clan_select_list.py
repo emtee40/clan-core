@@ -1,8 +1,13 @@
-from gi.repository import Gtk
+from typing import TYPE_CHECKING
+
+from gi.repository import GObject, Gtk
+
+if TYPE_CHECKING:
+    from ..app import VM
 
 
 class ClanSelectPage(Gtk.Box):
-    def __init__(self, vms):
+    def __init__(self, vms: list[VM]) -> None:
         super().__init__(orientation=Gtk.Orientation.VERTICAL, expand=True)
 
         self.add(ClanSelectList(vms, self.on_cell_toggled, self.on_select_row))
@@ -12,16 +17,16 @@ class ClanSelectPage(Gtk.Box):
             )
         )
 
-    def on_start_clicked(self, widget):
+    def on_start_clicked(self, widget: Gtk.Widget) -> None:
         print("Start clicked")
 
-    def on_stop_clicked(self, widget):
+    def on_stop_clicked(self, widget: Gtk.Widget) -> None:
         print("Stop clicked")
 
-    def on_backup_clicked(self, widget):
+    def on_backup_clicked(self, widget: Gtk.Widget) -> None:
         print("Backup clicked")
 
-    def on_cell_toggled(self, widget, path):
+    def on_cell_toggled(self, widget: Gtk.Widget, path: str) -> None:
         print(f"on_cell_toggled:  {path}")
         # Get the current value from the model
         current_value = self.list_store[path][1]
@@ -32,14 +37,19 @@ class ClanSelectPage(Gtk.Box):
         # Print the updated value
         print("Switched", path, "to", self.list_store[path][1])
 
-    def on_select_row(self, selection):
+    def on_select_row(self, selection: Gtk.TreeSelection) -> None:
         model, row = selection.get_selected()
         if row is not None:
             print(f"Selected {model[row][0]}")
 
 
 class ClanSelectButtons(Gtk.Box):
-    def __init__(self, on_start_clicked, on_stop_clicked, on_backup_clicked):
+    def __init__(
+        self,
+        on_start_clicked: GObject.Callback,
+        on_stop_clicked: GObject.Callback,
+        on_backup_clicked: GObject.Callback,
+    ) -> None:
         super().__init__(
             orientation=Gtk.Orientation.HORIZONTAL, margin_bottom=10, margin_top=10
         )
@@ -56,7 +66,12 @@ class ClanSelectButtons(Gtk.Box):
 
 
 class ClanSelectList(Gtk.Box):
-    def __init__(self, vms, on_cell_toggled, on_select_row):
+    def __init__(
+        self,
+        vms: list[VM],
+        on_cell_toggled: GObject.Callback,
+        on_select_row: GObject.Callback,
+    ) -> None:
         super().__init__(expand=True)
         self.vms = vms
 
