@@ -1,4 +1,8 @@
-# Initializing a New Clan Project
+# [Join this clan](clan://https://git.clan.lol/clan/clan-core/archive/main.tar.gz)
+
+
+
+## Initializing a New Clan Project
 
 ## Create a new flake
 
