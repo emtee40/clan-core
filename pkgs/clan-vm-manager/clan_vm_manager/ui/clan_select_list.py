@@ -1,9 +1,10 @@
-from typing import Callable, Any
+from collections.abc import Callable
 
-from gi.repository import Gdk, GdkPixbuf, Gtk, Adw
+from gi.repository import Gtk
 
 from ..interfaces import Callbacks
 from ..models import VMBase, VMStatus
+
 # from .context_menu import VmMenu
 
 
@@ -52,7 +53,9 @@ class ClanEdit(Gtk.Box):
     def __init__(
         self, *, remount_list: Callable[[], None], selected_vm: VMBase | None
     ) -> None:
-        super().__init__(orientation=Gtk.Orientation.VERTICAL, )
+        super().__init__(
+            orientation=Gtk.Orientation.VERTICAL,
+        )
 
         self.show_list = remount_list
         self.selected = selected_vm
@@ -90,7 +93,9 @@ class ClanList(Gtk.Box):
         selected_vm: VMBase | None,
         vms: list[VMBase],
     ) -> None:
-        super().__init__(orientation=Gtk.Orientation.VERTICAL, )
+        super().__init__(
+            orientation=Gtk.Orientation.VERTICAL,
+        )
 
         self.remount_edit_view = remount_edit
         self.remount_list_view = remount_list
@@ -226,7 +231,7 @@ class ClanListView(Gtk.Box):
         self.on_double_click = on_double_click
         # self.context_menu: VmMenu | None = None
 
-        store_types = VMBase.name_to_type_map().values()
+        # store_types = VMBase.name_to_type_map().values()
 
         # self.list_store = Gtk.ListStore(*store_types)
         # self.tree_view = Gtk.TreeView(self.list_store)

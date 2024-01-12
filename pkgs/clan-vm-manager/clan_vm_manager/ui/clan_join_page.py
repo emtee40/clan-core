@@ -10,9 +10,7 @@ from gi.repository import Gtk
 class ClanJoinPage(Gtk.Box):
     def __init__(self, *, stack: Gtk.Stack) -> None:
         super().__init__()
-        self.page = Gtk.Box(
-            orientation=Gtk.Orientation.VERTICAL, spacing=6
-        )
+        self.page = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         # self.set_border_width(10)
         self.stack = stack
 

@@ -21,7 +21,10 @@ class OverviewWindow(Gtk.ApplicationWindow):
         self.set_default_size(800, 600)
         self.cbs = cbs
 
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6, )
+        vbox = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL,
+            spacing=6,
+        )
         self.set_child(vbox)
         self.stack = Gtk.Stack()
 

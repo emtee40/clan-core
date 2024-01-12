@@ -16,7 +16,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
 
-from gi.repository import GdkPixbuf, Gio, Gtk, Adw
+from gi.repository import GdkPixbuf, Gio, Gtk
 
 
 class Trust(Gtk.Box):
@@ -106,7 +106,9 @@ class Details(Gtk.Box):
                 preserve_aspect_ratio=True,
             )
         )
-        layout = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, )
+        layout = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL,
+        )
         # layout.set_border_width(20)
 
         upper = Gtk.Box(orientation="vertical")
@@ -121,19 +123,29 @@ class Details(Gtk.Box):
         description_label = Gtk.Label(label=flake.description)
         upper.append(description_label)
 
-        lower = Gtk.Box(orientation="horizontal", )
+        lower = Gtk.Box(
+            orientation="horizontal",
+        )
         lower.set_spacing(20)
 
         join_button = Gtk.Button(label="Join")
         join_button.connect("clicked", self.on_join)
-        join_action_area = Gtk.Box(orientation="horizontal", )
-        join_button_area = Gtk.Box(orientation="vertical", )
+        join_action_area = Gtk.Box(
+            orientation="horizontal",
+        )
+        join_button_area = Gtk.Box(
+            orientation="vertical",
+        )
         join_action_area.append(join_button_area)
         join_button_area.append(join_button)
         join_details = Gtk.Label(label="Info")
 
-        join_details_area = Gtk.Box(orientation="horizontal", )
-        join_label_area = Gtk.Box(orientation="vertical", )
+        join_details_area = Gtk.Box(
+            orientation="horizontal",
+        )
+        join_label_area = Gtk.Box(
+            orientation="vertical",
+        )
 
         for info in [
             f"Memory: {flake.clan_name}",
@@ -145,9 +157,7 @@ class Details(Gtk.Box):
             join_label_area.append(details_label)
 
         join_label_area.append(join_details)
-        join_details_area.append(
-            join_label_area
-        )
+        join_details_area.append(join_label_area)
 
         lower.append(join_details_area)
         lower.append(join_action_area)
@@ -166,7 +176,7 @@ class JoinWindow(Gtk.ApplicationWindow):
     def __init__(self, initial_values: InitialJoinValues, cbs: Callbacks) -> None:
         super().__init__()
         # Initialize the main wincbsdow
-        
+
         self.cbs = cbs
         self.set_title("cLAN Manager")
         # self.connect("delete-event", self.on_quit)
@@ -182,7 +192,6 @@ class JoinWindow(Gtk.ApplicationWindow):
         # main_menu.set_submenu(menu)
         # menu.append(menu_item)
         # vbox.add(menu_bar)
-
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.set_child(vbox)

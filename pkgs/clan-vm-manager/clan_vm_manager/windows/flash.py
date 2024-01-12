@@ -32,7 +32,10 @@ class FlashUSBWindow(Gtk.ApplicationWindow):
         # self.connect("delete-event", self.on_quit)
         self.set_default_size(800, 600)
 
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6, )
+        vbox = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL,
+            spacing=6,
+        )
         self.append(vbox)
 
         button = Gtk.ToolButton()
