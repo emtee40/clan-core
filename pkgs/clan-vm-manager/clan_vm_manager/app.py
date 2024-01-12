@@ -35,7 +35,7 @@ class ClanConfig:
     initial_window: str
     url: ClanURI | None
 
-
+# https://amolenaar.pages.gitlab.gnome.org/pygobject-docs/Adw-1/class-ToolbarView.html
 # Will be executed in the context of the child process
 def on_except(error: Exception, proc: mp.process.BaseProcess) -> None:
     show_error_dialog(str(error))
@@ -44,38 +44,35 @@ def on_except(error: Exception, proc: mp.process.BaseProcess) -> None:
 class MainWindow(Adw.ApplicationWindow):
     def __init__(self, config: ClanConfig) -> None:
         super().__init__()
-        self.set_title("Clan Manager")
+        self.set_title("cLAN Manager")
+        self.set_default_size(800, 600)
         view = Adw.ToolbarView()
+        self.set_content(view)
+
         header = Adw.HeaderBar()
         view.add_top_bar(header)
 
-        label = Gtk.Label.new("testlabel")
-        view.set_content(label)
-
-        self.set_content(view)
-
         # Create a navigation view
-        # self.nav_view = Adw.NavigationView()
-        # self.set_child(self.nav_view)
+        self.nav_view = Adw.NavigationView()
+        view.set_content(self.nav_view)
 
-        # # Create the first page
-        # self.page1 = Adw.NavigationPage(title="Page 1")
-        # self.page1.set_child(Gtk.Label(label="This is the first page"))
+        # Create the first page
+        self.page1 = Adw.NavigationPage(title="Page 1")
+        self.page1.set_child(Gtk.Label(label="This is the first page"))
 
-        # # Create the second page
-        # self.page2 = Adw.NavigationPage(title="Page 2")
-        # self.page2.set_child(Gtk.Label(label="This is the second page"))
+        # Create the second page
+        self.page2 = Adw.NavigationPage(title="Page 2")
+        self.page2.set_child(Gtk.Label(label="This is the second page"))
 
-        # # Push the first page to the navigation view
-        # self.nav_view.push(self.page1)
+        # Push the first page to the navigation view
+        self.nav_view.push(self.page1)
 
         # Connect the signal to a callback function
+        self.nav_view.connect("pushed", self.on_page1_activated)
 
-    #     self.page1.connect("NavigationView::pushed", self.on_page1_activated)
-
-    # def on_page1_activated(self, page) -> None:
-    #     # Push the second page to the navigation view
-    #     self.nav_view.push(self.page2)
+    def on_page1_activated(self, page) -> None:
+        # Push the second page to the navigation view
+        self.nav_view.push(self.page2)
 
 
 class Application(Gtk.Application):
