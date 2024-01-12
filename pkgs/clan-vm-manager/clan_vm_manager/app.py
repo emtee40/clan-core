@@ -14,12 +14,11 @@ gi.require_version("Adw", "1")
 import multiprocessing as mp
 
 from clan_cli.clan_uri import ClanURI
-from gi.repository import Gio, Gtk, Adw
+from gi.repository import Adw, Gio, Gtk
 
 from .constants import constants
 from .errors.show_error import show_error_dialog
 from .executor import ProcessManager
-from .interfaces import Callbacks, InitialFlashValues, InitialJoinValues
 from .windows.join import JoinWindow
 from .windows.overview import OverviewWindow
 
@@ -43,17 +42,41 @@ def on_except(error: Exception, proc: mp.process.BaseProcess) -> None:
 
 
 class MainWindow(Adw.ApplicationWindow):
-        def __init__(self, config: ClanConfig) -> None:
-            super().__init__()
-            self.set_title("Clan Manager")
-            view = Adw.ToolbarView()
-            header = Adw.HeaderBar()
-            view.add_top_bar(header)
+    def __init__(self, config: ClanConfig) -> None:
+        super().__init__()
+        self.set_title("Clan Manager")
+        view = Adw.ToolbarView()
+        header = Adw.HeaderBar()
+        view.add_top_bar(header)
 
-            label = Gtk.Label.new("testlabel")
-            view.set_content(label)
+        label = Gtk.Label.new("testlabel")
+        view.set_content(label)
 
-            self.set_content(view)
+        self.set_content(view)
+
+        # Create a navigation view
+        # self.nav_view = Adw.NavigationView()
+        # self.set_child(self.nav_view)
+
+        # # Create the first page
+        # self.page1 = Adw.NavigationPage(title="Page 1")
+        # self.page1.set_child(Gtk.Label(label="This is the first page"))
+
+        # # Create the second page
+        # self.page2 = Adw.NavigationPage(title="Page 2")
+        # self.page2.set_child(Gtk.Label(label="This is the second page"))
+
+        # # Push the first page to the navigation view
+        # self.nav_view.push(self.page1)
+
+        # Connect the signal to a callback function
+
+    #     self.page1.connect("NavigationView::pushed", self.on_page1_activated)
+
+    # def on_page1_activated(self, page) -> None:
+    #     # Push the second page to the navigation view
+    #     self.nav_view.push(self.page2)
+
 
 class Application(Gtk.Application):
     def __init__(self, config: ClanConfig) -> None:
@@ -99,7 +122,7 @@ class Application(Gtk.Application):
         Gtk.Application.do_startup(self)
         Gtk.init()
         Gio.Application.do_startup(self)
-        
+        Adw.init()
 
         menu = Gio.Menu.new()
         file_menu = Gio.Menu.new()
@@ -108,11 +131,8 @@ class Application(Gtk.Application):
         file_menu.append_item(item)
         menu.append_submenu("File", file_menu)
 
-
         # TODO: add application menu
         self.set_menubar(menu)
-        
-
 
     def do_activate(self) -> None:
         win = self.props.active_window
