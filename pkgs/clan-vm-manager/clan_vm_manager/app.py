@@ -6,6 +6,8 @@ from pathlib import Path
 import gi
 from clan_cli import vms
 
+from clan_vm_manager.views.list import ClanList
+
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
@@ -32,7 +34,7 @@ def on_except(error: Exception, proc: mp.process.BaseProcess) -> None:
 
 
 class MainWindow(Adw.ApplicationWindow):
-    def __init__(self, config: ClanConfig) -> None:
+    def __init__(self, app: Adw.Application, config: ClanConfig) -> None:
         super().__init__()
         self.set_title("cLAN Manager")
         self.set_default_size(800, 600)
@@ -48,7 +50,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         # Create the first page
         self.list_view = Adw.NavigationPage(title="Your cLan")
-        self.list_view.set_child(Gtk.Label(label="This is the first page"))
+        self.list_view.set_child(ClanList(app=app))
 
         # Push the first page to the navigation view
         self.nav_view.push(self.list_view)
@@ -95,7 +97,7 @@ class Application(Adw.Application):
 
     def do_activate(self) -> None:
         self.init_style()
-        window = MainWindow(self.config)
+        window = MainWindow(app=self, config=self.config)
         window.set_application(self)
         window.present()
 
