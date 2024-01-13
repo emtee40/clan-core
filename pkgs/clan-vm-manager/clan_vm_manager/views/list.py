@@ -1,5 +1,7 @@
 import gi
 
+from clan_vm_manager.vms import running_vms
+
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, GObject, Gtk
 
@@ -62,7 +64,7 @@ class ClanList(Gtk.Box):
         list_store = Gio.ListStore()
         print(list_store)
 
-        for vm in get_initial_vms(app.running_vms()):
+        for vm in get_initial_vms(running_vms()):
             list_store.append(VMListItem(data=vm.base))
 
         boxed_list.bind_model(list_store, create_widget_func=create_widget)
