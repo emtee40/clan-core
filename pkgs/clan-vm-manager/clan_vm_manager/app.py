@@ -6,34 +6,24 @@ from pathlib import Path
 import gi
 from clan_cli import vms
 
-from clan_vm_manager.windows.flash import FlashUSBWindow
-
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
 import multiprocessing as mp
 
 from clan_cli.clan_uri import ClanURI
-from gi.repository import Adw, Gio, Gtk
+from gi.repository import Adw, Gdk, Gio, Gtk
 
 from .constants import constants
 from .errors.show_error import show_error_dialog
 from .executor import ProcessManager
-from .windows.join import JoinWindow
-from .windows.overview import OverviewWindow
-
-
-@dataclass
-class ClanWindows:
-    join: type[JoinWindow]
-    overview: type[OverviewWindow]
-    flash_usb: type[FlashUSBWindow]
 
 
 @dataclass
 class ClanConfig:
-    initial_window: str
+    initial_view: str
     url: ClanURI | None
+
 
 # https://amolenaar.pages.gitlab.gnome.org/pygobject-docs/Adw-1/class-ToolbarView.html
 # Will be executed in the context of the child process
@@ -57,35 +47,23 @@ class MainWindow(Adw.ApplicationWindow):
         view.set_content(self.nav_view)
 
         # Create the first page
-        self.page1 = Adw.NavigationPage(title="Page 1")
-        self.page1.set_child(Gtk.Label(label="This is the first page"))
-
-        # Create the second page
-        self.page2 = Adw.NavigationPage(title="Page 2")
-        self.page2.set_child(Gtk.Label(label="This is the second page"))
+        self.list_view = Adw.NavigationPage(title="Your cLan")
+        self.list_view.set_child(Gtk.Label(label="This is the first page"))
 
         # Push the first page to the navigation view
-        self.nav_view.push(self.page1)
-
-        # Connect the signal to a callback function
-        self.nav_view.connect("pushed", self.on_page1_activated)
-
-    def on_page1_activated(self, page) -> None:
-        # Push the second page to the navigation view
-        self.nav_view.push(self.page2)
+        self.nav_view.push(self.list_view)
 
 
-class Application(Gtk.Application):
+class Application(Adw.Application):
     def __init__(self, config: ClanConfig) -> None:
         super().__init__(
             application_id=constants["APPID"], flags=Gio.ApplicationFlags.FLAGS_NONE
         )
         # TODO:
         # self.init_style()
-
-        self.window = MainWindow(config)
+        self.config = config
+        # self.window = MainWindow(self.config)
         self.proc_manager = ProcessManager()
-
         self.connect("shutdown", self.on_shutdown)
 
     def on_shutdown(self, app: Gtk.Application) -> None:
@@ -115,42 +93,27 @@ class Application(Gtk.Application):
     def running_vms(self) -> list[str]:
         return self.proc_manager.running_procs()
 
-    def do_startup(self) -> None:
-        Gtk.Application.do_startup(self)
-        Gtk.init()
-        Gio.Application.do_startup(self)
-        Adw.init()
-
-        menu = Gio.Menu.new()
-        file_menu = Gio.Menu.new()
-        item = Gio.MenuItem.new("Menu Item", "app.menu_item")
-
-        file_menu.append_item(item)
-        menu.append_submenu("File", file_menu)
-
-        # TODO: add application menu
-        self.set_menubar(menu)
-
     def do_activate(self) -> None:
-        win = self.props.active_window
-        if not win:
-            win = self.window
-            win.set_application(self)
-        win.present()
+        self.init_style()
+        window = MainWindow(self.config)
+        window.set_application(self)
+        window.present()
 
     # TODO: For css styling
     def init_style(self) -> None:
-        pass
-        # css_provider = Gtk.CssProvider()
-        # css_provider.load_from_resource(constants['RESOURCEID'] + '/style.css')
-        # screen = Gdk.Screen.get_default()
-        # style_context = Gtk.StyleContext()
-        # style_context.add_provider_for_screen(screen, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        resource_path = Path(__file__).parent / "style.css"
+        css_provider = Gtk.CssProvider()
+        css_provider.load_from_path(str(resource_path))
+        Gtk.StyleContext.add_provider_for_display(
+            Gdk.Display.get_default(),
+            css_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+        )
 
 
 def show_join(args: argparse.Namespace) -> None:
     app = Application(
-        config=ClanConfig(url=args.clan_uri, initial_window="join"),
+        config=ClanConfig(url=args.clan_uri, initial_view="join"),
     )
     return app.run()
 
@@ -162,7 +125,7 @@ def register_join_parser(parser: argparse.ArgumentParser) -> None:
 
 def show_overview(args: argparse.Namespace) -> None:
     app = Application(
-        config=ClanConfig(url=None, initial_window="overview"),
+        config=ClanConfig(url=None, initial_view="overview"),
     )
     return app.run()
 
