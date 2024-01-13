@@ -4,33 +4,23 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import gi
-from clan_cli import vms
 
 from clan_vm_manager.views.list import ClanList
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-import multiprocessing as mp
-
 from clan_cli.clan_uri import ClanURI
 from gi.repository import Adw, Gdk, Gio, Gtk
 
 from .constants import constants
-from .errors.show_error import show_error_dialog
-from .executor import ProcessManager
+from .vms import proc_manager
 
 
 @dataclass
 class ClanConfig:
     initial_view: str
     url: ClanURI | None
-
-
-# https://amolenaar.pages.gitlab.gnome.org/pygobject-docs/Adw-1/class-ToolbarView.html
-# Will be executed in the context of the child process
-def on_except(error: Exception, proc: mp.process.BaseProcess) -> None:
-    show_error_dialog(str(error))
 
 
 class MainWindow(Adw.ApplicationWindow):
@@ -65,36 +55,11 @@ class Application(Adw.Application):
         # TODO:
         # self.init_style()
         self.config = config
-        # self.window = MainWindow(self.config)
-        self.proc_manager = ProcessManager()
         self.connect("shutdown", self.on_shutdown)
 
     def on_shutdown(self, app: Gtk.Application) -> None:
         print("Shutting down")
-        self.proc_manager.kill_all()
-
-    def spawn_vm(self, url: str, attr: str) -> None:
-        print(f"spawn_vm {url}")
-
-        # TODO: We should use VMConfig from the history file
-        vm = vms.run.inspect_vm(flake_url=url, flake_attr=attr)
-        log_path = Path(".")
-
-        # TODO: We only use the url as the ident. This is not unique as the flake_attr is missing.
-        # when we migrate everything to use the ClanURI class we can use the full url as the ident
-        self.proc_manager.spawn(
-            ident=url,
-            on_except=on_except,
-            log_path=log_path,
-            func=vms.run.run_vm,
-            vm=vm,
-        )
-
-    def stop_vm(self, url: str, attr: str) -> None:
-        self.proc_manager.kill(url)
-
-    def running_vms(self) -> list[str]:
-        return self.proc_manager.running_procs()
+        proc_manager.kill_all()
 
     def do_activate(self) -> None:
         self.init_style()
