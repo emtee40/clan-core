@@ -37,7 +37,8 @@ class MainWindow(Adw.ApplicationWindow):
     def __init__(self, app: Adw.Application, config: ClanConfig) -> None:
         super().__init__()
         self.set_title("cLAN Manager")
-        self.set_default_size(800, 600)
+        self.set_default_size(980, 650)
+
         view = Adw.ToolbarView()
         self.set_content(view)
 

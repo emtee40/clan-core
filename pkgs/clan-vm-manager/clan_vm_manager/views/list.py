@@ -1,4 +1,5 @@
 import gi
+
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, GObject, Gtk
 
@@ -25,11 +26,7 @@ class ClanList(Gtk.Box):
     # ------------------------#
     """
 
-    def __init__(
-        self,
-        *,
-        app: Adw.Application
-    ) -> None:
+    def __init__(self, *, app: Adw.Application) -> None:
         super().__init__(orientation=Gtk.Orientation.VERTICAL)
         self.application = app
 
@@ -43,13 +40,14 @@ class ClanList(Gtk.Box):
             # Not displayed; Can be used as id.
             row = Adw.SwitchRow()
             row.set_name(vm.url)
-            
+
             row.set_title(vm.name)
             row.set_title_lines(1)
 
             row.set_subtitle(vm.url)
             row.set_subtitle_lines(1)
 
+            # TODO: Avatar could also display a GdkPaintable (image)
             avatar = Adw.Avatar()
             avatar.set_text(vm.name)
             avatar.set_show_initials(True)
@@ -60,7 +58,6 @@ class ClanList(Gtk.Box):
             row.connect("notify::active", self.on_row_toggle)
 
             return row
-        
 
         list_store = Gio.ListStore()
         print(list_store)
@@ -68,16 +65,12 @@ class ClanList(Gtk.Box):
         for vm in get_initial_vms(app.running_vms()):
             list_store.append(VMListItem(data=vm.base))
 
-
         boxed_list.bind_model(list_store, create_widget_func=create_widget)
 
-        
         self.append(boxed_list)
 
     def on_row_toggle(self, row: Adw.SwitchRow, state: bool) -> None:
         print("Toggled", row.get_name(), "active:", row.get_active())
         # TODO: start VM here
-        # question: Should we disable the switch 
+        # question: Should we disable the switch
         # for the time until we got a response for this VM?
-
-
