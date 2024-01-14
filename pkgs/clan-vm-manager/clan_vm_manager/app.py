@@ -14,8 +14,7 @@ from clan_cli.clan_uri import ClanURI
 from gi.repository import Adw, Gdk, Gio, Gtk
 
 from .constants import constants
-from .vms import proc_manager
-
+from .model.use_vms import VMS
 
 @dataclass
 class ClanConfig:
@@ -59,7 +58,8 @@ class Application(Adw.Application):
 
     def on_shutdown(self, app: Gtk.Application) -> None:
         print("Shutting down")
-        proc_manager.kill_all()
+        VMS.use().on_shutdown()
+        
 
     def do_activate(self) -> None:
         self.init_style()

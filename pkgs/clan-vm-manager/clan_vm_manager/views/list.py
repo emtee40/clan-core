@@ -1,6 +1,6 @@
 import gi
 
-from clan_vm_manager.vms import running_vms
+from ..model.use_vms import VMS
 
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gio, GObject, Gtk
@@ -39,14 +39,14 @@ class ClanList(Gtk.Box):
         def create_widget(item: VMListItem) -> Gtk.Widget:
             print("Creating", item.data)
             vm = item.data
-            # Not displayed; Can be used as id.
             row = Adw.SwitchRow()
-            row.set_name(vm.url)
+            # Not displayed; Can be used as id.
+            row.set_name(vm.url) 
 
             row.set_title(vm.name)
             row.set_title_lines(1)
 
-            row.set_subtitle(vm.url)
+            row.set_subtitle(vm._flake_attr)
             row.set_subtitle_lines(1)
 
             # TODO: Avatar could also display a GdkPaintable (image)
@@ -64,7 +64,7 @@ class ClanList(Gtk.Box):
         list_store = Gio.ListStore()
         print(list_store)
 
-        for vm in get_initial_vms(running_vms()):
+        for vm in get_initial_vms(VMS.use().get_running_vms()):
             list_store.append(VMListItem(data=vm.base))
 
         boxed_list.bind_model(list_store, create_widget_func=create_widget)
@@ -72,7 +72,14 @@ class ClanList(Gtk.Box):
         self.append(boxed_list)
 
     def on_row_toggle(self, row: Adw.SwitchRow, state: bool) -> None:
+        # print(running)
         print("Toggled", row.get_name(), "active:", row.get_active())
+        hooks = VMS.use()
+        if(row.get_active()):
+            hooks.start_vm(row.get_name(),row.get_subtitle())
+        
+        if(not row.get_active()):
+            hooks.stop_vm(row.get_name(),row.get_subtitle())
         # TODO: start VM here
         # question: Should we disable the switch
         # for the time until we got a response for this VM?
