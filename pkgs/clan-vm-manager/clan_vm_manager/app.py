@@ -36,7 +36,12 @@ class MainWindow(Adw.ApplicationWindow):
 
         # Create a navigation view
         self.nav_view = Adw.NavigationView()
-        view.set_content(self.nav_view)
+
+        clamp = Adw.Clamp()
+        clamp.set_child(self.nav_view)
+        clamp.set_maximum_size(1000)
+        
+        view.set_content(clamp)
 
         # Create the first page
         self.list_view = Adw.NavigationPage(title="Your cLan")
