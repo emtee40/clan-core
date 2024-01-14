@@ -1,34 +1,34 @@
-from collections.abc import Callable
 from functools import partial
-from typing import Literal
 
 import gi
 from clan_cli.clan_uri import ClanURI
 from clan_cli.errors import ClanError
-from clan_cli.flakes.inspect import FlakeConfig
-from clan_cli.history.add import add_history, list_history
+from clan_cli.history.add import add_history
 
-from clan_vm_manager import assets
 from clan_vm_manager.errors.show_error import show_error_dialog
 
-from ..interfaces import Callbacks, InitialJoinValues
+from ..interfaces import InitialJoinValues
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
 
-from gi.repository import GdkPixbuf, Gio, Gtk, GObject, Adw, Gdk
+from gi.repository import Adw, Gio, GObject, Gtk
+
 
 class TrustValues(GObject.Object):
     data: InitialJoinValues
+
     def __init__(self, data: InitialJoinValues) -> None:
         super().__init__()
         print("TrustValues", data)
         self.data = data
 
+
 class Trust(Gtk.Box):
     def __init__(
-        self,*,
+        self,
+        *,
         initial_values: InitialJoinValues,
     ) -> None:
         super().__init__(orientation=Gtk.Orientation.VERTICAL)
@@ -64,14 +64,13 @@ class Trust(Gtk.Box):
 
             return row
 
-
         boxed_list = Gtk.ListBox()
         boxed_list.set_selection_mode(Gtk.SelectionMode.NONE)
         boxed_list.add_css_class("boxed-list")
 
         list_store = Gio.ListStore.new(TrustValues)
         list_store.append(TrustValues(data=initial_values))
-        
+
         # icon = Gtk.Image.new_from_pixbuf(
         #     GdkPixbuf.Pixbuf.new_from_file_at_scale(
         #         filename=str(assets.loc / "placeholder.jpeg"),
@@ -121,10 +120,10 @@ class Trust(Gtk.Box):
 
     def on_trust_clicked(self, item: InitialJoinValues, widget: Gtk.Widget) -> None:
         try:
-            uri = item.url 
+            uri = item.url
             # or ClanURI(self.entry.get_text())
             print(f"trusted: {uri}")
-            if (uri):
+            if uri:
                 add_history(uri)
                 # history = list_history()
 
@@ -132,8 +131,8 @@ class Trust(Gtk.Box):
                 #     lambda item: item.flake.flake_url == uri.get_internal(), history
                 # )
                 # if found:
-                    # [item] = found
-                    # self.on_trust(uri.get_internal(), item.flake)
+                # [item] = found
+                # self.on_trust(uri.get_internal(), item.flake)
 
         except ClanError as e:
             pass

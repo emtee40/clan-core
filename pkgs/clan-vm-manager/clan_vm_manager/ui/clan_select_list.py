@@ -273,8 +273,9 @@ class ClanListView(Gtk.Box):
     def _on_select_row(self, selection: Gtk.TreeSelection) -> None:
         model, row = selection.get_selected()
         if row is not None:
-            vm = VMBase(*model[row])
-            self.on_select_row(vm)
+            pass
+            # vm = VMBase(*model[row])
+            # self.on_select_row(vm)
 
     # def _on_button_pressed(
     #     self, tree_view: Gtk.TreeView, event: Any

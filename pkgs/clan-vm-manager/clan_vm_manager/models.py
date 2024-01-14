@@ -30,14 +30,15 @@ class VMBase(GObject.Object):
     status: VMStatus
     _flake_attr: str
 
-    def __init__(self,*,icon: Path, name: str, url: str, status: VMStatus, _flake_attr: str) -> None:
+    def __init__(
+        self, *, icon: Path, name: str, url: str, status: VMStatus, _flake_attr: str
+    ) -> None:
         super().__init__()
         self.icon = icon
         self.name = name
         self.url = url
         self.status = status
         self._flake_attr = _flake_attr
-
 
     @staticmethod
     def name_to_type_map() -> OrderedDict[str, type]:
