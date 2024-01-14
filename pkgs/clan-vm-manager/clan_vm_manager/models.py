@@ -41,6 +41,9 @@ class VMBase:
                 "_FlakeAttr": str,
             }
         )
+    
+    def get_id(self) -> str:
+        return self.url + self._flake_attr
 
     @staticmethod
     def to_idx(name: str) -> int:

@@ -1,14 +1,16 @@
 import gi
+from functools import partial
 
 from ..model.use_vms import VMS
 
 gi.require_version("Adw", "1")
-from gi.repository import Adw, Gio, GObject, Gtk
+from gi.repository import Adw, Gio, GObject, Gtk, Gdk
 
 from ..models import VMBase, get_initial_vms
 
 
 class VMListItem(GObject.Object):
+    data: VMBase
     def __init__(self, data: VMBase) -> None:
         super().__init__()
         self.data = data
@@ -39,29 +41,38 @@ class ClanList(Gtk.Box):
         def create_widget(item: VMListItem) -> Gtk.Widget:
             print("Creating", item.data)
             vm = item.data
-            row = Adw.SwitchRow()
+            row = Adw.ActionRow()
             # Not displayed; Can be used as id.
             row.set_name(vm.url) 
 
             row.set_title(vm.name)
             row.set_title_lines(1)
+            row.set_title_selectable(True)
 
             row.set_subtitle(vm._flake_attr)
             row.set_subtitle_lines(1)
 
             # TODO: Avatar could also display a GdkPaintable (image)
             avatar = Adw.Avatar()
-            avatar.set_text(vm.name)
+            avatar.set_custom_image(Gdk.Texture.new_from_filename(vm.icon))
+            avatar.set_text(vm.name + " " + vm._flake_attr)
             avatar.set_show_initials(True)
-            avatar.set_size(50)
+            avatar.set_size(50) 
 
             row.add_prefix(avatar)
 
-            row.connect("notify::active", self.on_row_toggle)
+
+            switch = Gtk.Switch()
+            box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+            box.set_valign(Gtk.Align.CENTER)
+            box.append(switch)
+
+            switch.connect("notify::active", partial(self.on_row_toggle, item.data))
+            row.add_suffix(box)
 
             return row
 
-        list_store = Gio.ListStore()
+        list_store = Gio.ListStore.new(VMListItem)
         print(list_store)
 
         for vm in get_initial_vms(VMS.use().get_running_vms()):
@@ -71,15 +82,11 @@ class ClanList(Gtk.Box):
 
         self.append(boxed_list)
 
-    def on_row_toggle(self, row: Adw.SwitchRow, state: bool) -> None:
-        # print(running)
-        print("Toggled", row.get_name(), "active:", row.get_active())
+    def on_row_toggle(self, data: VMBase ,row: Adw.SwitchRow, state: bool) -> None:
+        print("Toggled", data, "active:", row.get_active())
         hooks = VMS.use()
         if(row.get_active()):
-            hooks.start_vm(row.get_name(),row.get_subtitle())
+            hooks.start_vm(data.url,data._flake_attr)
         
         if(not row.get_active()):
-            hooks.stop_vm(row.get_name(),row.get_subtitle())
-        # TODO: start VM here
-        # question: Should we disable the switch
-        # for the time until we got a response for this VM?
+            hooks.stop_vm(data.url,data._flake_attr)
