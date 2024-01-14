@@ -6,11 +6,13 @@ from clan_cli.errors import ClanError
 
 from clan_vm_manager.errors.show_error import show_error_dialog
 from clan_vm_manager.executor import ProcessManager
+from clan_vm_manager.models import VMBase
 
 # https://amolenaar.pages.gitlab.gnome.org/pygobject-docs/Adw-1/class-ToolbarView.html
 # Will be executed in the context of the child process
 def on_except(error: Exception, proc: mp.process.BaseProcess) -> None:
     show_error_dialog(ClanError(str(error)))
+
 
 class VMS():
     """
@@ -41,8 +43,6 @@ class VMS():
             
         return cls._instance
 
-
-
     def get_running_vms(self) -> list[str]:
         return self.proc_manager.running_procs()
 
@@ -55,7 +55,7 @@ class VMS():
         # TODO: We only use the url as the ident. This is not unique as the flake_attr is missing.
         # when we migrate everything to use the ClanURI class we can use the full url as the ident
         self.proc_manager.spawn(
-            ident=url,
+            ident=VMBase.static_get_id(str(vm.flake_url),vm.flake_attr),
             on_except=on_except,
             log_path=log_path,
             func=vms.run.run_vm,
@@ -63,10 +63,8 @@ class VMS():
         )
 
 
-    def stop_vm(self, url: str, attr: str) -> None:
-        self.proc_manager.kill(url)
-
-
+    def stop_vm(self, ident: str) -> None:
+        self.proc_manager.kill(ident)
 
     def on_shutdown(self) -> None:
         print("Store: stop all running vms")

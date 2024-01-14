@@ -85,8 +85,10 @@ class ClanList(Gtk.Box):
     def on_row_toggle(self, data: VMBase ,row: Adw.SwitchRow, state: bool) -> None:
         print("Toggled", data, "active:", row.get_active())
         hooks = VMS.use()
+
         if(row.get_active()):
             hooks.start_vm(data.url,data._flake_attr)
         
         if(not row.get_active()):
-            hooks.stop_vm(data.url,data._flake_attr)
+            hooks.stop_vm(data.get_id())
+
