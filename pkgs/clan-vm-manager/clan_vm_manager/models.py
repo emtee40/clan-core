@@ -41,7 +41,11 @@ class VMBase:
                 "_FlakeAttr": str,
             }
         )
-    
+        
+    @staticmethod
+    def static_get_id(url: str,flake_attr: str) -> str:
+        return url + flake_attr
+
     def get_id(self) -> str:
         return self.url + self._flake_attr
 
