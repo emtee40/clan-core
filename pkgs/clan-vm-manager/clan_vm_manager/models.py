@@ -12,7 +12,7 @@ from .errors.show_error import show_error_dialog
 gi.require_version("GdkPixbuf", "2.0")
 
 from clan_cli.errors import ClanError
-from gi.repository import GdkPixbuf
+from gi.repository import GdkPixbuf, GObject
 
 from clan_vm_manager import assets
 
@@ -22,13 +22,22 @@ class VMStatus(StrEnum):
     STOPPED = "Stopped"
 
 
-@dataclass(frozen=True)
-class VMBase:
-    icon: Path | GdkPixbuf.Pixbuf
+# @dataclass(frozen=True)
+class VMBase(GObject.Object):
+    icon: Path
     name: str
     url: str
     status: VMStatus
     _flake_attr: str
+
+    def __init__(self,*,icon: Path, name: str, url: str, status: VMStatus, _flake_attr: str) -> None:
+        super().__init__()
+        self.icon = icon
+        self.name = name
+        self.url = url
+        self.status = status
+        self._flake_attr = _flake_attr
+
 
     @staticmethod
     def name_to_type_map() -> OrderedDict[str, type]:
