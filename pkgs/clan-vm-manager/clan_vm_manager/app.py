@@ -4,12 +4,11 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import gi
+
 from clan_vm_manager.interfaces import InitialJoinValues
 from clan_vm_manager.model.use_views import Views
-
 from clan_vm_manager.views.list import ClanList
 from clan_vm_manager.views.trust_join import Trust
-
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
@@ -42,7 +41,9 @@ class MainWindow(Adw.ApplicationWindow):
         # Initialize all views
         stack_view = Views.use().view
         stack_view.add_named(ClanList(), "list")
-        stack_view.add_named(Trust(initial_values=InitialJoinValues(url=config.url)), "join.trust")
+        stack_view.add_named(
+            Trust(initial_values=InitialJoinValues(url=config.url)), "join.trust"
+        )
 
         stack_view.set_visible_child_name(config.initial_view)
 

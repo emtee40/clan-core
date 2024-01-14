@@ -1,9 +1,11 @@
 from typing import Any
+
 import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw
+
 
 class Views:
     """
@@ -17,6 +19,7 @@ class Views:
     Views.use() can also be called before the data is needed. e.g. to eliminate/reduce waiting time.
 
     """
+
     _instance: "None | Views" = None
     view: Adw.ViewStack
 

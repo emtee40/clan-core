@@ -5,9 +5,10 @@ import gi
 from ..model.use_vms import VMS, VMListItem
 
 gi.require_version("Adw", "1")
-from gi.repository import Adw, Gdk, Gio, GObject, Gtk
+from gi.repository import Adw, Gdk, Gtk
 
-from ..models import VMBase, get_initial_vms
+from ..models import VMBase
+
 
 class ClanList(Gtk.Box):
     """

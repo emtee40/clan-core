@@ -2,11 +2,9 @@ import multiprocessing as mp
 from pathlib import Path
 from typing import Any
 
-from gi.repository import Gio, GObject
-
-
 from clan_cli import vms
 from clan_cli.errors import ClanError
+from gi.repository import Gio, GObject
 
 from clan_vm_manager.errors.show_error import show_error_dialog
 from clan_vm_manager.executor import ProcessManager
