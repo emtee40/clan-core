@@ -16,6 +16,7 @@ from gi.repository import Adw, Gdk, Gio, Gtk
 from .constants import constants
 from .model.use_vms import VMS
 
+
 @dataclass
 class ClanConfig:
     initial_view: str
@@ -40,7 +41,7 @@ class MainWindow(Adw.ApplicationWindow):
         clamp = Adw.Clamp()
         clamp.set_child(self.nav_view)
         clamp.set_maximum_size(1000)
-        
+
         view.set_content(clamp)
 
         # Create the first page
@@ -64,7 +65,6 @@ class Application(Adw.Application):
     def on_shutdown(self, app: Gtk.Application) -> None:
         print("Shutting down")
         VMS.use().on_shutdown()
-        
 
     def do_activate(self) -> None:
         self.init_style()

@@ -1,16 +1,18 @@
-import gi
 from functools import partial
+
+import gi
 
 from ..model.use_vms import VMS
 
 gi.require_version("Adw", "1")
-from gi.repository import Adw, Gio, GObject, Gtk, Gdk
+from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 
 from ..models import VMBase, get_initial_vms
 
 
 class VMListItem(GObject.Object):
     data: VMBase
+
     def __init__(self, data: VMBase) -> None:
         super().__init__()
         self.data = data
@@ -43,7 +45,7 @@ class ClanList(Gtk.Box):
             vm = item.data
             row = Adw.ActionRow()
             # Not displayed; Can be used as id.
-            row.set_name(vm.url) 
+            row.set_name(vm.url)
 
             row.set_title(vm.name)
             row.set_title_lines(1)
@@ -57,10 +59,9 @@ class ClanList(Gtk.Box):
             avatar.set_custom_image(Gdk.Texture.new_from_filename(vm.icon))
             avatar.set_text(vm.name + " " + vm._flake_attr)
             avatar.set_show_initials(True)
-            avatar.set_size(50) 
+            avatar.set_size(50)
 
             row.add_prefix(avatar)
-
 
             switch = Gtk.Switch()
             box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -82,13 +83,12 @@ class ClanList(Gtk.Box):
 
         self.append(boxed_list)
 
-    def on_row_toggle(self, data: VMBase ,row: Adw.SwitchRow, state: bool) -> None:
+    def on_row_toggle(self, data: VMBase, row: Adw.SwitchRow, state: bool) -> None:
         print("Toggled", data, "active:", row.get_active())
         hooks = VMS.use()
 
-        if(row.get_active()):
-            hooks.start_vm(data.url,data._flake_attr)
-        
-        if(not row.get_active()):
-            hooks.stop_vm(data.get_id())
+        if row.get_active():
+            hooks.start_vm(data.url, data._flake_attr)
 
+        if not row.get_active():
+            hooks.stop_vm(data.get_id())
