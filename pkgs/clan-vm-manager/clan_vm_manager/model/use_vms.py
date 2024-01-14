@@ -2,18 +2,29 @@ import multiprocessing as mp
 from pathlib import Path
 from typing import Any
 
+from gi.repository import Gio, GObject
+
+
 from clan_cli import vms
 from clan_cli.errors import ClanError
 
 from clan_vm_manager.errors.show_error import show_error_dialog
 from clan_vm_manager.executor import ProcessManager
-from clan_vm_manager.models import VMBase
+from clan_vm_manager.models import VMBase, get_initial_vms
 
 
 # https://amolenaar.pages.gitlab.gnome.org/pygobject-docs/Adw-1/class-ToolbarView.html
 # Will be executed in the context of the child process
 def on_except(error: Exception, proc: mp.process.BaseProcess) -> None:
     show_error_dialog(ClanError(str(error)))
+
+
+class VMListItem(GObject.Object):
+    data: VMBase
+
+    def __init__(self, data: VMBase) -> None:
+        super().__init__()
+        self.data = data
 
 
 class VMS:
@@ -30,6 +41,7 @@ class VMS:
     """
 
     proc_manager: ProcessManager
+    list_store: Gio.ListStore
     _instance: "None | VMS" = None
 
     # Make sure the VMS class is used as a singleton
@@ -42,6 +54,11 @@ class VMS:
             print("Creating new instance")
             cls._instance = cls.__new__(cls)
             cls.proc_manager = ProcessManager()
+            cls.list_store = Gio.ListStore.new(VMListItem)
+
+            for vm in get_initial_vms(VMS.use().get_running_vms()):
+                cls.list_store.append(VMListItem(data=vm.base))
+
             # Init happens here
 
         return cls._instance

@@ -4,8 +4,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import gi
+from clan_vm_manager.interfaces import InitialJoinValues
+from clan_vm_manager.model.use_views import Views
 
 from clan_vm_manager.views.list import ClanList
+from clan_vm_manager.views.trust_join import Trust
+
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
@@ -24,7 +28,7 @@ class ClanConfig:
 
 
 class MainWindow(Adw.ApplicationWindow):
-    def __init__(self, app: Adw.Application, config: ClanConfig) -> None:
+    def __init__(self, config: ClanConfig) -> None:
         super().__init__()
         self.set_title("cLAN Manager")
         self.set_default_size(980, 650)
@@ -35,21 +39,20 @@ class MainWindow(Adw.ApplicationWindow):
         header = Adw.HeaderBar()
         view.add_top_bar(header)
 
-        # Create a navigation view
-        self.nav_view = Adw.NavigationView()
+        # Initialize all views
+        stack_view = Views.use().view
+        stack_view.add_named(ClanList(), "list")
+        stack_view.add_named(Trust(initial_values=InitialJoinValues(url=config.url)), "join.trust")
+
+        stack_view.set_visible_child_name(config.initial_view)
 
         clamp = Adw.Clamp()
-        clamp.set_child(self.nav_view)
+        clamp.set_child(stack_view)
         clamp.set_maximum_size(1000)
 
         view.set_content(clamp)
 
-        # Create the first page
-        self.list_view = Adw.NavigationPage(title="Your cLan")
-        self.list_view.set_child(ClanList(app=app))
-
         # Push the first page to the navigation view
-        self.nav_view.push(self.list_view)
 
 
 class Application(Adw.Application):
@@ -57,8 +60,6 @@ class Application(Adw.Application):
         super().__init__(
             application_id=constants["APPID"], flags=Gio.ApplicationFlags.FLAGS_NONE
         )
-        # TODO:
-        # self.init_style()
         self.config = config
         self.connect("shutdown", self.on_shutdown)
 
@@ -68,7 +69,7 @@ class Application(Adw.Application):
 
     def do_activate(self) -> None:
         self.init_style()
-        window = MainWindow(app=self, config=self.config)
+        window = MainWindow(config=self.config)
         window.set_application(self)
         window.present()
 
@@ -86,7 +87,7 @@ class Application(Adw.Application):
 
 def show_join(args: argparse.Namespace) -> None:
     app = Application(
-        config=ClanConfig(url=args.clan_uri, initial_view="join"),
+        config=ClanConfig(url=args.clan_uri, initial_view="join.trust"),
     )
     return app.run()
 
@@ -98,7 +99,7 @@ def register_join_parser(parser: argparse.ArgumentParser) -> None:
 
 def show_overview(args: argparse.Namespace) -> None:
     app = Application(
-        config=ClanConfig(url=None, initial_view="overview"),
+        config=ClanConfig(url=None, initial_view="list"),
     )
     return app.run()
 
