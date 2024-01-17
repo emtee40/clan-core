@@ -1,7 +1,6 @@
 import argparse
 import logging
 import sys
-import traceback
 from collections.abc import Sequence
 from pathlib import Path
 from types import ModuleType
