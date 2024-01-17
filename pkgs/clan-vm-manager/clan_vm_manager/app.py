@@ -66,7 +66,7 @@ class Application(Adw.Application):
 
     def on_shutdown(self, app: Gtk.Application) -> None:
         print("Shutting down")
-        VMS.use().on_shutdown()
+        VMS.use().kill_all()
 
     def do_activate(self) -> None:
         self.init_style()

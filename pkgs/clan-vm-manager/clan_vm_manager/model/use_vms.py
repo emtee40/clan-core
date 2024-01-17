@@ -1,28 +1,17 @@
 import multiprocessing as mp
-from pathlib import Path
 from typing import Any
 
-from clan_cli import vms
 from clan_cli.errors import ClanError
-from gi.repository import Gio, GObject
+from gi.repository import Gio
 
 from clan_vm_manager.errors.show_error import show_error_dialog
-from clan_vm_manager.executor import ProcessManager
-from clan_vm_manager.models import VMBase, get_initial_vms
+from clan_vm_manager.models import VM, get_initial_vms
 
 
 # https://amolenaar.pages.gitlab.gnome.org/pygobject-docs/Adw-1/class-ToolbarView.html
 # Will be executed in the context of the child process
 def on_except(error: Exception, proc: mp.process.BaseProcess) -> None:
     show_error_dialog(ClanError(str(error)))
-
-
-class VMListItem(GObject.Object):
-    data: VMBase
-
-    def __init__(self, data: VMBase) -> None:
-        super().__init__()
-        self.data = data
 
 
 class VMS:
@@ -38,7 +27,6 @@ class VMS:
 
     """
 
-    proc_manager: ProcessManager
     list_store: Gio.ListStore
     _instance: "None | VMS" = None
 
@@ -51,38 +39,15 @@ class VMS:
         if cls._instance is None:
             print("Creating new instance")
             cls._instance = cls.__new__(cls)
-            cls.proc_manager = ProcessManager()
-            cls.list_store = Gio.ListStore.new(VMListItem)
+            cls.list_store = Gio.ListStore.new(VM)
 
-            for vm in get_initial_vms(VMS.use().get_running_vms()):
-                cls.list_store.append(VMListItem(data=vm.base))
-
-            # Init happens here
-
+            for vm in get_initial_vms():
+                cls.list_store.append(vm)
         return cls._instance
 
-    def get_running_vms(self) -> list[str]:
-        return self.proc_manager.running_procs()
+    def get_running_vms(self) -> list[VM]:
+        return list(filter(lambda vm: vm.is_running(), self.list_store))
 
-    def start_vm(self, url: str, attr: str) -> None:
-        print(f"start_vm {url}")
-        # TODO: We should use VMConfig from the history file
-        vm = vms.run.inspect_vm(flake_url=url, flake_attr=attr)
-        log_path = Path(".")
-
-        # TODO: We only use the url as the ident. This is not unique as the flake_attr is missing.
-        # when we migrate everything to use the ClanURI class we can use the full url as the ident
-        self.proc_manager.spawn(
-            ident=VMBase.static_get_id(str(vm.flake_url), vm.flake_attr),
-            on_except=on_except,
-            log_path=log_path,
-            func=vms.run.run_vm,
-            vm=vm,
-        )
-
-    def stop_vm(self, ident: str) -> None:
-        self.proc_manager.kill(ident)
-
-    def on_shutdown(self) -> None:
-        print("Store: stop all running vms")
-        self.proc_manager.kill_all()
+    def kill_all(self) -> None:
+        for vm in self.get_running_vms():
+            vm.stop()

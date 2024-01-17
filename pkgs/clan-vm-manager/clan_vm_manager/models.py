@@ -1,20 +1,19 @@
-from collections import OrderedDict
-from dataclasses import dataclass
+import multiprocessing as mp
+import sys
+import weakref
 from enum import StrEnum
 from pathlib import Path
-from typing import Any
 
-import gi
-from clan_cli.history.list import list_history
-
-from .errors.show_error import show_error_dialog
-
-gi.require_version("GdkPixbuf", "2.0")
-
+from clan_cli import vms
 from clan_cli.errors import ClanError
-from gi.repository import GdkPixbuf, GObject
+from clan_cli.history.add import HistoryEntry
+from clan_cli.history.list import list_history
+from gi.repository import GObject
 
 from clan_vm_manager import assets
+
+from .errors.show_error import show_error_dialog
+from .executor import MPProcess, spawn
 
 
 class VMStatus(StrEnum):
@@ -22,96 +21,75 @@ class VMStatus(StrEnum):
     STOPPED = "Stopped"
 
 
-# @dataclass(frozen=True)
-class VMBase(GObject.Object):
-    icon: Path
-    name: str
-    url: str
-    status: VMStatus
-    _flake_attr: str
+def on_except(error: Exception, proc: mp.process.BaseProcess) -> None:
+    show_error_dialog(ClanError(str(error)))
 
+
+class VM(GObject.Object):
     def __init__(
-        self, *, icon: Path, name: str, url: str, status: VMStatus, _flake_attr: str
+        self,
+        icon: Path,
+        status: VMStatus,
+        data: HistoryEntry,
+        process: MPProcess | None = None,
     ) -> None:
         super().__init__()
-        self.icon = icon
-        self.name = name
-        self.url = url
+        self.data = data
+        self.process = process
         self.status = status
-        self._flake_attr = _flake_attr
+        self._finalizer = weakref.finalize(self, self.stop)
 
-    @staticmethod
-    def name_to_type_map() -> OrderedDict[str, type]:
-        return OrderedDict(
-            {
-                "Icon": GdkPixbuf.Pixbuf,
-                "Name": str,
-                "URL": str,
-                "Status": str,
-                "_FlakeAttr": str,
-            }
+    def start(self) -> None:
+        if self.process is not None:
+            show_error_dialog(ClanError("VM is already running"))
+            return
+        vm = vms.run.inspect_vm(
+            flake_url=self.data.flake.flake_url, flake_attr=self.data.flake.flake_attr
+        )
+        log_path = Path(".")
+
+        self.process = spawn(
+            on_except=on_except,
+            log_path=log_path,
+            func=vms.run.run_vm,
+            vm=vm,
         )
 
-    @staticmethod
-    def static_get_id(url: str, flake_attr: str) -> str:
-        return url + flake_attr
+    def is_running(self) -> bool:
+        if self.process is not None:
+            return self.process.proc.is_alive()
+        return False
 
     def get_id(self) -> str:
-        return self.url + self._flake_attr
+        return self.data.flake.flake_url + self.data.flake.flake_attr
 
-    @staticmethod
-    def to_idx(name: str) -> int:
-        return list(VMBase.name_to_type_map().keys()).index(name)
+    def stop(self) -> None:
+        if self.process is None:
+            print("VM is already stopped", file=sys.stderr)
+            return
 
-    def list_data(self) -> OrderedDict[str, Any]:
-        return OrderedDict(
-            {
-                "Icon": str(self.icon),
-                "Name": self.name,
-                "URL": self.url,
-                "Status": self.status,
-                "_FlakeAttr": self._flake_attr,
-            }
-        )
+        self.process.kill_group()
+        self.process = None
 
 
-@dataclass(frozen=True)
-class VM:
-    # Inheritance is bad. Lets use composition
-    # Added attributes are separated from base attributes.
-    base: VMBase
-    autostart: bool = False
-    description: str | None = None
-
-
-# TODO: How to handle incompatible / corrupted history file. Delete it?
-# start/end indexes can be used optionally for pagination
-def get_initial_vms(
-    running_vms: list[str], start: int = 0, end: int | None = None
-) -> list[VM]:
+def get_initial_vms() -> list[VM]:
     vm_list = []
 
     try:
         # Execute `clan flakes add <path>` to democlan for this to work
         for entry in list_history():
-            icon = assets.loc / "placeholder.jpeg"
-            if entry.flake.icon is not None:
+            if entry.flake.icon is None:
+                icon = assets.loc / "placeholder.jpeg"
+            else:
                 icon = entry.flake.icon
 
-            status = VMStatus.STOPPED
-            if entry.flake.flake_url in running_vms:
-                status = VMStatus.RUNNING
-
-            base = VMBase(
+            base = VM(
                 icon=icon,
-                name=entry.flake.clan_name,
-                url=entry.flake.flake_url,
-                status=status,
-                _flake_attr=entry.flake.flake_attr,
+                status=VMStatus.STOPPED,
+                data=entry,
             )
-            vm_list.append(VM(base=base))
+            vm_list.append(base)
     except ClanError as e:
         show_error_dialog(e)
 
-    # start/end slices can be used for pagination
-    return vm_list[start:end]
+    return vm_list

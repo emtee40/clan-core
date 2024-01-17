@@ -136,13 +136,15 @@ def main() -> None:
         args.func(args)
     except ClanError as e:
         if args.debug:
-            traceback.print_exc()
+            log.exception(e)
             sys.exit(1)
         if isinstance(e, ClanCmdError):
             if e.cmd.msg:
                 print(e.cmd.msg, file=sys.stderr)
             else:
                 print(e, file=sys.stderr)
+        elif isinstance(e, ClanError):
+            print(e, file=sys.stderr)
         sys.exit(1)
 
 
