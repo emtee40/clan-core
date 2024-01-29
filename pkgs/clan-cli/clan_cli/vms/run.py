@@ -236,8 +236,11 @@ def run_vm(
         #   in the state_dir.
         # The reason is, qemu has a length limit of 108 bytes for the qmp socket
         #   path which is violated easily.
-        (state_dir / "qmp.sock").symlink_to(qmp_socket_file)
-        (state_dir / "qga.sock").symlink_to(qga_socket_file)
+        if (state_dir / "qmp.sock").exists():
+            (state_dir / "qmp.sock").symlink_to(qmp_socket_file)
+
+        if (state_dir / "qga.sock").exists():
+            (state_dir / "qga.sock").symlink_to(qga_socket_file)
 
         rootfs_img = prepare_disk(tmpdir)
         state_img = prepare_disk(
