@@ -103,7 +103,7 @@ def qemu_command(
         kernel_cmdline.append("console=tty0")
     # fmt: off
     command = [
-        "qemu-kvm",
+        "qemu-kvms",
         "-name", vm.machine_name,
         "-m", f'{nixos_config["memorySize"]}M',
         "-object", f"memory-backend-memfd,id=mem,size={nixos_config['memorySize']}M",
