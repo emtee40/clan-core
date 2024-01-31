@@ -69,8 +69,12 @@
         enable = true;
         configDir = "/var/lib/syncthing";
 
-        overrideFolders = true;
-        overrideDevices = true;
+        overrideFolders = lib.mkDefault (
+          if (config.clancore.syncthing.introducer == null) then true else false
+        );
+        overrideDevices = lib.mkDefault (
+          if (config.clancore.syncthing.introducer == null) then true else false
+        );
 
         dataDir = lib.mkDefault "/home/user/";
 
