@@ -37,7 +37,7 @@ def graphics_options(vm: VmConfig) -> GraphicOptions:
         "driver=pa,model=virtio",
     ]
 
-    if vm.wayland:
+    if vm.waypipe:
         # FIXME: check for collisions
         cid = random.randint(1, 2**32)
         # fmt: off
@@ -101,7 +101,7 @@ def qemu_command(
         f'regInfo={nixos_config["regInfo"]}/registration',
         "console=ttyS0,115200n8",
     ]
-    if not vm.wayland:
+    if not vm.waypipe:
         kernel_cmdline.append("console=tty0")
     # fmt: off
     command = [
@@ -343,7 +343,7 @@ def run_vm(
         packages = ["nixpkgs#qemu"]
 
         env = os.environ.copy()
-        if vm.graphics and not vm.wayland:
+        if vm.graphics and not vm.waypipe:
             packages.append("nixpkgs#virt-viewer")
             remote_viewer_mimetypes = module_root() / "vms" / "mimetypes"
             env[
