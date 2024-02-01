@@ -364,7 +364,7 @@ class RunOptions:
     machine: str
     flake: Path
     nix_options: list[str] = field(default_factory=list)
-    wayland: bool = False
+    waypipe: bool = False
 
 
 def run_command(args: argparse.Namespace) -> None:
@@ -372,15 +372,11 @@ def run_command(args: argparse.Namespace) -> None:
         machine=args.machine,
         flake=args.flake,
         nix_options=args.option,
-        wayland=args.wayland,
     )
 
     machine = Machine(run_options.machine, run_options.flake)
 
     vm = inspect_vm(machine=machine)
-
-    if run_options.wayland:
-        vm.wayland = run_options.wayland
 
     run_vm(vm, run_options.nix_options)
 
@@ -388,5 +384,4 @@ def run_command(args: argparse.Namespace) -> None:
 def register_run_parser(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("machine", type=str, help="machine in the flake to run")
     parser.add_argument("--flake-url", type=str, help="flake url")
-    parser.add_argument("--wayland", action="store_true", help="use wayland")
     parser.set_defaults(func=run_command)
