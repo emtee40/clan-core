@@ -4,6 +4,7 @@
     installer.imports = [ ./installer ];
     clanCore.imports = [
       inputs.sops-nix.nixosModules.sops
+      inputs.disko.nixosModules.disko # TODO use this only where we need it
       ./clanCore
       ./iso
       ({ pkgs, lib, ... }: {
