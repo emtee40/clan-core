@@ -42,14 +42,15 @@ mkShell (
     ];
 
     # To debug clan-vm-manger execute pygdb --args python ./bin/clan-vm-manager
-    nativeBuildInputs = [
+    packages = [
       ruff
       desktop-file-utils
       mypy
       python3Packages.ipdb
-      gtk4.dev
+      gtk4.dev # has the demo called
       libadwaita.devdoc # has the demo called 'adwaita-1-demo'
-    ] ++ clan-vm-manager.nativeBuildInputs ++ clan-vm-manager.propagatedBuildInputs;
+      clan-cli.checkPython
+    ];
 
     PYTHONBREAKPOINT = "ipdb.set_trace";
 
