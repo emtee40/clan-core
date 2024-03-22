@@ -12,6 +12,7 @@
   clan-cli,
   makeDesktopItem,
   libadwaita,
+  weston,
 }:
 let
   source = ./.;
@@ -56,9 +57,13 @@ python3.pkgs.buildPythonApplication rec {
 
   checkPython = python3.withPackages (_ps: clan-cli.passthru.pytestDependencies);
 
-  passthru.checkPython = checkPython;
+  devDependencies = [
+    checkPython
+    weston
+  ] ++ nativeBuildInputs ++ buildInputs ++ propagatedBuildInputs;
 
-  passthru.devDependencies = checkPython;
+  passthru.checkPython = checkPython;
+  passthru.devDependencies = devDependencies;
 
   # also re-expose dependencies so we test them in CI
   passthru = {
@@ -71,15 +76,17 @@ python3.pkgs.buildPythonApplication rec {
       pygobject-stubs
     ];
     tests = {
-      clan-vm-manager-pytest = runCommand "clan-vm-manager-pytest" { nativeBuildInputs = [ checkPython ]; } ''
-        cp -r ${source} ./src
-        chmod +w -R ./src
-        cd ./src
+      clan-vm-manager-pytest =
+        runCommand "clan-vm-manager-pytest" { nativeBuildInputs = devDependencies; }
+          ''
+            cp -r ${source} ./src
+            chmod +w -R ./src
+            cd ./src
 
-        export NIX_STATE_DIR=$TMPDIR/nix IN_NIX_SANDBOX=1
-        ${checkPython}/bin/python -m pytest -m "not impure" ./tests
-        touch $out
-      '';
+            export NIX_STATE_DIR=$TMPDIR/nix IN_NIX_SANDBOX=1
+            ${checkPython}/bin/python -m pytest -m "not impure" ./tests
+            touch $out
+          '';
       clan-vm-manager-no-breakpoints = runCommand "clan-vm-manager-no-breakpoints" { } ''
         if grep --include \*.py -Rq "breakpoint()" ${source}; then
           echo "breakpoint() found in ${source}:"

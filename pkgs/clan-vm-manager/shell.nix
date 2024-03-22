@@ -33,7 +33,7 @@ mkShell (
             --add-flags '-ex "source ${python3}/share/gdb/libpython.py"'
         '';
   in
-  {
+  rec {
     inherit (clan-vm-manager) propagatedBuildInputs buildInputs;
 
     linuxOnlyPackages = lib.optionals stdenv.isLinux [
@@ -47,10 +47,9 @@ mkShell (
       desktop-file-utils
       mypy
       python3Packages.ipdb
-      gtk4.dev # has the demo called
+      gtk4.dev
       libadwaita.devdoc # has the demo called 'adwaita-1-demo'
-      clan-cli.checkPython
-    ];
+    ] ++ clan-vm-manager.devDependencies ++ linuxOnlyPackages;
 
     PYTHONBREAKPOINT = "ipdb.set_trace";
 
