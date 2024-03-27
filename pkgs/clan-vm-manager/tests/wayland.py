@@ -12,7 +12,7 @@ from tempfile import TemporaryDirectory
 import pytest
 
 
-def write_script(cmd: list[str], new_env: dict[str, str], name:str) -> None:
+def write_script(cmd: list[str], new_env: dict[str, str], name: str) -> None:
     # Create the bash script content
     script_content = "#!/bin/bash\n"
     for key, value in new_env.items():
@@ -20,7 +20,7 @@ def write_script(cmd: list[str], new_env: dict[str, str], name:str) -> None:
             value = value.replace('"', '\\"')
         if "'" in value:
             value = value.replace("'", "\\'")
-        if '`' in value:
+        if "`" in value:
             value = value.replace("`", "\\`")
         script_content += f'export {key}="{value}"\n'
     script_content += shlex.join(cmd)
@@ -40,8 +40,9 @@ class Compositor:
         self.proc = proc
         self.env = env
 
+
 @pytest.fixture
-def weston_override_lib(test_root: Path) ->  Generator[Path, None, None]:
+def weston_override_lib(test_root: Path) -> Generator[Path, None, None]:
     with TemporaryDirectory() as tmpdir:
         # This enforces a login shell by overriding the login shell of `getpwnam(3)`
         lib_path = Path(tmpdir) / "libweston_auth_override.so"
@@ -60,7 +61,9 @@ def weston_override_lib(test_root: Path) ->  Generator[Path, None, None]:
 
 
 @pytest.fixture
-def wayland_comp(test_root: Path, weston_override_lib: Path) -> Generator[Compositor, None, None]:
+def wayland_comp(
+    test_root: Path, weston_override_lib: Path
+) -> Generator[Compositor, None, None]:
     tls_key = test_root / "data" / "rdp-security" / "tls.key"
     tls_cert = test_root / "data" / "rdp-security" / "tls.crt"
     wayland_display = "wayland-1"  # Define a unique WAYLAND_DISPLAY value
@@ -70,15 +73,15 @@ def wayland_comp(test_root: Path, weston_override_lib: Path) -> Generator[Compos
     new_env["LIBGL_ALWAYS_SOFTWARE"] = "true"
     new_env["LD_PRELOAD"] = str(weston_override_lib)
     cmd = [
-            "weston",
-            "--width=1920",
-            "--height=1080",
-            "--port=5900",
-            f"--vnc-tls-key={tls_key}",
-            f"--vnc-tls-cert={tls_cert}",
-            "--backend=vnc",
-            f"--socket={wayland_display}",
-        ]
+        "weston",
+        "--width=1920",
+        "--height=1080",
+        "--port=5900",
+        f"--vnc-tls-key={tls_key}",
+        f"--vnc-tls-cert={tls_cert}",
+        "--backend=vnc",
+        f"--socket={wayland_display}",
+    ]
 
     compositor = subprocess.Popen(
         cmd,
@@ -106,6 +109,7 @@ class GtkApp:
 
     def poll(self) -> int | None:
         return self.proc.poll()
+
 
 @pytest.fixture
 def app(wayland_comp: Compositor) -> Generator[GtkApp, None, None]:
