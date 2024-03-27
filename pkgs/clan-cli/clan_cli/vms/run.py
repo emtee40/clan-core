@@ -3,6 +3,7 @@ import importlib
 import json
 import logging
 import os
+import weakref
 from dataclasses import dataclass, field
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -119,10 +120,12 @@ def run_vm(
     if cachedir is None:
         cache_tmp = TemporaryDirectory(dir=cache)
         cachedir = Path(cache_tmp.name)
+        weakref.finalize(cache_tmp, cache_tmp.cleanup)
 
     if socketdir is None:
         socket_tmp = TemporaryDirectory()
         socketdir = Path(socket_tmp.name)
+        weakref.finalize(socket_tmp, socket_tmp.cleanup)
 
     # TODO: We should get this from the vm argument
     nixos_config = build_vm(machine, cachedir, nix_options)
