@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
+# Check if openssl is available
+if ! command -v openssl &> /dev/null; then
+    echo "openssl is not installed. Please install openssl to generate the certificates."
+    exit 1
+fi
+
 # Step 0: Define CA subject details
 CA_SUBJECT="/C=US/ST=YourState/L=YourCity/O=YourCAOrganization/OU=YourCADepartment/CN=127.0.0.1"
 

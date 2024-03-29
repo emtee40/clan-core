@@ -17,8 +17,7 @@
   libadwaita,
   pytest, # Testing framework
   pytest-cov, # Generate coverage reports
-  pytest-subprocess, # fake the real subprocess behavior to make your tests more independent.
-  pytest-xdist, # Run tests in parallel on multiple cores
+  pytest-subprocess, # fake the real subprocess behavior to make your tests more independent. # Run tests in parallel on multiple cores
   pytest-timeout, # Add timeouts to your tests
 }:
 let

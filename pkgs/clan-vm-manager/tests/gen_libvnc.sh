@@ -15,4 +15,4 @@ if [ -z ${hardeningDisabled+x} ]; then
 fi
 
 OUT_PATH=$GIT_ROOT/pkgs/clan-vm-manager/tests/helpers/libvncclient.py
-python3 ~/Projects/ctypesgen/run.py -R "$LIBVNC_LIB" -I "$LIBVNC_INCLUDE" -l libvncclient.so "$LIBVNC_INCLUDE/rfb/rfbclient.h" -o "$OUT_PATH"
+python3 ~/Projects/ctypesgen/run.py -l libvncclient.so "$LIBVNC_INCLUDE/rfb/rfbclient.h" -o "$OUT_PATH"

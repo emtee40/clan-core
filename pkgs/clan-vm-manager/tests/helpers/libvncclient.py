@@ -1,7 +1,8 @@
+# ruff: noqa
 r"""Wrapper for rfbclient.h
 
 Generated with:
-/home/lhebendanz/Projects/ctypesgen/run.py -R /nix/store/k2gq8jnpdffwav59qd83sdha2ihmb6g9-libvncserver-0.9.14/lib -I /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include -l libvncclient.so /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h -o /home/lhebendanz/Projects/clan-core/pkgs/clan-vm-manager/tests/helpers/libvncclient.py
+/home/lhebendanz/Projects/ctypesgen/run.py -l libvncclient.so /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h -o /home/lhebendanz/Projects/clan-core/pkgs/clan-vm-manager/tests/helpers/libvncclient.py
 
 Do not modify this file.
 """
@@ -12,7 +13,7 @@ __docformat__ = "restructuredtext"
 
 import ctypes
 import sys
-from ctypes import *  # noqa: F401, F403
+from ctypes import *  # noqa: F403
 
 _int_types = (ctypes.c_int16, ctypes.c_int32)
 if hasattr(ctypes, "c_int64"):
@@ -25,7 +26,6 @@ for t in _int_types:
         c_ptrdiff_t = t
 del t
 del _int_types
-
 
 
 class UserString:
@@ -404,7 +404,7 @@ def UNCHECKED(type):
 
 # ctypes doesn't have direct support for variadic functions, so we have to write
 # our own wrapper class
-class _variadic_function(object):
+class _variadic_function:
     def __init__(self, func, restype, argtypes, errcheck):
         self.func = func
         self.func.restype = restype
@@ -436,10 +436,11 @@ def ord_if_char(value):
     """
     return ord(value) if (isinstance(value, bytes) or isinstance(value, str)) else value
 
+
 # End preamble
 
 _libs = {}
-_libdirs = ['/nix/store/k2gq8jnpdffwav59qd83sdha2ihmb6g9-libvncserver-0.9.14/lib']
+_libdirs = []
 
 # Begin loader
 
@@ -518,9 +519,7 @@ class LibraryLoader:
             """Return the given name according to the selected calling convention"""
             if calling_convention not in self.access:
                 raise LookupError(
-                    "Unknown calling convention '{}' for function '{}'".format(
-                        calling_convention, name
-                    )
+                    f"Unknown calling convention '{calling_convention}' for function '{name}'"
                 )
             return getattr(self.access[calling_convention], name)
 
@@ -571,7 +570,9 @@ class LibraryLoader:
             # then we search the directory where the generated python interface is stored
             if this_file is not None:
                 for fmt in self.name_formats:
-                    yield os.path.abspath(os.path.join(os.path.dirname(__file__), fmt % libname))
+                    yield os.path.abspath(
+                        os.path.join(os.path.dirname(__file__), fmt % libname)
+                    )
 
             # now, use the ctypes tools to try to find the library
             for fmt in self.name_formats:
@@ -724,7 +725,7 @@ class PosixLibraryLoader(LibraryLoader):
                     else:
                         for dir2 in glob.glob(match.group("pattern")):
                             self._get_ld_so_conf_dirs(dir2, dirs)
-        except IOError:
+        except OSError:
             pass
 
     def _create_ld_so_cache(self):
@@ -856,7 +857,7 @@ del loaderclass
 
 # End loader
 
-add_library_search_dirs(['/nix/store/k2gq8jnpdffwav59qd83sdha2ihmb6g9-libvncserver-0.9.14/lib'])
+add_library_search_dirs([])
 
 # Begin libraries
 _libs["libvncclient.so"] = load_library("libvncclient.so")
@@ -866,982 +867,1136 @@ _libs["libvncclient.so"] = load_library("libvncclient.so")
 
 # No modules
 
-__uint8_t = c_ubyte# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 38
+__uint8_t = c_ubyte  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 38
 
-__uint16_t = c_ushort# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 40
+__uint16_t = c_ushort  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 40
 
-__uint32_t = c_uint# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 42
+__uint32_t = c_uint  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 42
 
-__off_t = c_long# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 152
+__off_t = c_long  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 152
 
-__off64_t = c_long# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 153
+__off64_t = c_long  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 153
 
-__time_t = c_long# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 160
+__time_t = c_long  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 160
 
-__suseconds_t = c_long# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 162
+__suseconds_t = c_long  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types.h: 162
+
 
 # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types/struct_FILE.h: 49
 class struct__IO_FILE(Structure):
     pass
 
-FILE = struct__IO_FILE# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types/FILE.h: 7
+
+FILE = struct__IO_FILE  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types/FILE.h: 7
+
 
 # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types/struct_FILE.h: 36
 class struct__IO_marker(Structure):
     pass
 
+
 # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types/struct_FILE.h: 37
 class struct__IO_codecvt(Structure):
     pass
+
 
 # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types/struct_FILE.h: 38
 class struct__IO_wide_data(Structure):
     pass
 
-_IO_lock_t = None# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types/struct_FILE.h: 43
+
+_IO_lock_t = None  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types/struct_FILE.h: 43
 
 struct__IO_FILE.__slots__ = [
-    '_flags',
-    '_IO_read_ptr',
-    '_IO_read_end',
-    '_IO_read_base',
-    '_IO_write_base',
-    '_IO_write_ptr',
-    '_IO_write_end',
-    '_IO_buf_base',
-    '_IO_buf_end',
-    '_IO_save_base',
-    '_IO_backup_base',
-    '_IO_save_end',
-    '_markers',
-    '_chain',
-    '_fileno',
-    '_flags2',
-    '_old_offset',
-    '_cur_column',
-    '_vtable_offset',
-    '_shortbuf',
-    '_lock',
-    '_offset',
-    '_codecvt',
-    '_wide_data',
-    '_freeres_list',
-    '_freeres_buf',
-    '__pad5',
-    '_mode',
-    '_unused2',
+    "_flags",
+    "_IO_read_ptr",
+    "_IO_read_end",
+    "_IO_read_base",
+    "_IO_write_base",
+    "_IO_write_ptr",
+    "_IO_write_end",
+    "_IO_buf_base",
+    "_IO_buf_end",
+    "_IO_save_base",
+    "_IO_backup_base",
+    "_IO_save_end",
+    "_markers",
+    "_chain",
+    "_fileno",
+    "_flags2",
+    "_old_offset",
+    "_cur_column",
+    "_vtable_offset",
+    "_shortbuf",
+    "_lock",
+    "_offset",
+    "_codecvt",
+    "_wide_data",
+    "_freeres_list",
+    "_freeres_buf",
+    "__pad5",
+    "_mode",
+    "_unused2",
 ]
 struct__IO_FILE._fields_ = [
-    ('_flags', c_int),
-    ('_IO_read_ptr', String),
-    ('_IO_read_end', String),
-    ('_IO_read_base', String),
-    ('_IO_write_base', String),
-    ('_IO_write_ptr', String),
-    ('_IO_write_end', String),
-    ('_IO_buf_base', String),
-    ('_IO_buf_end', String),
-    ('_IO_save_base', String),
-    ('_IO_backup_base', String),
-    ('_IO_save_end', String),
-    ('_markers', POINTER(struct__IO_marker)),
-    ('_chain', POINTER(struct__IO_FILE)),
-    ('_fileno', c_int),
-    ('_flags2', c_int),
-    ('_old_offset', __off_t),
-    ('_cur_column', c_ushort),
-    ('_vtable_offset', c_char),
-    ('_shortbuf', c_char * int(1)),
-    ('_lock', POINTER(_IO_lock_t)),
-    ('_offset', __off64_t),
-    ('_codecvt', POINTER(struct__IO_codecvt)),
-    ('_wide_data', POINTER(struct__IO_wide_data)),
-    ('_freeres_list', POINTER(struct__IO_FILE)),
-    ('_freeres_buf', POINTER(None)),
-    ('__pad5', c_size_t),
-    ('_mode', c_int),
-    ('_unused2', c_char * int((((15 * sizeof(c_int)) - (4 * sizeof(POINTER(None)))) - sizeof(c_size_t)))),
+    ("_flags", c_int),
+    ("_IO_read_ptr", String),
+    ("_IO_read_end", String),
+    ("_IO_read_base", String),
+    ("_IO_write_base", String),
+    ("_IO_write_ptr", String),
+    ("_IO_write_end", String),
+    ("_IO_buf_base", String),
+    ("_IO_buf_end", String),
+    ("_IO_save_base", String),
+    ("_IO_backup_base", String),
+    ("_IO_save_end", String),
+    ("_markers", POINTER(struct__IO_marker)),
+    ("_chain", POINTER(struct__IO_FILE)),
+    ("_fileno", c_int),
+    ("_flags2", c_int),
+    ("_old_offset", __off_t),
+    ("_cur_column", c_ushort),
+    ("_vtable_offset", c_char),
+    ("_shortbuf", c_char * 1),
+    ("_lock", POINTER(_IO_lock_t)),
+    ("_offset", __off64_t),
+    ("_codecvt", POINTER(struct__IO_codecvt)),
+    ("_wide_data", POINTER(struct__IO_wide_data)),
+    ("_freeres_list", POINTER(struct__IO_FILE)),
+    ("_freeres_buf", POINTER(None)),
+    ("__pad5", c_size_t),
+    ("_mode", c_int),
+    (
+        "_unused2",
+        c_char
+        * int(((15 * sizeof(c_int)) - (4 * sizeof(POINTER(None)))) - sizeof(c_size_t)),
+    ),
 ]
+
 
 # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/types/struct_timeval.h: 8
 class struct_timeval(Structure):
     pass
 
+
 struct_timeval.__slots__ = [
-    'tv_sec',
-    'tv_usec',
+    "tv_sec",
+    "tv_usec",
 ]
 struct_timeval._fields_ = [
-    ('tv_sec', __time_t),
-    ('tv_usec', __suseconds_t),
+    ("tv_sec", __time_t),
+    ("tv_usec", __suseconds_t),
 ]
+
 
 # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/thread-shared-types.h: 51
 class struct___pthread_internal_list(Structure):
     pass
 
+
 struct___pthread_internal_list.__slots__ = [
-    '__prev',
-    '__next',
+    "__prev",
+    "__next",
 ]
 struct___pthread_internal_list._fields_ = [
-    ('__prev', POINTER(struct___pthread_internal_list)),
-    ('__next', POINTER(struct___pthread_internal_list)),
+    ("__prev", POINTER(struct___pthread_internal_list)),
+    ("__next", POINTER(struct___pthread_internal_list)),
 ]
 
-__pthread_list_t = struct___pthread_internal_list# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/thread-shared-types.h: 55
+__pthread_list_t = struct___pthread_internal_list  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/thread-shared-types.h: 55
+
 
 # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/struct_mutex.h: 22
 class struct___pthread_mutex_s(Structure):
     pass
 
+
 struct___pthread_mutex_s.__slots__ = [
-    '__lock',
-    '__count',
-    '__owner',
-    '__nusers',
-    '__kind',
-    '__spins',
-    '__elision',
-    '__list',
+    "__lock",
+    "__count",
+    "__owner",
+    "__nusers",
+    "__kind",
+    "__spins",
+    "__elision",
+    "__list",
 ]
 struct___pthread_mutex_s._fields_ = [
-    ('__lock', c_int),
-    ('__count', c_uint),
-    ('__owner', c_int),
-    ('__nusers', c_uint),
-    ('__kind', c_int),
-    ('__spins', c_short),
-    ('__elision', c_short),
-    ('__list', __pthread_list_t),
+    ("__lock", c_int),
+    ("__count", c_uint),
+    ("__owner", c_int),
+    ("__nusers", c_uint),
+    ("__kind", c_int),
+    ("__spins", c_short),
+    ("__elision", c_short),
+    ("__list", __pthread_list_t),
 ]
+
 
 # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/pthreadtypes.h: 72
 class union_anon_14(Union):
     pass
 
+
 union_anon_14.__slots__ = [
-    '__data',
-    '__size',
-    '__align',
+    "__data",
+    "__size",
+    "__align",
 ]
 union_anon_14._fields_ = [
-    ('__data', struct___pthread_mutex_s),
-    ('__size', c_char * int(40)),
-    ('__align', c_long),
+    ("__data", struct___pthread_mutex_s),
+    ("__size", c_char * 40),
+    ("__align", c_long),
 ]
 
-pthread_mutex_t = union_anon_14# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/pthreadtypes.h: 72
+pthread_mutex_t = union_anon_14  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/pthreadtypes.h: 72
 
-uint8_t = __uint8_t# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/stdint-uintn.h: 24
+uint8_t = __uint8_t  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/stdint-uintn.h: 24
 
-uint16_t = __uint16_t# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/stdint-uintn.h: 25
+uint16_t = __uint16_t  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/stdint-uintn.h: 25
 
-uint32_t = __uint32_t# /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/stdint-uintn.h: 26
+uint32_t = __uint32_t  # /nix/store/6jk1d1m5j9d8gjyq79zqlgqqs9j3gcwn-glibc-2.38-44-dev/include/bits/stdint-uintn.h: 26
 
-Byte = c_ubyte# /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zconf.h: 393
+Byte = c_ubyte  # /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zconf.h: 393
 
-uInt = c_uint# /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zconf.h: 395
+uInt = c_uint  # /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zconf.h: 395
 
-uLong = c_ulong# /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zconf.h: 396
+uLong = c_ulong  # /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zconf.h: 396
 
-Bytef = Byte# /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zconf.h: 402
+Bytef = Byte  # /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zconf.h: 402
 
-voidpf = POINTER(None)# /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zconf.h: 411
+voidpf = POINTER(
+    None
+)  # /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zconf.h: 411
 
-alloc_func = CFUNCTYPE(UNCHECKED(voidpf), voidpf, uInt, uInt)# /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zlib.h: 81
+alloc_func = CFUNCTYPE(
+    UNCHECKED(voidpf), voidpf, uInt, uInt
+)  # /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zlib.h: 81
 
-free_func = CFUNCTYPE(UNCHECKED(None), voidpf, voidpf)# /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zlib.h: 82
+free_func = CFUNCTYPE(
+    UNCHECKED(None), voidpf, voidpf
+)  # /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zlib.h: 82
+
 
 # /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zlib.h: 84
 class struct_internal_state(Structure):
     pass
 
+
 # /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zlib.h: 106
 class struct_z_stream_s(Structure):
     pass
 
+
 struct_z_stream_s.__slots__ = [
-    'next_in',
-    'avail_in',
-    'total_in',
-    'next_out',
-    'avail_out',
-    'total_out',
-    'msg',
-    'state',
-    'zalloc',
-    'zfree',
-    'opaque',
-    'data_type',
-    'adler',
-    'reserved',
+    "next_in",
+    "avail_in",
+    "total_in",
+    "next_out",
+    "avail_out",
+    "total_out",
+    "msg",
+    "state",
+    "zalloc",
+    "zfree",
+    "opaque",
+    "data_type",
+    "adler",
+    "reserved",
 ]
 struct_z_stream_s._fields_ = [
-    ('next_in', POINTER(Bytef)),
-    ('avail_in', uInt),
-    ('total_in', uLong),
-    ('next_out', POINTER(Bytef)),
-    ('avail_out', uInt),
-    ('total_out', uLong),
-    ('msg', String),
-    ('state', POINTER(struct_internal_state)),
-    ('zalloc', alloc_func),
-    ('zfree', free_func),
-    ('opaque', voidpf),
-    ('data_type', c_int),
-    ('adler', uLong),
-    ('reserved', uLong),
+    ("next_in", POINTER(Bytef)),
+    ("avail_in", uInt),
+    ("total_in", uLong),
+    ("next_out", POINTER(Bytef)),
+    ("avail_out", uInt),
+    ("total_out", uLong),
+    ("msg", String),
+    ("state", POINTER(struct_internal_state)),
+    ("zalloc", alloc_func),
+    ("zfree", free_func),
+    ("opaque", voidpf),
+    ("data_type", c_int),
+    ("adler", uLong),
+    ("reserved", uLong),
 ]
 
-z_stream = struct_z_stream_s# /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zlib.h: 106
+z_stream = struct_z_stream_s  # /nix/store/6gbq1krsayq346c7lccn2lbpv74ljqwz-zlib-1.3.1-dev/include/zlib.h: 106
 
-rfbBool = c_int8# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 108
+rfbBool = c_int8  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 108
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 152
 class struct_anon_33(Structure):
     pass
 
+
 struct_anon_33.__slots__ = [
-    'x',
-    'y',
-    'w',
-    'h',
+    "x",
+    "y",
+    "w",
+    "h",
 ]
 struct_anon_33._fields_ = [
-    ('x', uint16_t),
-    ('y', uint16_t),
-    ('w', uint16_t),
-    ('h', uint16_t),
+    ("x", uint16_t),
+    ("y", uint16_t),
+    ("w", uint16_t),
+    ("h", uint16_t),
 ]
 
-rfbRectangle = struct_anon_33# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 152
+rfbRectangle = struct_anon_33  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 152
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 207
 class struct_anon_34(Structure):
     pass
 
+
 struct_anon_34.__slots__ = [
-    'bitsPerPixel',
-    'depth',
-    'bigEndian',
-    'trueColour',
-    'redMax',
-    'greenMax',
-    'blueMax',
-    'redShift',
-    'greenShift',
-    'blueShift',
-    'pad1',
-    'pad2',
+    "bitsPerPixel",
+    "depth",
+    "bigEndian",
+    "trueColour",
+    "redMax",
+    "greenMax",
+    "blueMax",
+    "redShift",
+    "greenShift",
+    "blueShift",
+    "pad1",
+    "pad2",
 ]
 struct_anon_34._fields_ = [
-    ('bitsPerPixel', uint8_t),
-    ('depth', uint8_t),
-    ('bigEndian', uint8_t),
-    ('trueColour', uint8_t),
-    ('redMax', uint16_t),
-    ('greenMax', uint16_t),
-    ('blueMax', uint16_t),
-    ('redShift', uint8_t),
-    ('greenShift', uint8_t),
-    ('blueShift', uint8_t),
-    ('pad1', uint8_t),
-    ('pad2', uint16_t),
+    ("bitsPerPixel", uint8_t),
+    ("depth", uint8_t),
+    ("bigEndian", uint8_t),
+    ("trueColour", uint8_t),
+    ("redMax", uint16_t),
+    ("greenMax", uint16_t),
+    ("blueMax", uint16_t),
+    ("redShift", uint8_t),
+    ("greenShift", uint8_t),
+    ("blueShift", uint8_t),
+    ("pad1", uint8_t),
+    ("pad2", uint16_t),
 ]
 
-rfbPixelFormat = struct_anon_34# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 207
+rfbPixelFormat = struct_anon_34  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 207
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 376
 class struct_anon_36(Structure):
     pass
 
+
 struct_anon_36.__slots__ = [
-    'framebufferWidth',
-    'framebufferHeight',
-    'format',
-    'nameLength',
+    "framebufferWidth",
+    "framebufferHeight",
+    "format",
+    "nameLength",
 ]
 struct_anon_36._fields_ = [
-    ('framebufferWidth', uint16_t),
-    ('framebufferHeight', uint16_t),
-    ('format', rfbPixelFormat),
-    ('nameLength', uint32_t),
+    ("framebufferWidth", uint16_t),
+    ("framebufferHeight", uint16_t),
+    ("format", rfbPixelFormat),
+    ("nameLength", uint32_t),
 ]
 
-rfbServerInitMsg = struct_anon_36# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 376
+rfbServerInitMsg = struct_anon_36  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 376
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 562
 class struct_anon_37(Structure):
     pass
 
+
 struct_anon_37.__slots__ = [
-    'type',
-    'pad',
-    'nRects',
+    "type",
+    "pad",
+    "nRects",
 ]
 struct_anon_37._fields_ = [
-    ('type', uint8_t),
-    ('pad', uint8_t),
-    ('nRects', uint16_t),
+    ("type", uint8_t),
+    ("pad", uint8_t),
+    ("nRects", uint16_t),
 ]
 
-rfbFramebufferUpdateMsg = struct_anon_37# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 562
+rfbFramebufferUpdateMsg = struct_anon_37  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 562
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 577
 class struct_anon_38(Structure):
     pass
 
+
 struct_anon_38.__slots__ = [
-    'r',
-    'encoding',
+    "r",
+    "encoding",
 ]
 struct_anon_38._fields_ = [
-    ('r', rfbRectangle),
-    ('encoding', uint32_t),
+    ("r", rfbRectangle),
+    ("encoding", uint32_t),
 ]
 
-rfbFramebufferUpdateRectHeader = struct_anon_38# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 577
+rfbFramebufferUpdateRectHeader = struct_anon_38  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 577
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 591
 class struct_anon_39(Structure):
     pass
 
+
 struct_anon_39.__slots__ = [
-    'client2server',
-    'server2client',
+    "client2server",
+    "server2client",
 ]
 struct_anon_39._fields_ = [
-    ('client2server', uint8_t * int(32)),
-    ('server2client', uint8_t * int(32)),
+    ("client2server", uint8_t * 32),
+    ("server2client", uint8_t * 32),
 ]
 
-rfbSupportedMessages = struct_anon_39# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 591
+rfbSupportedMessages = struct_anon_39  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 591
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 987
 class struct_anon_46(Structure):
     pass
 
+
 struct_anon_46.__slots__ = [
-    'type',
-    'pad',
-    'firstColour',
-    'nColours',
+    "type",
+    "pad",
+    "firstColour",
+    "nColours",
 ]
 struct_anon_46._fields_ = [
-    ('type', uint8_t),
-    ('pad', uint8_t),
-    ('firstColour', uint16_t),
-    ('nColours', uint16_t),
+    ("type", uint8_t),
+    ("pad", uint8_t),
+    ("firstColour", uint16_t),
+    ("nColours", uint16_t),
 ]
 
-rfbSetColourMapEntriesMsg = struct_anon_46# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 987
+rfbSetColourMapEntriesMsg = struct_anon_46  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 987
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 999
 class struct_anon_47(Structure):
     pass
 
+
 struct_anon_47.__slots__ = [
-    'type',
+    "type",
 ]
 struct_anon_47._fields_ = [
-    ('type', uint8_t),
+    ("type", uint8_t),
 ]
 
-rfbBellMsg = struct_anon_47# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 999
+rfbBellMsg = struct_anon_47  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 999
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1015
 class struct_anon_48(Structure):
     pass
 
+
 struct_anon_48.__slots__ = [
-    'type',
-    'pad1',
-    'pad2',
-    'length',
+    "type",
+    "pad1",
+    "pad2",
+    "length",
 ]
 struct_anon_48._fields_ = [
-    ('type', uint8_t),
-    ('pad1', uint8_t),
-    ('pad2', uint16_t),
-    ('length', uint32_t),
+    ("type", uint8_t),
+    ("pad1", uint8_t),
+    ("pad2", uint16_t),
+    ("length", uint32_t),
 ]
 
-rfbServerCutTextMsg = struct_anon_48# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1015
+rfbServerCutTextMsg = struct_anon_48  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1015
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1035
 class struct__rfbFileTransferMsg(Structure):
     pass
 
+
 struct__rfbFileTransferMsg.__slots__ = [
-    'type',
-    'contentType',
-    'contentParam',
-    'pad',
-    'size',
-    'length',
+    "type",
+    "contentType",
+    "contentParam",
+    "pad",
+    "size",
+    "length",
 ]
 struct__rfbFileTransferMsg._fields_ = [
-    ('type', uint8_t),
-    ('contentType', uint8_t),
-    ('contentParam', uint8_t),
-    ('pad', uint8_t),
-    ('size', uint32_t),
-    ('length', uint32_t),
+    ("type", uint8_t),
+    ("contentType", uint8_t),
+    ("contentParam", uint8_t),
+    ("pad", uint8_t),
+    ("size", uint32_t),
+    ("length", uint32_t),
 ]
 
-rfbFileTransferMsg = struct__rfbFileTransferMsg# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1035
+rfbFileTransferMsg = struct__rfbFileTransferMsg  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1035
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1108
 class struct__rfbTextChatMsg(Structure):
     pass
 
+
 struct__rfbTextChatMsg.__slots__ = [
-    'type',
-    'pad1',
-    'pad2',
-    'length',
+    "type",
+    "pad1",
+    "pad2",
+    "length",
 ]
 struct__rfbTextChatMsg._fields_ = [
-    ('type', uint8_t),
-    ('pad1', uint8_t),
-    ('pad2', uint16_t),
-    ('length', uint32_t),
+    ("type", uint8_t),
+    ("pad1", uint8_t),
+    ("pad2", uint16_t),
+    ("length", uint32_t),
 ]
 
-rfbTextChatMsg = struct__rfbTextChatMsg# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1108
+rfbTextChatMsg = struct__rfbTextChatMsg  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1108
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1144
 class struct_anon_49(Structure):
     pass
 
+
 struct_anon_49.__slots__ = [
-    'type',
-    'pad',
-    'version',
-    'code',
+    "type",
+    "pad",
+    "version",
+    "code",
 ]
 struct_anon_49._fields_ = [
-    ('type', uint8_t),
-    ('pad', uint8_t),
-    ('version', uint8_t),
-    ('code', uint8_t),
+    ("type", uint8_t),
+    ("pad", uint8_t),
+    ("version", uint8_t),
+    ("code", uint8_t),
 ]
 
-rfbXvpMsg = struct_anon_49# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1144
+rfbXvpMsg = struct_anon_49  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1144
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1169
 class struct_rfbExtDesktopSizeMsg(Structure):
     pass
 
+
 struct_rfbExtDesktopSizeMsg.__slots__ = [
-    'numberOfScreens',
-    'pad',
+    "numberOfScreens",
+    "pad",
 ]
 struct_rfbExtDesktopSizeMsg._fields_ = [
-    ('numberOfScreens', uint8_t),
-    ('pad', uint8_t * int(3)),
+    ("numberOfScreens", uint8_t),
+    ("pad", uint8_t * 3),
 ]
 
-rfbExtDesktopSizeMsg = struct_rfbExtDesktopSizeMsg# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1169
+rfbExtDesktopSizeMsg = struct_rfbExtDesktopSizeMsg  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1169
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1178
 class struct_rfbExtDesktopScreen(Structure):
     pass
 
+
 struct_rfbExtDesktopScreen.__slots__ = [
-    'id',
-    'x',
-    'y',
-    'width',
-    'height',
-    'flags',
+    "id",
+    "x",
+    "y",
+    "width",
+    "height",
+    "flags",
 ]
 struct_rfbExtDesktopScreen._fields_ = [
-    ('id', uint32_t),
-    ('x', uint16_t),
-    ('y', uint16_t),
-    ('width', uint16_t),
-    ('height', uint16_t),
-    ('flags', uint32_t),
+    ("id", uint32_t),
+    ("x", uint16_t),
+    ("y", uint16_t),
+    ("width", uint16_t),
+    ("height", uint16_t),
+    ("flags", uint32_t),
 ]
 
-rfbExtDesktopScreen = struct_rfbExtDesktopScreen# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1178
+rfbExtDesktopScreen = struct_rfbExtDesktopScreen  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1178
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1225
 class struct__rfbResizeFrameBufferMsg(Structure):
     pass
 
+
 struct__rfbResizeFrameBufferMsg.__slots__ = [
-    'type',
-    'pad1',
-    'framebufferWidth',
-    'framebufferHeigth',
+    "type",
+    "pad1",
+    "framebufferWidth",
+    "framebufferHeigth",
 ]
 struct__rfbResizeFrameBufferMsg._fields_ = [
-    ('type', uint8_t),
-    ('pad1', uint8_t),
-    ('framebufferWidth', uint16_t),
-    ('framebufferHeigth', uint16_t),
+    ("type", uint8_t),
+    ("pad1", uint8_t),
+    ("framebufferWidth", uint16_t),
+    ("framebufferHeigth", uint16_t),
 ]
 
-rfbResizeFrameBufferMsg = struct__rfbResizeFrameBufferMsg# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1225
+rfbResizeFrameBufferMsg = struct__rfbResizeFrameBufferMsg  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1225
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1247
 class struct_anon_50(Structure):
     pass
 
+
 struct_anon_50.__slots__ = [
-    'type',
-    'pad1',
-    'desktop_w',
-    'desktop_h',
-    'buffer_w',
-    'buffer_h',
-    'pad2',
+    "type",
+    "pad1",
+    "desktop_w",
+    "desktop_h",
+    "buffer_w",
+    "buffer_h",
+    "pad2",
 ]
 struct_anon_50._fields_ = [
-    ('type', uint8_t),
-    ('pad1', uint8_t),
-    ('desktop_w', uint16_t),
-    ('desktop_h', uint16_t),
-    ('buffer_w', uint16_t),
-    ('buffer_h', uint16_t),
-    ('pad2', uint16_t),
+    ("type", uint8_t),
+    ("pad1", uint8_t),
+    ("desktop_w", uint16_t),
+    ("desktop_h", uint16_t),
+    ("buffer_w", uint16_t),
+    ("buffer_h", uint16_t),
+    ("pad2", uint16_t),
 ]
 
-rfbPalmVNCReSizeFrameBufferMsg = struct_anon_50# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1247
+rfbPalmVNCReSizeFrameBufferMsg = struct_anon_50  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1247
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1270
 class union_anon_51(Union):
     pass
 
+
 union_anon_51.__slots__ = [
-    'type',
-    'fu',
-    'scme',
-    'b',
-    'sct',
-    'rsfb',
-    'prsfb',
-    'ft',
-    'tc',
-    'xvp',
-    'eds',
+    "type",
+    "fu",
+    "scme",
+    "b",
+    "sct",
+    "rsfb",
+    "prsfb",
+    "ft",
+    "tc",
+    "xvp",
+    "eds",
 ]
 union_anon_51._fields_ = [
-    ('type', uint8_t),
-    ('fu', rfbFramebufferUpdateMsg),
-    ('scme', rfbSetColourMapEntriesMsg),
-    ('b', rfbBellMsg),
-    ('sct', rfbServerCutTextMsg),
-    ('rsfb', rfbResizeFrameBufferMsg),
-    ('prsfb', rfbPalmVNCReSizeFrameBufferMsg),
-    ('ft', rfbFileTransferMsg),
-    ('tc', rfbTextChatMsg),
-    ('xvp', rfbXvpMsg),
-    ('eds', rfbExtDesktopSizeMsg),
+    ("type", uint8_t),
+    ("fu", rfbFramebufferUpdateMsg),
+    ("scme", rfbSetColourMapEntriesMsg),
+    ("b", rfbBellMsg),
+    ("sct", rfbServerCutTextMsg),
+    ("rsfb", rfbResizeFrameBufferMsg),
+    ("prsfb", rfbPalmVNCReSizeFrameBufferMsg),
+    ("ft", rfbFileTransferMsg),
+    ("tc", rfbTextChatMsg),
+    ("xvp", rfbXvpMsg),
+    ("eds", rfbExtDesktopSizeMsg),
 ]
 
-rfbServerToClientMsg = union_anon_51# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1270
+rfbServerToClientMsg = union_anon_51  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbproto.h: 1270
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 109
 class struct_anon_75(Structure):
     pass
 
+
 struct_anon_75.__slots__ = [
-    'file',
-    'tv',
-    'readTimestamp',
-    'doNotSleep',
+    "file",
+    "tv",
+    "readTimestamp",
+    "doNotSleep",
 ]
 struct_anon_75._fields_ = [
-    ('file', POINTER(FILE)),
-    ('tv', struct_timeval),
-    ('readTimestamp', rfbBool),
-    ('doNotSleep', rfbBool),
+    ("file", POINTER(FILE)),
+    ("tv", struct_timeval),
+    ("readTimestamp", rfbBool),
+    ("doNotSleep", rfbBool),
 ]
 
-rfbVNCRec = struct_anon_75# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 109
+rfbVNCRec = struct_anon_75  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 109
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 113
 class struct_rfbClientData(Structure):
     pass
 
+
 struct_rfbClientData.__slots__ = [
-    'tag',
-    'data',
-    'next',
+    "tag",
+    "data",
+    "next",
 ]
 struct_rfbClientData._fields_ = [
-    ('tag', POINTER(None)),
-    ('data', POINTER(None)),
-    ('next', POINTER(struct_rfbClientData)),
+    ("tag", POINTER(None)),
+    ("data", POINTER(None)),
+    ("next", POINTER(struct_rfbClientData)),
 ]
 
-rfbClientData = struct_rfbClientData# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 117
+rfbClientData = struct_rfbClientData  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 117
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 139
 class struct_anon_76(Structure):
     pass
 
+
 struct_anon_76.__slots__ = [
-    'shareDesktop',
-    'viewOnly',
-    'encodingsString',
-    'useBGR233',
-    'nColours',
-    'forceOwnCmap',
-    'forceTrueColour',
-    'requestedDepth',
-    'compressLevel',
-    'qualityLevel',
-    'enableJPEG',
-    'useRemoteCursor',
-    'palmVNC',
-    'scaleSetting',
+    "shareDesktop",
+    "viewOnly",
+    "encodingsString",
+    "useBGR233",
+    "nColours",
+    "forceOwnCmap",
+    "forceTrueColour",
+    "requestedDepth",
+    "compressLevel",
+    "qualityLevel",
+    "enableJPEG",
+    "useRemoteCursor",
+    "palmVNC",
+    "scaleSetting",
 ]
 struct_anon_76._fields_ = [
-    ('shareDesktop', rfbBool),
-    ('viewOnly', rfbBool),
-    ('encodingsString', String),
-    ('useBGR233', rfbBool),
-    ('nColours', c_int),
-    ('forceOwnCmap', rfbBool),
-    ('forceTrueColour', rfbBool),
-    ('requestedDepth', c_int),
-    ('compressLevel', c_int),
-    ('qualityLevel', c_int),
-    ('enableJPEG', rfbBool),
-    ('useRemoteCursor', rfbBool),
-    ('palmVNC', rfbBool),
-    ('scaleSetting', c_int),
+    ("shareDesktop", rfbBool),
+    ("viewOnly", rfbBool),
+    ("encodingsString", String),
+    ("useBGR233", rfbBool),
+    ("nColours", c_int),
+    ("forceOwnCmap", rfbBool),
+    ("forceTrueColour", rfbBool),
+    ("requestedDepth", c_int),
+    ("compressLevel", c_int),
+    ("qualityLevel", c_int),
+    ("enableJPEG", rfbBool),
+    ("useRemoteCursor", rfbBool),
+    ("palmVNC", rfbBool),
+    ("scaleSetting", c_int),
 ]
 
-AppData = struct_anon_76# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 139
+AppData = struct_anon_76  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 139
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 145
 class struct_anon_77(Structure):
     pass
 
+
 struct_anon_77.__slots__ = [
-    'x509CACertFile',
-    'x509CACrlFile',
-    'x509ClientCertFile',
-    'x509ClientKeyFile',
-    'x509CrlVerifyMode',
+    "x509CACertFile",
+    "x509CACrlFile",
+    "x509ClientCertFile",
+    "x509ClientKeyFile",
+    "x509CrlVerifyMode",
 ]
 struct_anon_77._fields_ = [
-    ('x509CACertFile', String),
-    ('x509CACrlFile', String),
-    ('x509ClientCertFile', String),
-    ('x509ClientKeyFile', String),
-    ('x509CrlVerifyMode', uint8_t),
+    ("x509CACertFile", String),
+    ("x509CACrlFile", String),
+    ("x509ClientCertFile", String),
+    ("x509ClientKeyFile", String),
+    ("x509CrlVerifyMode", uint8_t),
 ]
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 154
 class struct_anon_78(Structure):
     pass
 
+
 struct_anon_78.__slots__ = [
-    'username',
-    'password',
+    "username",
+    "password",
 ]
 struct_anon_78._fields_ = [
-    ('username', String),
-    ('password', String),
+    ("username", String),
+    ("password", String),
 ]
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 159
 class union__rfbCredential(Union):
     pass
 
+
 union__rfbCredential.__slots__ = [
-    'x509Credential',
-    'userCredential',
+    "x509Credential",
+    "userCredential",
 ]
 union__rfbCredential._fields_ = [
-    ('x509Credential', struct_anon_77),
-    ('userCredential', struct_anon_78),
+    ("x509Credential", struct_anon_77),
+    ("userCredential", struct_anon_78),
 ]
 
-rfbCredential = union__rfbCredential# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 159
+rfbCredential = union__rfbCredential  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 159
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 241
 class struct__rfbClient(Structure):
     pass
 
-HandleTextChatProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient), c_int, String)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 183
 
-HandleXvpMsgProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient), uint8_t, uint8_t)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 193
+HandleTextChatProc = CFUNCTYPE(
+    UNCHECKED(None), POINTER(struct__rfbClient), c_int, String
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 183
 
-HandleKeyboardLedStateProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient), c_int, c_int)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 194
+HandleXvpMsgProc = CFUNCTYPE(
+    UNCHECKED(None), POINTER(struct__rfbClient), uint8_t, uint8_t
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 193
 
-HandleCursorPosProc = CFUNCTYPE(UNCHECKED(rfbBool), POINTER(struct__rfbClient), c_int, c_int)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 195
+HandleKeyboardLedStateProc = CFUNCTYPE(
+    UNCHECKED(None), POINTER(struct__rfbClient), c_int, c_int
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 194
 
-SoftCursorLockAreaProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient), c_int, c_int, c_int, c_int)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 196
+HandleCursorPosProc = CFUNCTYPE(
+    UNCHECKED(rfbBool), POINTER(struct__rfbClient), c_int, c_int
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 195
 
-SoftCursorUnlockScreenProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient))# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 197
+SoftCursorLockAreaProc = CFUNCTYPE(
+    UNCHECKED(None), POINTER(struct__rfbClient), c_int, c_int, c_int, c_int
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 196
 
-GotFrameBufferUpdateProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient), c_int, c_int, c_int, c_int)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 208
+SoftCursorUnlockScreenProc = CFUNCTYPE(
+    UNCHECKED(None), POINTER(struct__rfbClient)
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 197
 
-FinishedFrameBufferUpdateProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient))# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 215
+GotFrameBufferUpdateProc = CFUNCTYPE(
+    UNCHECKED(None), POINTER(struct__rfbClient), c_int, c_int, c_int, c_int
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 208
 
-GetPasswordProc = CFUNCTYPE(UNCHECKED(String), POINTER(struct__rfbClient))# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 216
+FinishedFrameBufferUpdateProc = CFUNCTYPE(
+    UNCHECKED(None), POINTER(struct__rfbClient)
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 215
 
-GetCredentialProc = CFUNCTYPE(UNCHECKED(POINTER(rfbCredential)), POINTER(struct__rfbClient), c_int)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 217
+GetPasswordProc = CFUNCTYPE(
+    UNCHECKED(String), POINTER(struct__rfbClient)
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 216
 
-MallocFrameBufferProc = CFUNCTYPE(UNCHECKED(rfbBool), POINTER(struct__rfbClient))# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 218
+GetCredentialProc = CFUNCTYPE(
+    UNCHECKED(POINTER(rfbCredential)), POINTER(struct__rfbClient), c_int
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 217
 
-GotXCutTextProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient), String, c_int)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 219
+MallocFrameBufferProc = CFUNCTYPE(
+    UNCHECKED(rfbBool), POINTER(struct__rfbClient)
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 218
 
-BellProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient))# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 220
+GotXCutTextProc = CFUNCTYPE(
+    UNCHECKED(None), POINTER(struct__rfbClient), String, c_int
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 219
 
-GotCursorShapeProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient), c_int, c_int, c_int, c_int, c_int)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 228
+BellProc = CFUNCTYPE(
+    UNCHECKED(None), POINTER(struct__rfbClient)
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 220
 
-GotCopyRectProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient), c_int, c_int, c_int, c_int, c_int, c_int)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 229
+GotCursorShapeProc = CFUNCTYPE(
+    UNCHECKED(None), POINTER(struct__rfbClient), c_int, c_int, c_int, c_int, c_int
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 228
 
-GotFillRectProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient), c_int, c_int, c_int, c_int, uint32_t)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 230
+GotCopyRectProc = CFUNCTYPE(
+    UNCHECKED(None),
+    POINTER(struct__rfbClient),
+    c_int,
+    c_int,
+    c_int,
+    c_int,
+    c_int,
+    c_int,
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 229
 
-GotBitmapProc = CFUNCTYPE(UNCHECKED(None), POINTER(struct__rfbClient), POINTER(uint8_t), c_int, c_int, c_int, c_int)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 231
+GotFillRectProc = CFUNCTYPE(
+    UNCHECKED(None), POINTER(struct__rfbClient), c_int, c_int, c_int, c_int, uint32_t
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 230
 
-GotJpegProc = CFUNCTYPE(UNCHECKED(rfbBool), POINTER(struct__rfbClient), POINTER(uint8_t), c_int, c_int, c_int, c_int, c_int)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 232
+GotBitmapProc = CFUNCTYPE(
+    UNCHECKED(None),
+    POINTER(struct__rfbClient),
+    POINTER(uint8_t),
+    c_int,
+    c_int,
+    c_int,
+    c_int,
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 231
 
-LockWriteToTLSProc = CFUNCTYPE(UNCHECKED(rfbBool), POINTER(struct__rfbClient))# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 233
+GotJpegProc = CFUNCTYPE(
+    UNCHECKED(rfbBool),
+    POINTER(struct__rfbClient),
+    POINTER(uint8_t),
+    c_int,
+    c_int,
+    c_int,
+    c_int,
+    c_int,
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 232
 
-UnlockWriteToTLSProc = CFUNCTYPE(UNCHECKED(rfbBool), POINTER(struct__rfbClient))# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 234
+LockWriteToTLSProc = CFUNCTYPE(
+    UNCHECKED(rfbBool), POINTER(struct__rfbClient)
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 233
+
+UnlockWriteToTLSProc = CFUNCTYPE(
+    UNCHECKED(rfbBool), POINTER(struct__rfbClient)
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 234
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 255
 class struct_anon_79(Structure):
     pass
 
+
 struct_anon_79.__slots__ = [
-    'x',
-    'y',
-    'w',
-    'h',
+    "x",
+    "y",
+    "w",
+    "h",
 ]
 struct_anon_79._fields_ = [
-    ('x', c_int),
-    ('y', c_int),
-    ('w', c_int),
-    ('h', c_int),
+    ("x", c_int),
+    ("y", c_int),
+    ("w", c_int),
+    ("h", c_int),
 ]
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 325
 class struct_jpeg_source_mgr(Structure):
     pass
 
+
 struct__rfbClient.__slots__ = [
-    'frameBuffer',
-    'width',
-    'height',
-    'endianTest',
-    'appData',
-    'programName',
-    'serverHost',
-    'serverPort',
-    'listenSpecified',
-    'listenPort',
-    'flashPort',
-    'updateRect',
-    'buffer',
-    'sock',
-    'canUseCoRRE',
-    'canUseHextile',
-    'desktopName',
-    'format',
-    'si',
-    'buf',
-    'bufoutptr',
-    'buffered',
-    'ultra_buffer_size',
-    'ultra_buffer',
-    'raw_buffer_size',
-    'raw_buffer',
-    'decompStream',
-    'decompStreamInited',
-    'zlib_buffer',
-    'zlibStream',
-    'zlibStreamActive',
-    'cutZeros',
-    'rectWidth',
-    'rectColors',
-    'tightPalette',
-    'tightPrevRow',
-    'jpegError',
-    'jpegSrcManager',
-    'jpegBufferPtr',
-    'jpegBufferLen',
-    'rcSource',
-    'rcMask',
-    'clientData',
-    'vncRec',
-    'KeyboardLedStateEnabled',
-    'CurrentKeyboardLedState',
-    'canHandleNewFBSize',
-    'HandleTextChat',
-    'HandleKeyboardLedState',
-    'HandleCursorPos',
-    'SoftCursorLockArea',
-    'SoftCursorUnlockScreen',
-    'GotFrameBufferUpdate',
-    'GetPassword',
-    'MallocFrameBuffer',
-    'GotXCutText',
-    'Bell',
-    'GotCursorShape',
-    'GotCopyRect',
-    'supportedMessages',
-    'major',
-    'minor',
-    'authScheme',
-    'subAuthScheme',
-    'tlsSession',
-    'GetCredential',
-    'clientAuthSchemes',
-    'destHost',
-    'destPort',
-    'QoS_DSCP',
-    'HandleXvpMsg',
-    'listenSock',
-    'FinishedFrameBufferUpdate',
-    'listenAddress',
-    'listen6Sock',
-    'listen6Address',
-    'listen6Port',
-    'outputWindow',
-    'LockWriteToTLS',
-    'UnlockWriteToTLS',
-    'GotFillRect',
-    'GotBitmap',
-    'GotJpeg',
-    'tjhnd',
-    'connectTimeout',
-    'readTimeout',
-    'tlsRwMutex',
-    'requestedResize',
-    'screen',
+    "frameBuffer",
+    "width",
+    "height",
+    "endianTest",
+    "appData",
+    "programName",
+    "serverHost",
+    "serverPort",
+    "listenSpecified",
+    "listenPort",
+    "flashPort",
+    "updateRect",
+    "buffer",
+    "sock",
+    "canUseCoRRE",
+    "canUseHextile",
+    "desktopName",
+    "format",
+    "si",
+    "buf",
+    "bufoutptr",
+    "buffered",
+    "ultra_buffer_size",
+    "ultra_buffer",
+    "raw_buffer_size",
+    "raw_buffer",
+    "decompStream",
+    "decompStreamInited",
+    "zlib_buffer",
+    "zlibStream",
+    "zlibStreamActive",
+    "cutZeros",
+    "rectWidth",
+    "rectColors",
+    "tightPalette",
+    "tightPrevRow",
+    "jpegError",
+    "jpegSrcManager",
+    "jpegBufferPtr",
+    "jpegBufferLen",
+    "rcSource",
+    "rcMask",
+    "clientData",
+    "vncRec",
+    "KeyboardLedStateEnabled",
+    "CurrentKeyboardLedState",
+    "canHandleNewFBSize",
+    "HandleTextChat",
+    "HandleKeyboardLedState",
+    "HandleCursorPos",
+    "SoftCursorLockArea",
+    "SoftCursorUnlockScreen",
+    "GotFrameBufferUpdate",
+    "GetPassword",
+    "MallocFrameBuffer",
+    "GotXCutText",
+    "Bell",
+    "GotCursorShape",
+    "GotCopyRect",
+    "supportedMessages",
+    "major",
+    "minor",
+    "authScheme",
+    "subAuthScheme",
+    "tlsSession",
+    "GetCredential",
+    "clientAuthSchemes",
+    "destHost",
+    "destPort",
+    "QoS_DSCP",
+    "HandleXvpMsg",
+    "listenSock",
+    "FinishedFrameBufferUpdate",
+    "listenAddress",
+    "listen6Sock",
+    "listen6Address",
+    "listen6Port",
+    "outputWindow",
+    "LockWriteToTLS",
+    "UnlockWriteToTLS",
+    "GotFillRect",
+    "GotBitmap",
+    "GotJpeg",
+    "tjhnd",
+    "connectTimeout",
+    "readTimeout",
+    "tlsRwMutex",
+    "requestedResize",
+    "screen",
 ]
 struct__rfbClient._fields_ = [
-    ('frameBuffer', POINTER(uint8_t)),
-    ('width', c_int),
-    ('height', c_int),
-    ('endianTest', c_int),
-    ('appData', AppData),
-    ('programName', String),
-    ('serverHost', String),
-    ('serverPort', c_int),
-    ('listenSpecified', rfbBool),
-    ('listenPort', c_int),
-    ('flashPort', c_int),
-    ('updateRect', struct_anon_79),
-    ('buffer', c_char * int((640 * 480))),
-    ('sock', c_int),
-    ('canUseCoRRE', rfbBool),
-    ('canUseHextile', rfbBool),
-    ('desktopName', String),
-    ('format', rfbPixelFormat),
-    ('si', rfbServerInitMsg),
-    ('buf', c_char * int(8192)),
-    ('bufoutptr', String),
-    ('buffered', c_uint),
-    ('ultra_buffer_size', c_int),
-    ('ultra_buffer', String),
-    ('raw_buffer_size', c_int),
-    ('raw_buffer', String),
-    ('decompStream', z_stream),
-    ('decompStreamInited', rfbBool),
-    ('zlib_buffer', c_char * int(30000)),
-    ('zlibStream', z_stream * int(4)),
-    ('zlibStreamActive', rfbBool * int(4)),
-    ('cutZeros', rfbBool),
-    ('rectWidth', c_int),
-    ('rectColors', c_int),
-    ('tightPalette', c_char * int((256 * 4))),
-    ('tightPrevRow', uint8_t * int(((2048 * 3) * sizeof(uint16_t)))),
-    ('jpegError', rfbBool),
-    ('jpegSrcManager', POINTER(struct_jpeg_source_mgr)),
-    ('jpegBufferPtr', POINTER(None)),
-    ('jpegBufferLen', c_size_t),
-    ('rcSource', POINTER(uint8_t)),
-    ('rcMask', POINTER(uint8_t)),
-    ('clientData', POINTER(rfbClientData)),
-    ('vncRec', POINTER(rfbVNCRec)),
-    ('KeyboardLedStateEnabled', c_int),
-    ('CurrentKeyboardLedState', c_int),
-    ('canHandleNewFBSize', c_int),
-    ('HandleTextChat', HandleTextChatProc),
-    ('HandleKeyboardLedState', HandleKeyboardLedStateProc),
-    ('HandleCursorPos', HandleCursorPosProc),
-    ('SoftCursorLockArea', SoftCursorLockAreaProc),
-    ('SoftCursorUnlockScreen', SoftCursorUnlockScreenProc),
-    ('GotFrameBufferUpdate', GotFrameBufferUpdateProc),
-    ('GetPassword', GetPasswordProc),
-    ('MallocFrameBuffer', MallocFrameBufferProc),
-    ('GotXCutText', GotXCutTextProc),
-    ('Bell', BellProc),
-    ('GotCursorShape', GotCursorShapeProc),
-    ('GotCopyRect', GotCopyRectProc),
-    ('supportedMessages', rfbSupportedMessages),
-    ('major', c_int),
-    ('minor', c_int),
-    ('authScheme', uint32_t),
-    ('subAuthScheme', uint32_t),
-    ('tlsSession', POINTER(None)),
-    ('GetCredential', GetCredentialProc),
-    ('clientAuthSchemes', POINTER(uint32_t)),
-    ('destHost', String),
-    ('destPort', c_int),
-    ('QoS_DSCP', c_int),
-    ('HandleXvpMsg', HandleXvpMsgProc),
-    ('listenSock', c_int),
-    ('FinishedFrameBufferUpdate', FinishedFrameBufferUpdateProc),
-    ('listenAddress', String),
-    ('listen6Sock', c_int),
-    ('listen6Address', String),
-    ('listen6Port', c_int),
-    ('outputWindow', c_ulong),
-    ('LockWriteToTLS', LockWriteToTLSProc),
-    ('UnlockWriteToTLS', UnlockWriteToTLSProc),
-    ('GotFillRect', GotFillRectProc),
-    ('GotBitmap', GotBitmapProc),
-    ('GotJpeg', GotJpegProc),
-    ('tjhnd', POINTER(None)),
-    ('connectTimeout', c_uint),
-    ('readTimeout', c_uint),
-    ('tlsRwMutex', pthread_mutex_t),
-    ('requestedResize', rfbBool),
-    ('screen', rfbExtDesktopScreen),
+    ("frameBuffer", POINTER(uint8_t)),
+    ("width", c_int),
+    ("height", c_int),
+    ("endianTest", c_int),
+    ("appData", AppData),
+    ("programName", String),
+    ("serverHost", String),
+    ("serverPort", c_int),
+    ("listenSpecified", rfbBool),
+    ("listenPort", c_int),
+    ("flashPort", c_int),
+    ("updateRect", struct_anon_79),
+    ("buffer", c_char * int(640 * 480)),
+    ("sock", c_int),
+    ("canUseCoRRE", rfbBool),
+    ("canUseHextile", rfbBool),
+    ("desktopName", String),
+    ("format", rfbPixelFormat),
+    ("si", rfbServerInitMsg),
+    ("buf", c_char * 8192),
+    ("bufoutptr", String),
+    ("buffered", c_uint),
+    ("ultra_buffer_size", c_int),
+    ("ultra_buffer", String),
+    ("raw_buffer_size", c_int),
+    ("raw_buffer", String),
+    ("decompStream", z_stream),
+    ("decompStreamInited", rfbBool),
+    ("zlib_buffer", c_char * 30000),
+    ("zlibStream", z_stream * 4),
+    ("zlibStreamActive", rfbBool * 4),
+    ("cutZeros", rfbBool),
+    ("rectWidth", c_int),
+    ("rectColors", c_int),
+    ("tightPalette", c_char * int(256 * 4)),
+    ("tightPrevRow", uint8_t * int((2048 * 3) * sizeof(uint16_t))),
+    ("jpegError", rfbBool),
+    ("jpegSrcManager", POINTER(struct_jpeg_source_mgr)),
+    ("jpegBufferPtr", POINTER(None)),
+    ("jpegBufferLen", c_size_t),
+    ("rcSource", POINTER(uint8_t)),
+    ("rcMask", POINTER(uint8_t)),
+    ("clientData", POINTER(rfbClientData)),
+    ("vncRec", POINTER(rfbVNCRec)),
+    ("KeyboardLedStateEnabled", c_int),
+    ("CurrentKeyboardLedState", c_int),
+    ("canHandleNewFBSize", c_int),
+    ("HandleTextChat", HandleTextChatProc),
+    ("HandleKeyboardLedState", HandleKeyboardLedStateProc),
+    ("HandleCursorPos", HandleCursorPosProc),
+    ("SoftCursorLockArea", SoftCursorLockAreaProc),
+    ("SoftCursorUnlockScreen", SoftCursorUnlockScreenProc),
+    ("GotFrameBufferUpdate", GotFrameBufferUpdateProc),
+    ("GetPassword", GetPasswordProc),
+    ("MallocFrameBuffer", MallocFrameBufferProc),
+    ("GotXCutText", GotXCutTextProc),
+    ("Bell", BellProc),
+    ("GotCursorShape", GotCursorShapeProc),
+    ("GotCopyRect", GotCopyRectProc),
+    ("supportedMessages", rfbSupportedMessages),
+    ("major", c_int),
+    ("minor", c_int),
+    ("authScheme", uint32_t),
+    ("subAuthScheme", uint32_t),
+    ("tlsSession", POINTER(None)),
+    ("GetCredential", GetCredentialProc),
+    ("clientAuthSchemes", POINTER(uint32_t)),
+    ("destHost", String),
+    ("destPort", c_int),
+    ("QoS_DSCP", c_int),
+    ("HandleXvpMsg", HandleXvpMsgProc),
+    ("listenSock", c_int),
+    ("FinishedFrameBufferUpdate", FinishedFrameBufferUpdateProc),
+    ("listenAddress", String),
+    ("listen6Sock", c_int),
+    ("listen6Address", String),
+    ("listen6Port", c_int),
+    ("outputWindow", c_ulong),
+    ("LockWriteToTLS", LockWriteToTLSProc),
+    ("UnlockWriteToTLS", UnlockWriteToTLSProc),
+    ("GotFillRect", GotFillRectProc),
+    ("GotBitmap", GotBitmapProc),
+    ("GotJpeg", GotJpegProc),
+    ("tjhnd", POINTER(None)),
+    ("connectTimeout", c_uint),
+    ("readTimeout", c_uint),
+    ("tlsRwMutex", pthread_mutex_t),
+    ("requestedResize", rfbBool),
+    ("screen", rfbExtDesktopScreen),
 ]
 
-rfbClient = struct__rfbClient# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 480
+rfbClient = struct__rfbClient  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 480
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 489
 if _libs["libvncclient.so"].has("HandleCursorShape", "cdecl"):
     HandleCursorShape = _libs["libvncclient.so"].get("HandleCursorShape", "cdecl")
-    HandleCursorShape.argtypes = [POINTER(rfbClient), c_int, c_int, c_int, c_int, uint32_t]
+    HandleCursorShape.argtypes = [
+        POINTER(rfbClient),
+        c_int,
+        c_int,
+        c_int,
+        c_int,
+        uint32_t,
+    ]
     HandleCursorShape.restype = rfbBool
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 493
 if _libs["libvncclient.so"].has("listenForIncomingConnections", "cdecl"):
-    listenForIncomingConnections = _libs["libvncclient.so"].get("listenForIncomingConnections", "cdecl")
+    listenForIncomingConnections = _libs["libvncclient.so"].get(
+        "listenForIncomingConnections", "cdecl"
+    )
     listenForIncomingConnections.argtypes = [POINTER(rfbClient)]
     listenForIncomingConnections.restype = None
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 494
 if _libs["libvncclient.so"].has("listenForIncomingConnectionsNoFork", "cdecl"):
-    listenForIncomingConnectionsNoFork = _libs["libvncclient.so"].get("listenForIncomingConnectionsNoFork", "cdecl")
+    listenForIncomingConnectionsNoFork = _libs["libvncclient.so"].get(
+        "listenForIncomingConnectionsNoFork", "cdecl"
+    )
     listenForIncomingConnectionsNoFork.argtypes = [POINTER(rfbClient), c_int]
     listenForIncomingConnectionsNoFork.restype = c_int
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 498
 try:
-    rfbEnableClientLogging = (rfbBool).in_dll(_libs["libvncclient.so"], "rfbEnableClientLogging")
+    rfbEnableClientLogging = (rfbBool).in_dll(
+        _libs["libvncclient.so"], "rfbEnableClientLogging"
+    )
 except:
     pass
 
-rfbClientLogProc = CFUNCTYPE(UNCHECKED(None), String)# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 499
+rfbClientLogProc = CFUNCTYPE(
+    UNCHECKED(None), String
+)  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 499
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 500
 try:
@@ -1875,26 +2030,41 @@ if _libs["libvncclient.so"].has("SetClientAuthSchemes", "cdecl"):
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 504
 if _libs["libvncclient.so"].has("InitialiseRFBConnection", "cdecl"):
-    InitialiseRFBConnection = _libs["libvncclient.so"].get("InitialiseRFBConnection", "cdecl")
+    InitialiseRFBConnection = _libs["libvncclient.so"].get(
+        "InitialiseRFBConnection", "cdecl"
+    )
     InitialiseRFBConnection.argtypes = [POINTER(rfbClient)]
     InitialiseRFBConnection.restype = rfbBool
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 522
 if _libs["libvncclient.so"].has("SetFormatAndEncodings", "cdecl"):
-    SetFormatAndEncodings = _libs["libvncclient.so"].get("SetFormatAndEncodings", "cdecl")
+    SetFormatAndEncodings = _libs["libvncclient.so"].get(
+        "SetFormatAndEncodings", "cdecl"
+    )
     SetFormatAndEncodings.argtypes = [POINTER(rfbClient)]
     SetFormatAndEncodings.restype = rfbBool
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 523
 if _libs["libvncclient.so"].has("SendIncrementalFramebufferUpdateRequest", "cdecl"):
-    SendIncrementalFramebufferUpdateRequest = _libs["libvncclient.so"].get("SendIncrementalFramebufferUpdateRequest", "cdecl")
+    SendIncrementalFramebufferUpdateRequest = _libs["libvncclient.so"].get(
+        "SendIncrementalFramebufferUpdateRequest", "cdecl"
+    )
     SendIncrementalFramebufferUpdateRequest.argtypes = [POINTER(rfbClient)]
     SendIncrementalFramebufferUpdateRequest.restype = rfbBool
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 544
 if _libs["libvncclient.so"].has("SendFramebufferUpdateRequest", "cdecl"):
-    SendFramebufferUpdateRequest = _libs["libvncclient.so"].get("SendFramebufferUpdateRequest", "cdecl")
-    SendFramebufferUpdateRequest.argtypes = [POINTER(rfbClient), c_int, c_int, c_int, c_int, rfbBool]
+    SendFramebufferUpdateRequest = _libs["libvncclient.so"].get(
+        "SendFramebufferUpdateRequest", "cdecl"
+    )
+    SendFramebufferUpdateRequest.argtypes = [
+        POINTER(rfbClient),
+        c_int,
+        c_int,
+        c_int,
+        c_int,
+        rfbBool,
+    ]
     SendFramebufferUpdateRequest.restype = rfbBool
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 547
@@ -1935,7 +2105,9 @@ if _libs["libvncclient.so"].has("SendClientCutText", "cdecl"):
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 621
 if _libs["libvncclient.so"].has("HandleRFBServerMessage", "cdecl"):
-    HandleRFBServerMessage = _libs["libvncclient.so"].get("HandleRFBServerMessage", "cdecl")
+    HandleRFBServerMessage = _libs["libvncclient.so"].get(
+        "HandleRFBServerMessage", "cdecl"
+    )
     HandleRFBServerMessage.argtypes = [POINTER(rfbClient)]
     HandleRFBServerMessage.restype = rfbBool
 
@@ -1983,61 +2155,90 @@ if _libs["libvncclient.so"].has("PrintPixelFormat", "cdecl"):
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 648
 if _libs["libvncclient.so"].has("SupportsClient2Server", "cdecl"):
-    SupportsClient2Server = _libs["libvncclient.so"].get("SupportsClient2Server", "cdecl")
+    SupportsClient2Server = _libs["libvncclient.so"].get(
+        "SupportsClient2Server", "cdecl"
+    )
     SupportsClient2Server.argtypes = [POINTER(rfbClient), c_int]
     SupportsClient2Server.restype = rfbBool
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 649
 if _libs["libvncclient.so"].has("SupportsServer2Client", "cdecl"):
-    SupportsServer2Client = _libs["libvncclient.so"].get("SupportsServer2Client", "cdecl")
+    SupportsServer2Client = _libs["libvncclient.so"].get(
+        "SupportsServer2Client", "cdecl"
+    )
     SupportsServer2Client.argtypes = [POINTER(rfbClient), c_int]
     SupportsServer2Client.restype = rfbBool
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 666
 if _libs["libvncclient.so"].has("rfbClientSetClientData", "cdecl"):
-    rfbClientSetClientData = _libs["libvncclient.so"].get("rfbClientSetClientData", "cdecl")
+    rfbClientSetClientData = _libs["libvncclient.so"].get(
+        "rfbClientSetClientData", "cdecl"
+    )
     rfbClientSetClientData.argtypes = [POINTER(rfbClient), POINTER(None), POINTER(None)]
     rfbClientSetClientData.restype = None
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 675
 if _libs["libvncclient.so"].has("rfbClientGetClientData", "cdecl"):
-    rfbClientGetClientData = _libs["libvncclient.so"].get("rfbClientGetClientData", "cdecl")
+    rfbClientGetClientData = _libs["libvncclient.so"].get(
+        "rfbClientGetClientData", "cdecl"
+    )
     rfbClientGetClientData.argtypes = [POINTER(rfbClient), POINTER(None)]
     rfbClientGetClientData.restype = POINTER(c_ubyte)
-    rfbClientGetClientData.errcheck = lambda v,*a : cast(v, c_void_p)
+    rfbClientGetClientData.errcheck = lambda v, *a: cast(v, c_void_p)
+
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 679
 class struct__rfbClientProtocolExtension(Structure):
     pass
 
+
 struct__rfbClientProtocolExtension.__slots__ = [
-    'encodings',
-    'handleEncoding',
-    'handleMessage',
-    'next',
-    'securityTypes',
-    'handleAuthentication',
+    "encodings",
+    "handleEncoding",
+    "handleMessage",
+    "next",
+    "securityTypes",
+    "handleAuthentication",
 ]
 struct__rfbClientProtocolExtension._fields_ = [
-    ('encodings', POINTER(c_int)),
-    ('handleEncoding', CFUNCTYPE(UNCHECKED(rfbBool), POINTER(rfbClient), POINTER(rfbFramebufferUpdateRectHeader))),
-    ('handleMessage', CFUNCTYPE(UNCHECKED(rfbBool), POINTER(rfbClient), POINTER(rfbServerToClientMsg))),
-    ('next', POINTER(struct__rfbClientProtocolExtension)),
-    ('securityTypes', POINTER(uint32_t)),
-    ('handleAuthentication', CFUNCTYPE(UNCHECKED(rfbBool), POINTER(rfbClient), uint32_t)),
+    ("encodings", POINTER(c_int)),
+    (
+        "handleEncoding",
+        CFUNCTYPE(
+            UNCHECKED(rfbBool),
+            POINTER(rfbClient),
+            POINTER(rfbFramebufferUpdateRectHeader),
+        ),
+    ),
+    (
+        "handleMessage",
+        CFUNCTYPE(
+            UNCHECKED(rfbBool), POINTER(rfbClient), POINTER(rfbServerToClientMsg)
+        ),
+    ),
+    ("next", POINTER(struct__rfbClientProtocolExtension)),
+    ("securityTypes", POINTER(uint32_t)),
+    (
+        "handleAuthentication",
+        CFUNCTYPE(UNCHECKED(rfbBool), POINTER(rfbClient), uint32_t),
+    ),
 ]
 
-rfbClientProtocolExtension = struct__rfbClientProtocolExtension# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 691
+rfbClientProtocolExtension = struct__rfbClientProtocolExtension  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 691
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 693
 if _libs["libvncclient.so"].has("rfbClientRegisterExtension", "cdecl"):
-    rfbClientRegisterExtension = _libs["libvncclient.so"].get("rfbClientRegisterExtension", "cdecl")
+    rfbClientRegisterExtension = _libs["libvncclient.so"].get(
+        "rfbClientRegisterExtension", "cdecl"
+    )
     rfbClientRegisterExtension.argtypes = [POINTER(rfbClientProtocolExtension)]
     rfbClientRegisterExtension.restype = None
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 697
 try:
-    errorMessageOnReadFailure = (rfbBool).in_dll(_libs["libvncclient.so"], "errorMessageOnReadFailure")
+    errorMessageOnReadFailure = (rfbBool).in_dll(
+        _libs["libvncclient.so"], "errorMessageOnReadFailure"
+    )
 except:
     pass
 
@@ -2067,43 +2268,57 @@ if _libs["libvncclient.so"].has("ListenAtTcpPort", "cdecl"):
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 703
 if _libs["libvncclient.so"].has("ListenAtTcpPortAndAddress", "cdecl"):
-    ListenAtTcpPortAndAddress = _libs["libvncclient.so"].get("ListenAtTcpPortAndAddress", "cdecl")
+    ListenAtTcpPortAndAddress = _libs["libvncclient.so"].get(
+        "ListenAtTcpPortAndAddress", "cdecl"
+    )
     ListenAtTcpPortAndAddress.argtypes = [c_int, String]
     ListenAtTcpPortAndAddress.restype = c_int
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 710
 if _libs["libvncclient.so"].has("ConnectClientToTcpAddr", "cdecl"):
-    ConnectClientToTcpAddr = _libs["libvncclient.so"].get("ConnectClientToTcpAddr", "cdecl")
+    ConnectClientToTcpAddr = _libs["libvncclient.so"].get(
+        "ConnectClientToTcpAddr", "cdecl"
+    )
     ConnectClientToTcpAddr.argtypes = [c_uint, c_int]
     ConnectClientToTcpAddr.restype = c_int
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 717
 if _libs["libvncclient.so"].has("ConnectClientToTcpAddr6", "cdecl"):
-    ConnectClientToTcpAddr6 = _libs["libvncclient.so"].get("ConnectClientToTcpAddr6", "cdecl")
+    ConnectClientToTcpAddr6 = _libs["libvncclient.so"].get(
+        "ConnectClientToTcpAddr6", "cdecl"
+    )
     ConnectClientToTcpAddr6.argtypes = [String, c_int]
     ConnectClientToTcpAddr6.restype = c_int
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 723
 if _libs["libvncclient.so"].has("ConnectClientToUnixSock", "cdecl"):
-    ConnectClientToUnixSock = _libs["libvncclient.so"].get("ConnectClientToUnixSock", "cdecl")
+    ConnectClientToUnixSock = _libs["libvncclient.so"].get(
+        "ConnectClientToUnixSock", "cdecl"
+    )
     ConnectClientToUnixSock.argtypes = [String]
     ConnectClientToUnixSock.restype = c_int
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 731
 if _libs["libvncclient.so"].has("ConnectClientToTcpAddrWithTimeout", "cdecl"):
-    ConnectClientToTcpAddrWithTimeout = _libs["libvncclient.so"].get("ConnectClientToTcpAddrWithTimeout", "cdecl")
+    ConnectClientToTcpAddrWithTimeout = _libs["libvncclient.so"].get(
+        "ConnectClientToTcpAddrWithTimeout", "cdecl"
+    )
     ConnectClientToTcpAddrWithTimeout.argtypes = [c_uint, c_int, c_uint]
     ConnectClientToTcpAddrWithTimeout.restype = c_int
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 739
 if _libs["libvncclient.so"].has("ConnectClientToTcpAddr6WithTimeout", "cdecl"):
-    ConnectClientToTcpAddr6WithTimeout = _libs["libvncclient.so"].get("ConnectClientToTcpAddr6WithTimeout", "cdecl")
+    ConnectClientToTcpAddr6WithTimeout = _libs["libvncclient.so"].get(
+        "ConnectClientToTcpAddr6WithTimeout", "cdecl"
+    )
     ConnectClientToTcpAddr6WithTimeout.argtypes = [String, c_int, c_uint]
     ConnectClientToTcpAddr6WithTimeout.restype = c_int
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 746
 if _libs["libvncclient.so"].has("ConnectClientToUnixSockWithTimeout", "cdecl"):
-    ConnectClientToUnixSockWithTimeout = _libs["libvncclient.so"].get("ConnectClientToUnixSockWithTimeout", "cdecl")
+    ConnectClientToUnixSockWithTimeout = _libs["libvncclient.so"].get(
+        "ConnectClientToUnixSockWithTimeout", "cdecl"
+    )
     ConnectClientToUnixSockWithTimeout.argtypes = [String, c_uint]
     ConnectClientToUnixSockWithTimeout.restype = c_int
 
@@ -2158,7 +2373,11 @@ if _libs["libvncclient.so"].has("rfbGetClient", "cdecl"):
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 823
 if _libs["libvncclient.so"].has("rfbInitClient", "cdecl"):
     rfbInitClient = _libs["libvncclient.so"].get("rfbInitClient", "cdecl")
-    rfbInitClient.argtypes = [POINTER(rfbClient), POINTER(c_int), POINTER(POINTER(c_char))]
+    rfbInitClient.argtypes = [
+        POINTER(rfbClient),
+        POINTER(c_int),
+        POINTER(POINTER(c_char)),
+    ]
     rfbInitClient.restype = rfbBool
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 831
@@ -2205,7 +2424,7 @@ except:
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 91
 try:
-    DEFAULT_SSH_CMD = '/usr/bin/ssh'
+    DEFAULT_SSH_CMD = "/usr/bin/ssh"
 except:
     pass
 
@@ -2241,7 +2460,7 @@ except:
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 264
 try:
-    RFB_BUFFER_SIZE = (640 * 480)
+    RFB_BUFFER_SIZE = 640 * 480
 except:
     pass
 
@@ -2257,17 +2476,16 @@ try:
 except:
     pass
 
-rfbClientData = struct_rfbClientData# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 113
+rfbClientData = struct_rfbClientData  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 113
 
-_rfbCredential = union__rfbCredential# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 159
+_rfbCredential = union__rfbCredential  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 159
 
-_rfbClient = struct__rfbClient# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 241
+_rfbClient = struct__rfbClient  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 241
 
-jpeg_source_mgr = struct_jpeg_source_mgr# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 325
+jpeg_source_mgr = struct_jpeg_source_mgr  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 325
 
-_rfbClientProtocolExtension = struct__rfbClientProtocolExtension# /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 679
+_rfbClientProtocolExtension = struct__rfbClientProtocolExtension  # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 679
 
 # No inserted files
 
 # No prefix-stripping
-

@@ -7,14 +7,15 @@ from clan_vm_manager.app import MainApplication
 
 log = logging.getLogger(__name__)
 import gi
-gi.require_version('Gtk', '4.0')
-from gi.repository import Gtk, Gdk
 
+gi.require_version("Gtk", "4.0")
 import time
+
+from gi.repository import Gdk
+
 
 @profile
 def main(argv: list[str] = sys.argv) -> int:
-
     # Attempt to get the default display
     display = Gdk.Display.get_default()
 
@@ -26,7 +27,6 @@ def main(argv: list[str] = sys.argv) -> int:
 
         # Attempt to get the default display
         display = Gdk.Display.get_default()
-
 
     app = MainApplication()
     return app.run(argv)

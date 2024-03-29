@@ -11,8 +11,7 @@
   gtk4,
   libadwaita,
   tigervnc,
-  openssl,
-  libvncserver
+  libvncserver,
 }:
 
 let
@@ -35,7 +34,6 @@ mkShell {
       gtk4.dev # has the demo called 'gtk4-widget-factory'
       libadwaita.devdoc # has the demo called 'adwaita-1-demo'
       tigervnc
-      openssl
       libvncserver.dev
       libvncserver
     ]
@@ -49,6 +47,8 @@ mkShell {
 
   # Use ipdb as the default debugger for python
   PYTHONBREAKPOINT = "ipdb.set_trace";
+
+  hardeningDisabled = "all";
 
   shellHook = ''
     export LIBVNC_INCLUDE=${libvncserver.dev}/include
