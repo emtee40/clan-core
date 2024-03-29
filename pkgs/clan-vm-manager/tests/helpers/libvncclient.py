@@ -1,7 +1,7 @@
 r"""Wrapper for rfbclient.h
 
 Generated with:
-/home/lhebendanz/Projects/ctypesgen/run.py -R /nix/store/k2gq8jnpdffwav59qd83sdha2ihmb6g9-libvncserver-0.9.14/lib -I /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include -l libvncclient.so /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h -o libvncclient.py
+/home/lhebendanz/Projects/ctypesgen/run.py -R /nix/store/k2gq8jnpdffwav59qd83sdha2ihmb6g9-libvncserver-0.9.14/lib -I /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include -l libvncclient.so /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h -o /home/lhebendanz/Projects/clan-core/pkgs/clan-vm-manager/tests/helpers/libvncclient.py
 
 Do not modify this file.
 """

@@ -47,6 +47,7 @@ mkShell {
       desktop-file-utils # verify desktop files
     ]);
 
+  # Use ipdb as the default debugger for python
   PYTHONBREAKPOINT = "ipdb.set_trace";
 
   shellHook = ''
