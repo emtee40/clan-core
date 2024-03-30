@@ -1602,12 +1602,14 @@ struct_anon_77.__slots__ = [
     "x509CrlVerifyMode",
 ]
 struct_anon_77._fields_ = [
-    ("x509CACertFile", String),
-    ("x509CACrlFile", String),
-    ("x509ClientCertFile", String),
-    ("x509ClientKeyFile", String),
+    ("x509CACertFile", c_char_p),
+    ("x509CACrlFile", c_char_p),
+    ("x509ClientCertFile", c_char_p),
+    ("x509ClientKeyFile", c_char_p),
     ("x509CrlVerifyMode", uint8_t),
 ]
+
+x509Credential = struct_anon_77
 
 
 # /nix/store/25f5jlhp815846zxprn3v3h47qrbqgdb-libvncserver-0.9.14-dev/include/rfb/rfbclient.h: 154
@@ -1620,8 +1622,8 @@ struct_anon_78.__slots__ = [
     "password",
 ]
 struct_anon_78._fields_ = [
-    ("username", String),
-    ("password", String),
+    ("username", c_char_p),
+    ("password", c_char_p),
 ]
 
 

@@ -1,8 +1,18 @@
 #!/usr/bin/env python3
 
 import os
-from ctypes import byref, c_int
+from ctypes import (
+    CDLL,
+    POINTER,
+    Structure,
+    addressof,
+    c_char_p,
+    c_int,
+    memmove,
+    sizeof,
+)
 from pathlib import Path
+from typing import TypeVar
 
 import libvncclient
 from libvncclient import (
@@ -17,9 +27,11 @@ from libvncclient import (
     rfbClient,
     rfbClientCleanup,
     rfbCredential,
+    rfbCredentialTypeUser,
     rfbCredentialTypeX509,
     rfbGetClient,
     rfbInitClient,
+    struct__rfbClient,
 )
 
 path_to_lib = libvncclient._libs["libvncclient.so"].access["cdecl"]._name
@@ -27,40 +39,74 @@ if path_to_lib.startswith("/nix/store/"):
     print("Using libvncclient from nix store")
     exit(-1)
 
-credentials = {}
+
+libc = CDLL("libc.so.6")  # Use the correct path for your libc
 
 
-def get_credential(rfb_client: rfbClient, credential_type: int) -> rfbCredential:
+def alloc_str(data: str) -> c_char_p:
+    bdata = data.encode("ascii")
+    data_buf = libc.malloc(len(bdata) + 1)  # +1 for null terminator
+    memmove(data_buf, bdata, len(bdata) + 1)
+    return data_buf
+
+
+StructType = TypeVar("StructType", bound="Structure")
+
+
+def alloc_struct(data: StructType) -> int:
+    data_buf = libc.malloc(sizeof(data))
+    memmove(data_buf, addressof(data), sizeof(data))
+    return data_buf
+
+
+def get_credential(
+    rfb_client: POINTER(struct__rfbClient),  # type: ignore[valid-type]
+    credential_type: c_int,
+) -> int | None:
     print(f"==> get_credential: {credential_type}")
-    creds = rfbCredential()
-    credentials[credential_type] = creds
-    if credential_type != rfbCredentialTypeX509:
-        print(f"Unknown credential type {credential_type}")
-        return None
 
-    git_root = os.environ.get("GIT_ROOT")
-    assert git_root
-    ca_path = (
-        Path(git_root)
-        / "pkgs"
-        / "clan-vm-manager"
-        / "tests"
-        / "data"
-        / "vnc-security"
-        / "ca.crt"
-    )
-    if not ca_path.exists():
-        print(f"ERROR: ca_path does not exist: {ca_path}")
-        return None
-    breakpoint()
-    print(f"ca_path: {ca_path}")
-    creds.x509Credential.x509CACertFile = String.from_param(str(ca_path))
-    # creds.x509Credential.x509CACrlFile = String.from_param("A")
-    # creds.x509Credential.x509ClientCertFile = String.from_param("B")
-    # creds.x509Credential.x509ClientKeyFile = String.from_param("C")
-    creds.x509Credential.x509CrlVerifyMode = False
+    if credential_type == rfbCredentialTypeUser:
+        creds = rfbCredential()
+        username = os.environ.get("USER")
+        if not username:
+            print("ERROR: USER environment variable is not set")
+            return None
+        creds.userCredential.username = alloc_str(username)
+        creds.userCredential.password = None
+        creds_buf = alloc_struct(creds)
 
-    return byref(creds)
+        # Return a integer to the creds obj
+        return creds_buf
+
+    if credential_type == rfbCredentialTypeX509:
+        ca_dir = (
+            Path(os.environ.get("GIT_ROOT", ""))
+            / "pkgs"
+            / "clan-vm-manager"
+            / "tests"
+            / "data"
+            / "vnc-security"
+        )
+        ca_cert = ca_dir / "ca.crt"
+        if not ca_cert.exists():
+            print(f"ERROR: ca_cert does not exist: {ca_cert}")
+            return None
+        ca_crl = ca_dir / "ca.key"
+        if not ca_crl.exists():
+            print(f"ERROR: ca_crl does not exist: {ca_crl}")
+            return None
+
+        # Instantiate the credential union and populate it
+        creds = rfbCredential()
+        creds.x509Credential.x509CACertFile = alloc_str(str(ca_cert))
+        creds.x509Credential.x509CrlVerifyMode = False
+        creds_buf = alloc_struct(creds)
+
+        # Return a integer to the creds obj
+        return creds_buf
+
+    print(f"ERROR: Unknown credential type: {credential_type}")
+    return None
 
 
 def got_selection(cl: rfbClient, text: str, text_len: int) -> None:
@@ -68,7 +114,7 @@ def got_selection(cl: rfbClient, text: str, text_len: int) -> None:
 
 
 def resize(client: rfbClient) -> bool:
-    print("resize")
+    print("===>resize")
     return False
 
 
