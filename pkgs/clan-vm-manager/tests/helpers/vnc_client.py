@@ -22,8 +22,12 @@ from typing import TypeVar
 import libvncclient
 from libvncclient import (
     GetCredentialProc,
+    GotCursorShapeProc,
     GotFrameBufferUpdateProc,
+    GotXCutTextProc,
+    HandleKeyboardLedStateProc,
     HandleRFBServerMessage,
+    MallocFrameBufferProc,
     SendFramebufferUpdateRequest,
     SetFormatAndEncodings,
     String,
@@ -59,6 +63,18 @@ def alloc_str(data: str) -> c_char_p:
 
 
 StructType = TypeVar("StructType", bound="Structure")
+
+
+def got_cursor_shape(
+    cl: rfbClient,
+    width: int,
+    height: int,
+    xhot: int,
+    yhot: int,
+    data: POINTER(c_uint8),  # type: ignore[valid-type]
+) -> None:
+    print(f"got_cursor_shape: {width} {height} {xhot} {yhot}")
+    return
 
 
 def alloc_struct(data: StructType) -> int:
@@ -128,20 +144,18 @@ def resize(client: rfbClient) -> bool:
     height = client.contents.height
     bits_per_pixel = client.contents.format.bitsPerPixel
     print(f"Size: {width}x{height}")
-    print(f"Encondings: {client.contents.encodings}")
 
     if client.contents.frameBuffer:
         libc.free(client.contents.frameBuffer)
         client.contents.frameBuffer = None
 
-    new_buf = libc.malloc(int(width * height * bits_per_pixel * 5))
+    new_buf = libc.malloc(int(width * height * bits_per_pixel / 8))
     if not new_buf:
         print("malloc failed")
         return False
-    ptr = cast(new_buf, POINTER(c_uint8))
-    client.contents.frameBuffer = ptr
 
-    SetFormatAndEncodings(client)
+    casted_buf = cast(new_buf, POINTER(c_uint8))
+    client.contents.frameBuffer = casted_buf
 
     request = SendFramebufferUpdateRequest(client, 0, 0, width, height, False)
     if not request:
@@ -222,11 +236,14 @@ class VncClient:
 
     def _client_settings(self) -> None:
         # client settings
-        # client.contents.MallocFrameBuffer = MallocFrameBufferProc(resize)
-        # client.contents.canHandleNewFBSize = True
+        self.client.contents.MallocFrameBuffer = MallocFrameBufferProc(resize)
+        self.client.contents.canHandleNewFBSize = True
         self.client.contents.GotFrameBufferUpdate = GotFrameBufferUpdateProc(update)
-        # client.contents.HandleKeyboardLedState = HandleKeyboardLedStateProc(kbd_leds)
-        # client.contents.GotXCutText = GotXCutTextProc(got_selection)
+        self.client.contents.HandleKeyboardLedState = HandleKeyboardLedStateProc(
+            kbd_leds
+        )
+        self.client.contents.GotXCutText = GotXCutTextProc(got_selection)
+        self.client.contents.GotCursorShape = GotCursorShapeProc(got_cursor_shape)
         self.client.contents.GetCredential = GetCredentialProc(get_credential)
         self.client.contents.listenPort = 5900
         self.client.contents.listenAddress = String.from_param("127.0.0.1")

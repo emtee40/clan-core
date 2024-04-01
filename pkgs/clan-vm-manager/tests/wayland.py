@@ -90,9 +90,12 @@ def wayland_comp(
     time.sleep(0.4)
     if compositor.poll() is not None:
         raise Exception(f"Failed to start {cmd}")
-
+    # client = VncClient()
+    # client.start()
+    # time.sleep(2)
     yield Compositor(compositor, new_env)
     compositor.kill()
+    # client.stop()
 
 
 class GtkApp:
@@ -119,7 +122,7 @@ def app(wayland_comp: Compositor) -> Generator[GtkApp, None, None]:
     cmd = [f"{sys.executable}", "-m", "clan_vm_manager"]
 
     write_script(cmd, new_env, "weston.sh")
-
+    breakpoint()
     # Execute the script
     rapp = subprocess.Popen(
         cmd,
