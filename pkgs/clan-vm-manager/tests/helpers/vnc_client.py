@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import threading
 from ctypes import (
     CDLL,
     POINTER,
@@ -8,7 +9,9 @@ from ctypes import (
     addressof,
     c_char_p,
     c_int,
+    c_size_t,
     c_uint8,
+    c_void_p,
     cast,
     memmove,
     sizeof,
@@ -42,12 +45,16 @@ if path_to_lib.startswith("/nix/store/"):
 
 
 libc = CDLL("libc.so.6")  # Use the correct path for your libc
+libc.malloc.argtypes = [c_size_t]
+libc.malloc.restype = c_void_p
 
 
 def alloc_str(data: str) -> c_char_p:
-    bdata = data.encode("ascii")
-    data_buf = libc.malloc(len(bdata) + 1)  # +1 for null terminator
-    memmove(data_buf, bdata, len(bdata) + 1)
+    bdata = data.encode("ascii") + b"\0"
+    data_buf = libc.malloc(len(bdata))  # +1 for null terminator
+
+    memmove(data_buf, c_char_p(bdata), len(bdata))
+
     return data_buf
 
 
@@ -101,7 +108,9 @@ def get_credential(
         creds = rfbCredential()
         creds.x509Credential.x509CACertFile = alloc_str(str(ca_cert))
         creds.x509Credential.x509CrlVerifyMode = False
+        print("===> Alloc struct")
         creds_buf = alloc_struct(creds)
+        print("====> Done alloc struct")
 
         # Return a integer to the creds obj
         return creds_buf
@@ -185,70 +194,102 @@ def kbd_leds(cl: rfbClient, value: int, pad: int) -> None:
 # #define rfbEncodingUltraZip              0xFFFF0009
 
 
-def main() -> None:
-    bits_per_sample = 8
-    samples_per_pixel = 3
-    bytes_per_pixel = 4
-    client: rfbClient = rfbGetClient(
-        bits_per_sample, samples_per_pixel, bytes_per_pixel
-    )
-    if not client:
-        print("rfbGetClient failed")
-        exit(-1)
+class VncError(Exception):
+    pass
 
-    # client settings
-    # client.contents.MallocFrameBuffer = MallocFrameBufferProc(resize)
-    # client.contents.canHandleNewFBSize = True
-    client.contents.GotFrameBufferUpdate = GotFrameBufferUpdateProc(update)
-    # client.contents.HandleKeyboardLedState = HandleKeyboardLedStateProc(kbd_leds)
-    # client.contents.GotXCutText = GotXCutTextProc(got_selection)
-    client.contents.GetCredential = GetCredentialProc(get_credential)
-    client.contents.listenPort = 5900
-    client.contents.listenAddress = String.from_param("127.0.0.1")
 
-    # Set client encoding to (equal to remmina)
-    # TRUE colour: max red 255 green 255 blue 255, shift red 16 green 8 blue 0
-    client.contents.format.bitsPerPixel = 32
-    client.contents.format.depth = 24
-    client.contents.format.redShift = 16
-    client.contents.format.blueShift = 0
-    client.contents.format.greenShift = 8
-    client.contents.format.blueMax = 0xFF
-    client.contents.format.redMax = 0xFF
-    client.contents.format.greenMax = 0xFF
+class VncClient:
+    client: rfbClient
+    stop_event: threading.Event
+    thread: threading.Thread | None
 
-    # Set client compression to remminas quality 9 (best) and compress level 1 (lowest)
-    # BUG: tight encoding is crashing (looks exploitable)
-    client.contents.appData.shareDesktop = True
-    client.contents.appData.useBGR233 = False
-    client.contents.appData.encodingsString = String.from_param(
-        "copyrect zlib hextile raw"
-    )
-    client.contents.appData.compressLevel = 1
-    client.contents.appData.qualityLevel = 9
+    def __init__(self) -> None:
+        bits_per_sample = 8
+        samples_per_pixel = 3
+        bytes_per_pixel = 4
+        self.client: rfbClient = rfbGetClient(
+            bits_per_sample, samples_per_pixel, bytes_per_pixel
+        )
+        if not self.client:
+            raise VncError("rfbGetClient failed")
 
-    SetFormatAndEncodings(client)
+        self.stop_event = threading.Event()  # Initialize the stop event.
+        self.thread = None
 
-    print("Initializing connection")
-    argc = c_int(0)
-    argv = None
-    if not rfbInitClient(client, argc, argv):
-        print("rfbInitClient failed")
-        exit(-1)
+        self._client_settings()
+        self._set_color()
+        self._set_encoding()
 
-    while True:
-        res = WaitForMessage(client, 500)
-        if res < 0:
-            print("WaitForMessage failed")
-            break
+    def _client_settings(self) -> None:
+        # client settings
+        # client.contents.MallocFrameBuffer = MallocFrameBufferProc(resize)
+        # client.contents.canHandleNewFBSize = True
+        self.client.contents.GotFrameBufferUpdate = GotFrameBufferUpdateProc(update)
+        # client.contents.HandleKeyboardLedState = HandleKeyboardLedStateProc(kbd_leds)
+        # client.contents.GotXCutText = GotXCutTextProc(got_selection)
+        self.client.contents.GetCredential = GetCredentialProc(get_credential)
+        self.client.contents.listenPort = 5900
+        self.client.contents.listenAddress = String.from_param("127.0.0.1")
 
-        if res > 0:
-            if not HandleRFBServerMessage(client):
-                print("HandleRFBServerMessage failed")
-                break
+    def _set_color(self) -> None:
+        # Set client encoding to (equal to remmina)
+        # TRUE colour: max red 255 green 255 blue 255, shift red 16 green 8 blue 0
+        self.client.contents.format.bitsPerPixel = 32
+        self.client.contents.format.depth = 24
+        self.client.contents.format.redShift = 16
+        self.client.contents.format.blueShift = 0
+        self.client.contents.format.greenShift = 8
+        self.client.contents.format.blueMax = 0xFF
+        self.client.contents.format.redMax = 0xFF
+        self.client.contents.format.greenMax = 0xFF
+        SetFormatAndEncodings(self.client)
 
-    rfbClientCleanup(client)
+    def _set_encoding(self) -> None:
+        # Set client compression to remminas quality 9 (best) and compress level 1 (lowest)
+        # BUG: tight encoding is crashing (looks exploitable)
+        self.client.contents.appData.shareDesktop = True
+        self.client.contents.appData.useBGR233 = False
+        self.client.contents.appData.encodingsString = String.from_param(
+            "copyrect zlib hextile raw"
+        )
+        self.client.contents.appData.compressLevel = 1
+        self.client.contents.appData.qualityLevel = 9
+        SetFormatAndEncodings(self.client)
+
+    def start_blocking(self) -> None:
+        print("Initializing connection")
+        argc = c_int(0)
+        argv = None
+        if not rfbInitClient(self.client, argc, argv):
+            raise VncError("rfbInitClient failed")
+
+        # Main loop
+        while not self.stop_event.is_set():
+            res = WaitForMessage(self.client, 500)
+            if res < 0:
+                rfbClientCleanup(self.client)
+                raise VncError("WaitForMessage failed")
+
+            if res > 0:
+                if not HandleRFBServerMessage(self.client):
+                    rfbClientCleanup(self.client)
+                    raise VncError("HandleRFBServerMessage failed")
+
+        rfbClientCleanup(self.client)
+
+    def start(self) -> None:
+        self.thread = threading.Thread(target=self.start_blocking)
+        self.thread.start()
+
+    def stop(self) -> None:
+        self.stop_event.set()  # Signal the thread to stop.
+        if self.thread is not None:
+            self.thread.join()  # Wait for the thread to finish.
+        print("VNC client stopped.")
 
 
 if __name__ == "__main__":
-    main()
+    vnc = VncClient()
+    vnc.start()
+    assert vnc.thread is not None
+    vnc.thread.join()
