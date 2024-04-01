@@ -8,6 +8,8 @@ from ctypes import (
     addressof,
     c_char_p,
     c_int,
+    c_uint8,
+    cast,
     memmove,
     sizeof,
 )
@@ -18,10 +20,9 @@ import libvncclient
 from libvncclient import (
     GetCredentialProc,
     GotFrameBufferUpdateProc,
-    GotXCutTextProc,
-    HandleKeyboardLedStateProc,
     HandleRFBServerMessage,
-    MallocFrameBufferProc,
+    SendFramebufferUpdateRequest,
+    SetFormatAndEncodings,
     String,
     WaitForMessage,
     rfbClient,
@@ -114,16 +115,74 @@ def got_selection(cl: rfbClient, text: str, text_len: int) -> None:
 
 
 def resize(client: rfbClient) -> bool:
-    print("===>resize")
-    return False
+    width = client.contents.width
+    height = client.contents.height
+    bits_per_pixel = client.contents.format.bitsPerPixel
+    print(f"Size: {width}x{height}")
+    print(f"Encondings: {client.contents.encodings}")
+
+    if client.contents.frameBuffer:
+        libc.free(client.contents.frameBuffer)
+        client.contents.frameBuffer = None
+
+    new_buf = libc.malloc(int(width * height * bits_per_pixel * 5))
+    if not new_buf:
+        print("malloc failed")
+        return False
+    ptr = cast(new_buf, POINTER(c_uint8))
+    client.contents.frameBuffer = ptr
+
+    SetFormatAndEncodings(client)
+
+    request = SendFramebufferUpdateRequest(client, 0, 0, width, height, False)
+    if not request:
+        print("SendFramebufferUpdateRequest failed")
+
+    return True
 
 
 def update(cl: rfbClient, x: int, y: int, w: int, h: int) -> None:
     print(f"update: {x} {y} {w} {h}")
+    return
 
 
 def kbd_leds(cl: rfbClient, value: int, pad: int) -> None:
     print(f"kbd_leds: {value} {pad}")
+
+
+# /*****************************************************************************
+#  *
+#  * Encoding types
+#  *
+#  *****************************************************************************/
+
+# #define rfbEncodingRaw 0
+# #define rfbEncodingCopyRect 1
+# #define rfbEncodingRRE 2
+# #define rfbEncodingCoRRE 4
+# #define rfbEncodingHextile 5
+# #define rfbEncodingZlib 6
+# #define rfbEncodingTight 7
+# #define rfbEncodingTightPng 0xFFFFFEFC /* -260 */
+# #define rfbEncodingZlibHex 8
+# #define rfbEncodingUltra 9
+# #define rfbEncodingTRLE 15
+# #define rfbEncodingZRLE 16
+# #define rfbEncodingZYWRLE 17
+
+# #define rfbEncodingH264               0x48323634
+
+# /* Cache & XOR-Zlib - rdv@2002 */
+# #define rfbEncodingCache                 0xFFFF0000
+# #define rfbEncodingCacheEnable           0xFFFF0001
+# #define rfbEncodingXOR_Zlib              0xFFFF0002
+# #define rfbEncodingXORMonoColor_Zlib     0xFFFF0003
+# #define rfbEncodingXORMultiColor_Zlib    0xFFFF0004
+# #define rfbEncodingSolidColor            0xFFFF0005
+# #define rfbEncodingXOREnable             0xFFFF0006
+# #define rfbEncodingCacheZip              0xFFFF0007
+# #define rfbEncodingSolMonoZip            0xFFFF0008
+# #define rfbEncodingUltraZip              0xFFFF0009
 
 
 def main() -> None:
@@ -138,14 +197,37 @@ def main() -> None:
         exit(-1)
 
     # client settings
-    client.contents.MallocFrameBuffer = MallocFrameBufferProc(resize)
-    client.contents.canHandleNewFBSize = True
+    # client.contents.MallocFrameBuffer = MallocFrameBufferProc(resize)
+    # client.contents.canHandleNewFBSize = True
     client.contents.GotFrameBufferUpdate = GotFrameBufferUpdateProc(update)
-    client.contents.HandleKeyboardLedState = HandleKeyboardLedStateProc(kbd_leds)
-    client.contents.GotXCutText = GotXCutTextProc(got_selection)
+    # client.contents.HandleKeyboardLedState = HandleKeyboardLedStateProc(kbd_leds)
+    # client.contents.GotXCutText = GotXCutTextProc(got_selection)
     client.contents.GetCredential = GetCredentialProc(get_credential)
     client.contents.listenPort = 5900
     client.contents.listenAddress = String.from_param("127.0.0.1")
+
+    # Set client encoding to (equal to remmina)
+    # TRUE colour: max red 255 green 255 blue 255, shift red 16 green 8 blue 0
+    client.contents.format.bitsPerPixel = 32
+    client.contents.format.depth = 24
+    client.contents.format.redShift = 16
+    client.contents.format.blueShift = 0
+    client.contents.format.greenShift = 8
+    client.contents.format.blueMax = 0xFF
+    client.contents.format.redMax = 0xFF
+    client.contents.format.greenMax = 0xFF
+
+    # Set client compression to remminas quality 9 (best) and compress level 1 (lowest)
+    # BUG: tight encoding is crashing (looks exploitable)
+    client.contents.appData.shareDesktop = True
+    client.contents.appData.useBGR233 = False
+    client.contents.appData.encodingsString = String.from_param(
+        "copyrect zlib hextile raw"
+    )
+    client.contents.appData.compressLevel = 1
+    client.contents.appData.qualityLevel = 9
+
+    SetFormatAndEncodings(client)
 
     print("Initializing connection")
     argc = c_int(0)
@@ -157,15 +239,15 @@ def main() -> None:
     while True:
         res = WaitForMessage(client, 500)
         if res < 0:
-            rfbClientCleanup(client)
             print("WaitForMessage failed")
-            exit(-1)
+            break
 
         if res > 0:
             if not HandleRFBServerMessage(client):
-                rfbClientCleanup(client)
                 print("HandleRFBServerMessage failed")
-                exit(-1)
+                break
+
+    rfbClientCleanup(client)
 
 
 if __name__ == "__main__":

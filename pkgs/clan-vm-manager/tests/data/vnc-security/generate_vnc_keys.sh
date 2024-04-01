@@ -27,4 +27,7 @@ openssl req -new -key tls.key -out tls.csr -subj "$TLS_SUBJECT" -addext "subject
 # Step 5: Sign the CSR with your CA to generate the TLS certificate
 openssl x509 -req -in tls.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out tls.crt -days 365 -sha256 -extfile <(printf "subjectAltName=IP:127.0.0.1")
 
+# Step 6: Generate a ca.crl file needed for libvncserver
+openssl ca -config ./openssl.conf -gencrl -keyfile ca.key -cert ca.crt -out ca.crl
+
 echo "CA and TLS certificate, CSR, and key have been generated."
