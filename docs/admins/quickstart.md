@@ -1,14 +1,13 @@
-# **Quick Start Guide to Initializing a New Clan Project**
+# Getting Started with Your First Clan Project
 
-This guide will lead you through initiating a new Clan project
+Welcome to your simple guide on starting a new Clan project!
 
-## **Overview**
+## What's Inside
 
-Dive into our structured guide tailored to meet your needs:
+We've put together a straightforward guide to help you out:
 
-- [**Starting with a New Clan Project**](#starting-with-a-new-clan-project): Create a new Clan from scratch
-- [**Migrating Existing Flake Configuration**](migrate.md#migrating-existing-nixos-configuration-flake): Transition your existing flake-based Nix configuration to Clan.
-
+- [**Starting with a New Clan Project**](#starting-with-a-new-clan-project): Create a new Clan from scratch.
+- [**Migrating Existing Flake Configuration**](migrate.md#migrating-existing-nixos-configuration-flake): How to switch your current setup to a Clan setup.
 - [**Integrating Clan using Flake-Parts**](./migrate.md#integrating-clan-with-flakes-using-flake-parts)
 
 ---
@@ -43,7 +42,9 @@ Ensure the creation of your project files with a quick directory listing
 cd my-clan && ls -la
 ```
 
-Look for `.clan-flake`, `flake.lock`, and `flake.nix` among your files to confirm successful setup.
+You should see `.clan-flake`, `flake.lock`, and `flake.nix` among the files listed, which means you're all set up!
+
+---
 
 ### Next Steps
 
@@ -85,6 +86,6 @@ On the remote execute:
 Ready to expand? Explore how to install a new machine with the helpful documentation [here](./machines.md).
 Ready to explore more?
 
-- Learn how to add new machines [here](./machines.md).
+- Find out how to add new machines to your setup [here](./machines.md).
 
 ---
