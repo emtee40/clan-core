@@ -89,7 +89,7 @@ Select `NixOS` to boot into the clan installer
 The installer will display an IP address and a root password, which you can use to connect via SSH.
 
 Alternatively you can also use the displayed QR code.
-
+  
 ### Step 4. Finishing the installation
 
 With the target machine running Linux and accessible via SSH, execute the following command to install NixOS on the target machine, replacing `<target_host>` with the machine's hostname or IP address:
