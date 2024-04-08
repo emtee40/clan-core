@@ -1,5 +1,11 @@
 # Managing NixOS Machines with Clan
 
+Integrating a new machine into your Clan environment is a very easy yet flexible process, allowing for the centralized management of multiple NixOS configurations.
+
+The Guide below showcases how to introduce a new machine into an existing Clan setup.
+
+## Installing a New Machine
+
 Clan CLI, in conjunction with [nixos-anywhere](https://github.com/nix-community/nixos-anywhere), provides a seamless method for installing NixOS on various machines.
 This process involves preparing a suitable hardware and disk partitioning configuration and ensuring the target machine is accessible via SSH.
 
