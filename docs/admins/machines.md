@@ -2,7 +2,7 @@
 
 Integrating a new machine into your Clan environment is a very easy yet flexible process, allowing for the centralized management of multiple NixOS configurations.
 
-The Guide below showcases how to introduce a new machine into an existing Clan setup.
+We'll walk you through adding a new computer to your Clan using a special tool that works through a USB stick.
 
 ## Installing a New Machine
 
@@ -11,8 +11,8 @@ This process involves preparing a suitable hardware and disk partitioning config
 
 ### Step 0. Prerequisites
 
-- [x] A running Linux system with SSH on the target machine is required. This is typically pre-configured for many server providers.
-- [x] A clan machine configuration you want to deploy. TODO: [See here how to create one](./some-link.md)
+- [x] Two Computers: You'll need the computer you're setting up and another one to control the setup process. Both should be able to connect over the network using SSH. This is usually already done if you're working with servers from providers like Hetzner.
+- [x] A clan machine configuration you want to deploy. [Check out our templates](/templates/new-clan/flake.nix)
 - [x] Identify and prepare the USB Flash Drive
 
 #### Prepare the USB Flash Drive
@@ -89,7 +89,7 @@ Select `NixOS` to boot into the clan installer
 The installer will display an IP address and a root password, which you can use to connect via SSH.
 
 Alternatively you can also use the displayed QR code.
-  
+
 ### Step 4. Finishing the installation
 
 With the target machine running Linux and accessible via SSH, execute the following command to install NixOS on the target machine, replacing `<target_host>` with the machine's hostname or IP address:
