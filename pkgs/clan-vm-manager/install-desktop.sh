@@ -19,5 +19,5 @@ sed -i "s|Exec=.*clan-vm-manager|Exec=$UI_BIN|" $DESKTOP_DST
 xdg-mime default $DESKTOP_FILE_NAME  x-scheme-handler/clan
 echo "==== Validating desktop file installation   ===="
 set -x
-desktop-file-validate $DESKTOP_DST
+desktop-file-validate "$DESKTOP_DST"
 set +xeou pipefail
