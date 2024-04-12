@@ -29,7 +29,7 @@ def ssh(
         "StrictHostKeyChecking=no",
         f"{user}@{host}",
     ]
-    cmd = nix_shell(packages, ["torify", *password_args, *_ssh_args])
+    cmd = nix_shell(packages, [*password_args, *_ssh_args])
     subprocess.run(cmd)
 
 
@@ -57,7 +57,7 @@ def main(args: argparse.Namespace) -> None:
     if args.json:
         with open(args.json) as file:
             ssh_data = json.load(file)
-        ssh(host=ssh_data["address"], password=ssh_data["password"])
+        ssh(host=ssh_data["local_addresses"][0], password=ssh_data["password"])
     elif args.png:
         ssh_data = json.loads(qrcode_scan(args.png))
         ssh(host=ssh_data["address"], password=ssh_data["password"])
