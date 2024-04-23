@@ -5,7 +5,6 @@
     installer.imports = [
       ./installer
       self.nixosModules.hidden-ssh-announce
-      #inputs.disko.nixosModules.disko
     ];
     clanCore.imports = [
       inputs.sops-nix.nixosModules.sops
