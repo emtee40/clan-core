@@ -1,0 +1,2 @@
+A lightweight desktop manager
+---
