@@ -36,6 +36,8 @@ def ssh(
         "UserKnownHostsFile=/dev/null",
         "-o",
         "StrictHostKeyChecking=no",
+        "-o",
+        "ControlMaster=no",
         f"{user}@{host}",
     ]
 
