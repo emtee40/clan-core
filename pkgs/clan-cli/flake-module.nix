@@ -6,7 +6,12 @@
 }:
 {
   perSystem =
-    { self', pkgs, ... }:
+    {
+      self',
+      pkgs,
+      system,
+      ...
+    }:
     let
       flakeLock = lib.importJSON (self + /flake.lock);
       flakeInputs = (builtins.removeAttrs inputs [ "self" ]);
@@ -42,6 +47,7 @@
       packages = {
         clan-cli = pkgs.python3.pkgs.callPackage ./default.nix {
           inherit (inputs) nixpkgs;
+          disko = inputs.disko.packages.${system}.default;
           clan-core-path = clanCoreWithVendoredDeps;
         };
         clan-cli-docs = pkgs.stdenv.mkDerivation {

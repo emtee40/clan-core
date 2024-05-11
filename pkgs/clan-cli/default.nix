@@ -28,6 +28,7 @@
   gnupg,
   e2fsprogs,
   mypy,
+  disko,
   clan-core-path,
 }:
 let
@@ -44,6 +45,7 @@ let
     openssh
     sshpass
     zbar
+    disko
     tor
     age
     rsync

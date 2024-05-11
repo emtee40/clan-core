@@ -15,7 +15,6 @@ from .cmd import Log, run
 from .errors import ClanError
 from .facts.secret_modules import SecretStoreBase
 from .machines.machines import Machine
-from .nix import nix_shell
 
 log = logging.getLogger(__name__)
 
@@ -59,10 +58,7 @@ def flash_machine(
         disko_install.extend(["--flake", str(machine.flake) + "#" + machine.name])
         disko_install.extend(["--mode", str(mode)])
 
-        cmd = nix_shell(
-            ["nixpkgs#disko"],
-            disko_install,
-        )
+        cmd = disko_install
         print("$", " ".join(map(shlex.quote, cmd)))
         run(cmd, log=Log.BOTH, error_msg=f"Failed to flash {machine}")
 
