@@ -37,6 +37,8 @@ let
     argcomplete # Enables shell completion; without it, this feature won't work.
   ];
 
+  linuxExtraPackages = if stdenv.isLinux then [ disko ] else [ ];
+
   # Runtime dependencies required by the application
   runtimeDependencies = [
     bash
@@ -45,7 +47,6 @@ let
     openssh
     sshpass
     zbar
-    disko
     tor
     age
     rsync
@@ -54,7 +55,7 @@ let
     mypy
     qemu
     e2fsprogs
-  ];
+  ] ++ linuxExtraPackages;
 
   # Dependencies required for running tests
   testDependencies =
