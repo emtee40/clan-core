@@ -35,7 +35,7 @@ let
   # Dependencies that are directly used in the project
   pythonDependencies = [
     argcomplete # Enables shell completion; without it, this feature won't work.
-  ];
+  ] ++ linuxExtraPackages;
 
   linuxExtraPackages = if stdenv.isLinux then [ disko ] else [ ];
 
@@ -55,7 +55,7 @@ let
     mypy
     qemu
     e2fsprogs
-  ] ++ linuxExtraPackages;
+  ];
 
   # Dependencies required for running tests
   testDependencies =

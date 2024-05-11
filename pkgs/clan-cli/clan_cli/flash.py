@@ -47,7 +47,9 @@ def flash_machine(
             disko_install.append("sudo")
 
         if shutil.which("disko-install") is None:
-            raise ClanError("disko-install is not available. Unsupported OS?")
+            raise ClanError(
+                "disko-install is not available. clan flash only works on Linux."
+            )
 
         disko_install.append("disko-install")
         if dry_run:

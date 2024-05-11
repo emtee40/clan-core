@@ -14,7 +14,7 @@
         self.clanInternals.machines.${pkgs.hostPlatform.system}.test_install_machine.config.system.build.toplevel
         self.clanInternals.machines.${pkgs.hostPlatform.system}.test_install_machine.config.system.build.diskoScript
         self.clanInternals.machines.${pkgs.hostPlatform.system}.test_install_machine.config.system.clan.deployment.file
-        self.inputs.nixpkgs.legacyPackages.${pkgs.hostPlatform.system}.disko
+        self.inputs.disko.packages.${pkgs.hostPlatform.system}.default
       ] ++ builtins.map (i: i.outPath) (builtins.attrValues self.inputs);
       closureInfo = pkgs.closureInfo { rootPaths = dependencies; };
     in
