@@ -13,8 +13,8 @@
 let
   codium = vscode-with-extensions.override {
     vscode = vscodium;
-    vscodeExtensions = [ 
-      vscode-extensions.jnoortheen.nix-ide 
+    vscodeExtensions = [
+      vscode-extensions.jnoortheen.nix-ide
       vscode-extensions.mkhl.direnv
     ];
   };
@@ -29,12 +29,12 @@ writeShellApplication {
     direnv
   ];
   text = ''
-  set -eux
-  DATA_DIR="''${XDG_CACHE_HOME:-~/.cache}/clan-edit-codium"
-  SETTINGS="$DATA_DIR"/User/settings.json
-  ${coreutils}/bin/mkdir -p "$DATA_DIR/User"
-  cat ${./settings.json} > "$SETTINGS"
+    set -eux
+    DATA_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/clan-edit-codium"
+    SETTINGS="$DATA_DIR"/User/settings.json
+    ${coreutils}/bin/mkdir -p "$DATA_DIR/User"
+    cat ${./settings.json} > "$SETTINGS"
 
-  exec ${lib.getExe codium} --user-data-dir "$DATA_DIR" "$@"
+    exec ${lib.getExe codium} --user-data-dir "$DATA_DIR" "$@"
   '';
 }
