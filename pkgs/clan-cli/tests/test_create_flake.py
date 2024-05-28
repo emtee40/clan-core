@@ -35,6 +35,7 @@ def test_create_flake(
             hw_config_nix.write("{}")
 
     cli.run(["machines", "list"])
+    print(capsys.readouterr().out)
     assert "machine1" in capsys.readouterr().out
     flake_show = subprocess.run(
         ["nix", "flake", "show", "--json"],
