@@ -7,9 +7,11 @@ targetBranch="${3:-main}"
 shift && shift
 TMPDIR="$(mktemp -d)"
 currentBranch="$(git rev-parse --abbrev-ref HEAD)"
-user="$(git config --get remote.origin.url | awk -F'[@:/]' '{print $3}' | tr -d '\n')"
+user_unparsed="$(tea whoami)"
+user="$(echo "$user_unparsed" | tr -d '\n' | cut -f4 -d' ')"
 tempRemoteBranch="$user-$currentBranch"
 root_dir=$(git rev-parse --show-toplevel)
+
 
 # Function to check if a remote exists
 check_remote() {
