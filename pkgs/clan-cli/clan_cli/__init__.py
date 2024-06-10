@@ -6,6 +6,12 @@ from pathlib import Path
 from types import ModuleType
 from typing import Any
 
+# These imports are unused, but necessary for @API.register to run once.
+from clan_cli.api import directory
+from clan_cli.flakes import show
+
+__all__ = ["directory"]
+
 from . import (
     backups,
     config,
@@ -107,7 +113,31 @@ For more detailed information, visit: https://docs.clan.lol
         ),
         formatter_class=argparse.RawTextHelpFormatter,
     )
+
     subparsers = parser.add_subparsers()
+
+    # Commands directly under the root i.e. "clan show"
+    show_parser = subparsers.add_parser(
+        "show",
+        help="Show meta about the clan if present.",
+        description="Show meta about the clan if present.",
+        epilog=(
+            """
+This command prints the metadata of a clan.
+
+Examples:
+
+  $ clan show --flake [PATH]
+  Name: My Empty Clan
+  Description: some nice description
+  Icon: A path to the png
+
+Note: The meta results from clan/meta.json and manual flake arguments. It may not be present for clans not created via the clan-app.
+
+"""
+        ),
+    )
+    show_parser.set_defaults(func=show.show_command)
 
     parser_backups = subparsers.add_parser(
         "backups",
@@ -152,6 +182,7 @@ For more detailed information, visit: https://docs.clan.lol/getting-started
         ),
         formatter_class=argparse.RawTextHelpFormatter,
     )
+
     flakes.register_parser(parser_flake)
 
     parser_config = subparsers.add_parser(
@@ -312,7 +343,7 @@ def main() -> None:
     if len(sys.argv) == 1:
         parser.print_help()
 
-    if args.debug:
+    if getattr(args, "debug", False):
         setup_logging(logging.DEBUG, root_log_name=__name__.split(".")[0])
         log.debug("Debug log activated")
         if flatpak.is_flatpak():

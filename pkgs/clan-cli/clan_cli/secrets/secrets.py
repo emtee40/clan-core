@@ -9,6 +9,13 @@ from pathlib import Path
 from typing import IO
 
 from .. import tty
+from ..completions import (
+    add_dynamic_completer,
+    complete_groups,
+    complete_machines,
+    complete_secrets,
+    complete_users,
+)
 from ..errors import ClanError
 from ..git import commit_files
 from .folders import (
@@ -153,8 +160,12 @@ def remove_command(args: argparse.Namespace) -> None:
     remove_secret(Path(args.flake), args.secret)
 
 
-def add_secret_argument(parser: argparse.ArgumentParser) -> None:
-    parser.add_argument("secret", help="the name of the secret", type=secret_name_type)
+def add_secret_argument(parser: argparse.ArgumentParser, autocomplete: bool) -> None:
+    secrets_parser = parser.add_argument(
+        "secret", help="the name of the secret", type=secret_name_type
+    )
+    if autocomplete:
+        add_dynamic_completer(secrets_parser, complete_secrets)
 
 
 def machines_folder(flake_dir: Path, group: str) -> Path:
@@ -323,32 +334,35 @@ def register_secrets_parser(subparser: argparse._SubParsersAction) -> None:
     parser_list.set_defaults(func=list_command)
 
     parser_get = subparser.add_parser("get", help="get a secret")
-    add_secret_argument(parser_get)
+    add_secret_argument(parser_get, True)
     parser_get.set_defaults(func=get_command)
 
     parser_set = subparser.add_parser("set", help="set a secret")
-    add_secret_argument(parser_set)
-    parser_set.add_argument(
+    add_secret_argument(parser_set, False)
+    set_group_action = parser_set.add_argument(
         "--group",
         type=str,
         action="append",
         default=[],
         help="the group to import the secrets to (can be repeated)",
     )
-    parser_set.add_argument(
+    add_dynamic_completer(set_group_action, complete_groups)
+    machine_parser = parser_set.add_argument(
         "--machine",
         type=str,
         action="append",
         default=[],
         help="the machine to import the secrets to (can be repeated)",
     )
-    parser_set.add_argument(
+    add_dynamic_completer(machine_parser, complete_machines)
+    set_user_action = parser_set.add_argument(
         "--user",
         type=str,
         action="append",
         default=[],
         help="the user to import the secrets to (can be repeated)",
     )
+    add_dynamic_completer(set_user_action, complete_users)
     parser_set.add_argument(
         "-e",
         "--edit",
@@ -359,10 +373,10 @@ def register_secrets_parser(subparser: argparse._SubParsersAction) -> None:
     parser_set.set_defaults(func=set_command)
 
     parser_rename = subparser.add_parser("rename", help="rename a secret")
-    add_secret_argument(parser_rename)
+    add_secret_argument(parser_rename, True)
     parser_rename.add_argument("new_name", type=str, help="the new name of the secret")
     parser_rename.set_defaults(func=rename_command)
 
     parser_remove = subparser.add_parser("remove", help="remove a secret")
-    add_secret_argument(parser_remove)
+    add_secret_argument(parser_remove, True)
     parser_remove.set_defaults(func=remove_command)

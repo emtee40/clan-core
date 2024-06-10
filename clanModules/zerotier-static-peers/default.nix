@@ -20,7 +20,7 @@ let
     if builtins.pathExists fullPath then builtins.readFile fullPath else null
   ) machines;
   networkIds = lib.filter (machine: machine != null) networkIdsUnchecked;
-  networkId = builtins.elemAt networkIds 0;
+  networkId = if builtins.length networkIds == 0 then null else builtins.elemAt networkIds 0;
 in
 #TODO:trace on multiple found network-ids
 #TODO:trace on no single found networkId
@@ -35,21 +35,26 @@ in
 
   config.systemd.services.zerotier-static-peers-autoaccept =
     let
-      machines = builtins.readDir machineDir;
       zerotierIpMachinePath = machines: machineDir + machines + "/facts/zerotier-ip";
-      filteredMachines = lib.filterAttrs (
-        name: _: !(lib.elem name config.clan.static-hosts.excludeHosts)
+      networkIpsUnchecked = builtins.map (
+        machine:
+        let
+          fullPath = zerotierIpMachinePath machine;
+        in
+        if builtins.pathExists fullPath then machine else null
       ) machines;
+      networkIps = lib.filter (machine: machine != null) networkIpsUnchecked;
+      machinesWithIp = lib.filterAttrs (name: _: (lib.elem name networkIps)) machinesFileSet;
+      filteredMachines = lib.filterAttrs (
+        name: _: !(lib.elem name config.clan.zerotier-static-peers.excludeHosts)
+      ) machinesWithIp;
       hosts = lib.mapAttrsToList (host: _: host) (
         lib.mapAttrs' (
           machine: _:
           let
             fullPath = zerotierIpMachinePath machine;
           in
-          if builtins.pathExists fullPath then
-            lib.nameValuePair (builtins.readFile fullPath) [ machine ]
-          else
-            null
+          lib.nameValuePair (builtins.readFile fullPath) [ machine ]
         ) filteredMachines
       );
     in

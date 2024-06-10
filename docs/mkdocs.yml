@@ -1,4 +1,4 @@
-site_name: Clan Docs
+site_name: Clan Documentation
 site_url: https://docs.clan.lol
 repo_url: https://git.clan.lol/clan/clan-core/
 repo_name: clan-core
@@ -51,6 +51,7 @@ nav:
       - Flake-parts: getting-started/flake-parts.md
   - Modules:
       - Clan Modules:
+          - reference/clanModules/borgbackup-static.md
           - reference/clanModules/borgbackup.md
           - reference/clanModules/deltachat.md
           - reference/clanModules/disk-layouts.md
@@ -59,11 +60,13 @@ nav:
           - reference/clanModules/localsend.md
           - reference/clanModules/matrix-synapse.md
           - reference/clanModules/moonlight.md
+          - reference/clanModules/postgresql.md
           - reference/clanModules/root-password.md
           - reference/clanModules/sshd.md
-          - reference/clanModules/sunshine.md
-          - reference/clanModules/syncthing.md
           - reference/clanModules/static-hosts.md
+          - reference/clanModules/sunshine.md
+          - reference/clanModules/syncthing-static-peers.md
+          - reference/clanModules/syncthing.md
           - reference/clanModules/thelounge.md
           - reference/clanModules/trusted-nix-caches.md
           - reference/clanModules/user-password.md
@@ -80,6 +83,7 @@ nav:
           - reference/cli/history.md
           - reference/cli/machines.md
           - reference/cli/secrets.md
+          - reference/cli/show.md
           - reference/cli/ssh.md
           - reference/cli/vms.md
       - Clan Core:
@@ -96,7 +100,7 @@ site_dir: out
 theme:
   font: false
   logo: https://clan.lol/static/logo/clan-white.png
-  favicon: https://clan.lol/static/logo/clan-dark.png
+  favicon: https://clan.lol/static/dark-favicon/128x128.png
   name: material
   features:
     - navigation.instant
@@ -105,7 +109,8 @@ theme:
     - content.code.copy
     - content.tabs.link
   icon:
-    repo: fontawesome/brands/git
+    repo: fontawesome/brands/git-alt
+  custom_dir: overrides
 
   palette:
     # Palette toggle for light mode
@@ -128,8 +133,6 @@ theme:
 
 extra_css:
   - static/extra.css
-  - static/asciinema-player/custom-theme.css
-  - static/asciinema-player/asciinema-player.css
 
 extra:
   social:

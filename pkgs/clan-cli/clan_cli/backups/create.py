@@ -2,6 +2,11 @@ import argparse
 import json
 import logging
 
+from ..completions import (
+    add_dynamic_completer,
+    complete_backup_providers_for_machine,
+    complete_machines,
+)
 from ..errors import ClanError
 from ..machines.machines import Machine
 
@@ -40,8 +45,13 @@ def create_command(args: argparse.Namespace) -> None:
 
 
 def register_create_parser(parser: argparse.ArgumentParser) -> None:
-    parser.add_argument(
+    machines_parser = parser.add_argument(
         "machine", type=str, help="machine in the flake to create backups of"
     )
-    parser.add_argument("--provider", type=str, help="backup provider to use")
+    add_dynamic_completer(machines_parser, complete_machines)
+
+    provider_action = parser.add_argument(
+        "--provider", type=str, help="backup provider to use"
+    )
+    add_dynamic_completer(provider_action, complete_backup_providers_for_machine)
     parser.set_defaults(func=create_command)

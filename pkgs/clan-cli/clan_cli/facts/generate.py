@@ -9,6 +9,11 @@ from tempfile import TemporaryDirectory
 
 from clan_cli.cmd import run
 
+from ..completions import (
+    add_dynamic_completer,
+    complete_machines,
+    complete_services_for_machine,
+)
 from ..errors import ClanError
 from ..git import commit_files
 from ..machines.inventory import get_all_machines, get_selected_machines
@@ -27,6 +32,7 @@ def read_multiline_input(prompt: str = "Finish with Ctrl-D") -> str:
     """
     print(prompt, flush=True)
     proc = subprocess.run(["cat"], stdout=subprocess.PIPE, text=True)
+    log.info("Input received. Processing...")
     return proc.stdout
 
 
@@ -216,19 +222,23 @@ def generate_command(args: argparse.Namespace) -> None:
 
 
 def register_generate_parser(parser: argparse.ArgumentParser) -> None:
-    parser.add_argument(
+    machines_parser = parser.add_argument(
         "machines",
         type=str,
         help="machine to generate facts for. if empty, generate facts for all machines",
         nargs="*",
         default=[],
     )
-    parser.add_argument(
+    add_dynamic_completer(machines_parser, complete_machines)
+
+    service_parser = parser.add_argument(
         "--service",
         type=str,
         help="service to generate facts for, if empty, generate facts for every service",
         default=None,
     )
+    add_dynamic_completer(service_parser, complete_services_for_machine)
+
     parser.add_argument(
         "--regenerate",
         type=bool,

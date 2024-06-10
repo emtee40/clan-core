@@ -3,7 +3,8 @@
   options.clan.static-hosts = {
     excludeHosts = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ config.clanCore.machineName ];
+      default =
+        if config.clan.static-hosts.topLevelDomain != "" then [ ] else [ config.clanCore.machineName ];
       description = "Hosts that should be excluded";
     };
     topLevelDomain = lib.mkOption {
@@ -18,10 +19,20 @@
       clanDir = config.clanCore.clanDir;
       machineDir = clanDir + "/machines/";
       zerotierIpMachinePath = machines: machineDir + machines + "/facts/zerotier-ip";
-      machines = builtins.readDir machineDir;
+      machinesFileSet = builtins.readDir machineDir;
+      machines = lib.mapAttrsToList (name: _: name) machinesFileSet;
+      networkIpsUnchecked = builtins.map (
+        machine:
+        let
+          fullPath = zerotierIpMachinePath machine;
+        in
+        if builtins.pathExists fullPath then machine else null
+      ) machines;
+      networkIps = lib.filter (machine: machine != null) networkIpsUnchecked;
+      machinesWithIp = lib.filterAttrs (name: _: (lib.elem name networkIps)) machinesFileSet;
       filteredMachines = lib.filterAttrs (
         name: _: !(lib.elem name config.clan.static-hosts.excludeHosts)
-      ) machines;
+      ) machinesWithIp;
     in
     lib.filterAttrs (_: value: value != null) (
       lib.mapAttrs' (
@@ -37,7 +48,7 @@
               [ "${machine}.${config.clan.static-hosts.topLevelDomain}" ]
           )
         else
-          null
+          { }
       ) filteredMachines
     );
 }

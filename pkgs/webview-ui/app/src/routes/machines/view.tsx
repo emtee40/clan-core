@@ -1,18 +1,77 @@
-import { For, Match, Switch, createEffect, type Component } from "solid-js";
-import { useCountContext } from "../../Config";
+import {
+  For,
+  Match,
+  Switch,
+  createEffect,
+  createSignal,
+  type Component,
+} from "solid-js";
+import { useMachineContext } from "../../Config";
 import { route } from "@/src/App";
+import { OperationResponse, pyApi } from "@/src/api";
+import toast from "solid-toast";
+
+type FilesModel = Extract<
+  OperationResponse<"get_directory">,
+  { status: "success" }
+>["data"]["files"];
 
 export const MachineListView: Component = () => {
-  const [{ machines, loading }, { getMachines }] = useCountContext();
+  const [{ machines, loading }, { getMachines }] = useMachineContext();
 
-  const list = () => Object.values(machines());
+  const [files, setFiles] = createSignal<FilesModel>([]);
+  pyApi.get_directory.receive((r) => {
+    const { status } = r;
+    if (status === "error") return console.error(r.errors);
+    setFiles(r.data.files);
+  });
 
+  createEffect(() => {
+    console.log(files());
+  });
+
+  const [data, setData] = createSignal<string[]>([]);
   createEffect(() => {
     if (route() === "machines") getMachines();
   });
+
+  createEffect(() => {
+    const response = machines();
+    if (response?.status === "success") {
+      console.log(response.data);
+      setData(response.data);
+      toast.success("Machines loaded");
+    }
+    if (response?.status === "error") {
+      setData([]);
+      console.error(response.errors);
+      toast.error("Error loading machines");
+      response.errors.forEach((error) =>
+        toast.error(
+          `${error.message}: ${error.description} From ${error.location}`
+        )
+      );
+    }
+  });
+
   return (
     <div class="max-w-screen-lg">
-      <div class="tooltip" data-tip="Refresh ">
+      <div class="tooltip" data-tip="Open Clan">
+        <button
+          class="btn btn-ghost"
+          onClick={() =>
+            pyApi.open_file.dispatch({
+              file_request: {
+                title: "Open Clan",
+                mode: "select_folder",
+              },
+            })
+          }
+        >
+          <span class="material-icons ">folder_open</span>
+        </button>
+      </div>
+      <div class="tooltip" data-tip="Refresh">
         <button class="btn btn-ghost" onClick={() => getMachines()}>
           <span class="material-icons ">refresh</span>
         </button>
@@ -20,7 +79,7 @@ export const MachineListView: Component = () => {
       <Switch>
         <Match when={loading()}>
           {/* Loading skeleton */}
-          <li>
+          <div>
             <div class="card card-side m-2 bg-base-100 shadow-lg">
               <figure class="pl-2">
                 <div class="skeleton size-12"></div>
@@ -32,43 +91,47 @@ export const MachineListView: Component = () => {
                 <div class="skeleton h-8 w-72"></div>
               </div>
             </div>
-          </li>
+          </div>
         </Match>
-        <Match when={!loading() && Object.entries(machines()).length === 0}>
+        <Match when={!loading() && data().length === 0}>
           No machines found
         </Match>
         <Match when={!loading()}>
-          <For each={list()}>
-            {(entry) => (
-              <li>
-                <div class="card card-side m-2 bg-base-100 shadow-lg">
-                  <figure class="pl-2">
-                    <span class="material-icons content-center text-5xl">
-                      devices_other
-                    </span>
-                  </figure>
-                  <div class="card-body flex-row justify-between">
-                    <div class="flex flex-col">
-                      <h2 class="card-title">{entry.machine_name}</h2>
-                      <p
-                        classList={{
-                          "text-gray-400": !entry.machine_description,
-                          "text-gray-600": !!entry.machine_description,
-                        }}
-                      >
-                        {entry.machine_description || "No description"}
-                      </p>
-                    </div>
-                    <div>
-                      <button class="btn btn-ghost">
-                        <span class="material-icons">more_vert</span>
-                      </button>
+          <ul>
+            <For each={data()}>
+              {(entry) => (
+                <li>
+                  <div class="card card-side m-2 bg-base-100 shadow-lg">
+                    <figure class="pl-2">
+                      <span class="material-icons content-center text-5xl">
+                        devices_other
+                      </span>
+                    </figure>
+                    <div class="card-body flex-row justify-between">
+                      <div class="flex flex-col">
+                        <h2 class="card-title">{entry}</h2>
+                        {/*
+                        <p
+                          classList={{
+                            "text-gray-400": !entry.machine_description,
+                            "text-gray-600": !!entry.machine_description,
+                          }}
+                        >
+                          {entry.machine_description || "No description"}
+                        </p>
+                        */}
+                      </div>
+                      <div>
+                        <button class="btn btn-ghost">
+                          <span class="material-icons">more_vert</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-            )}
-          </For>
+                </li>
+              )}
+            </For>
+          </ul>
         </Match>
       </Switch>
     </div>
