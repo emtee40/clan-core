@@ -23,6 +23,6 @@ import (
 	// A map of machines
 	machines.#machine
 
-	// A map of users
+	// // A map of users
 	users.#user
 }

@@ -2,8 +2,9 @@ package users
 
 #user: users: [string]: {
    "autoInclude": bool,
-   "schemas": [ string ],
+   // TODO: this can include all available user-schemas
+   "schemas": [ "ssh-user" ],
    "config": {
-        ...
-    }
+     ...
+   }
 }
