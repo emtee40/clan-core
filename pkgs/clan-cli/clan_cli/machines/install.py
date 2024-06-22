@@ -48,6 +48,9 @@ def install_nixos(
         upload_dir = tmpdir / upload_dir_
         upload_dir.mkdir(parents=True)
         secret_facts_store.upload(upload_dir)
+        upload_dir.chmod(0o700)
+        for file in upload_dir.glob("*"):
+            file.chmod(0o600)
 
         if password:
             os.environ["SSHPASS"] = password
