@@ -31,9 +31,6 @@
         "peter": 2,
         "albrecht": 3
       },
-      "additionalProperties": {
-        "type": "integer"
-      },
       "description": "Some attributes"
     },
     "services": {
@@ -47,24 +44,20 @@
       }
     },
     "destinations": {
-      "additionalProperties": {
-        "properties": {
-          "name": {
-            "default": "‹name›",
-            "description": "the name of the backup job",
-            "type": "string"
-          },
-          "repo": {
-            "description": "the borgbackup repository to backup to",
-            "type": "string"
-          }
+      "properties": {
+        "name": {
+          "default": "‹name›",
+          "description": "the name of the backup job",
+          "type": "string"
         },
-        "required": [
-          "repo"
-        ],
-        "type": "object"
+        "repo": {
+          "description": "the borgbackup repository to backup to",
+          "type": "string"
+        }
       },
-      "default": {},
+      "required": [
+        "repo"
+      ],
       "type": "object"
     }
   }

@@ -6,6 +6,7 @@
 
         # check if the `clan config` example jsonschema and data is valid
         lib-jsonschema-example-valid = pkgs.runCommand "lib-jsonschema-example-valid" { } ''
+          set -ex
           echo "Checking that example-schema.json is valid"
           ${pkgs.check-jsonschema}/bin/check-jsonschema \
             --check-metaschema ${./.}/example-schema.json
@@ -20,6 +21,8 @@
 
         # check if the `clan config` nix jsonschema converter unit tests succeed
         lib-jsonschema-nix-unit-tests = pkgs.runCommand "lib-jsonschema-nix-unit-tests" { } ''
+          set -ex
+          echo "Running nix-unit tests"
           export NIX_PATH=nixpkgs=${pkgs.path}
           ${pkgs.nix-unit}/bin/nix-unit \
             ${./.}/test.nix \
