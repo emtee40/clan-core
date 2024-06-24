@@ -1,5 +1,6 @@
 .direnv
 ***/.hypothesis
+**/module-schema
 out.log
 .coverage.*
 **/qubeclan
