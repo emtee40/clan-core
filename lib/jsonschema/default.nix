@@ -65,6 +65,7 @@ rec {
     required
     // {
       type = "object";
+      additionalProperties = false;
       inherit properties;
     };
 
