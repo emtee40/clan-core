@@ -1,5 +1,4 @@
 import fileinput
-import json
 import logging
 import os
 import shutil
@@ -86,10 +85,10 @@ def generate_flake(
                 print(line, end="")
 
     # generate machines from machineConfigs
-    for machine_name, machine_config in machine_configs.items():
-        settings_path = flake / "machines" / machine_name / "settings.json"
-        settings_path.parent.mkdir(parents=True, exist_ok=True)
-        settings_path.write_text(json.dumps(machine_config, indent=2))
+    # for machine_name, machine_config in machine_configs.items():
+    #     settings_path = flake / "machines" / machine_name / "settings.json"
+    #     settings_path.parent.mkdir(parents=True, exist_ok=True)
+    #     settings_path.write_text(json.dumps(machine_config, indent=2))
 
     if "/tmp" not in str(os.environ.get("HOME")):
         log.warning(
@@ -148,10 +147,10 @@ def create_flake(
         substitute(flake / "machines" / machine_name / "default.nix", flake)
 
     # generate machines from machineConfigs
-    for machine_name, machine_config in machine_configs.items():
-        settings_path = flake / "machines" / machine_name / "settings.json"
-        settings_path.parent.mkdir(parents=True, exist_ok=True)
-        settings_path.write_text(json.dumps(machine_config, indent=2))
+    # for machine_name, machine_config in machine_configs.items():
+    #     settings_path = flake / "machines" / machine_name / "settings.json"
+    #     settings_path.parent.mkdir(parents=True, exist_ok=True)
+    #     settings_path.write_text(json.dumps(machine_config, indent=2))
 
     # in the flake.nix file replace the string __CLAN_URL__ with the the clan flake
     # provided by get_test_flake_toplevel

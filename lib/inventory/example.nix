@@ -14,6 +14,7 @@ self.lib.buildClan {
       };
     };
   };
+  # inventory = builtins.fromJSON (builtins.readFile "${self}/inventory.json");
 
   # merged with
   machines = {

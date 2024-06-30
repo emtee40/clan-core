@@ -2,7 +2,6 @@
 import argparse
 import json
 import logging
-import os
 import re
 import sys
 from pathlib import Path
@@ -10,9 +9,7 @@ from typing import Any, get_origin
 
 from clan_cli.cmd import run
 from clan_cli.completions import add_dynamic_completer, complete_machines
-from clan_cli.dirs import machine_settings_file
 from clan_cli.errors import ClanError
-from clan_cli.git import commit_file
 from clan_cli.nix import nix_eval
 
 script_dir = Path(__file__).parent
@@ -177,17 +174,17 @@ def get_or_set_option(args: argparse.Namespace) -> None:
             with open(args.options_file) as f:
                 options = json.load(f)
         # compute settings json file location
-        if args.settings_file is None:
-            settings_file = machine_settings_file(Path(args.flake), args.machine)
-        else:
-            settings_file = args.settings_file
+        # if args.settings_file is None:
+        #     settings_file = machine_settings_file(Path(args.flake), args.machine)
+        # else:
+        #     settings_file = args.settings_file
         # set the option with the given value
         set_option(
             flake_dir=Path(args.flake),
             option=args.option,
             value=args.value,
             options=options,
-            settings_file=settings_file,
+            # settings_file=settings_file,
             option_description=args.option,
             show_trace=args.show_trace,
         )
@@ -253,7 +250,7 @@ def set_option(
     option: str,
     value: Any,
     options: dict,
-    settings_file: Path,
+    # settings_file: Path,
     option_description: str = "",
     show_trace: bool = False,
 ) -> None:
@@ -286,25 +283,25 @@ def set_option(
     current[option_path_store[-1]] = casted
 
     # check if there is an existing config file
-    if os.path.exists(settings_file):
-        with open(settings_file) as f:
-            current_config = json.load(f)
-    else:
-        current_config = {}
+    # if os.path.exists(settings_file):
+    #     with open(settings_file) as f:
+    #         current_config = json.load(f)
+    # else:
+    #     current_config = {}
 
     # merge and save the new config file
-    new_config = merge(current_config, result)
-    settings_file.parent.mkdir(parents=True, exist_ok=True)
-    with open(settings_file, "w") as f:
-        json.dump(new_config, f, indent=2)
-        print(file=f)  # add newline at the end of the file to make git happy
+    # new_config = merge(current_config, result)
+    # settings_file.parent.mkdir(parents=True, exist_ok=True)
+    # with open(settings_file, "w") as f:
+    #     json.dump(new_config, f, indent=2)
+    #     print(file=f)  # add newline at the end of the file to make git happy
 
-    if settings_file.resolve().is_relative_to(flake_dir):
-        commit_file(
-            settings_file,
-            repo_dir=flake_dir,
-            commit_message=f"Set option {option_description}",
-        )
+    # if settings_file.resolve().is_relative_to(flake_dir):
+    #     commit_file(
+    #         settings_file,
+    #         repo_dir=flake_dir,
+    #         commit_message=f"Set option {option_description}",
+    #     )
 
 
 # takes a (sub)parser and configures it
