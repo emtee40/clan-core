@@ -1,12 +1,15 @@
 # Clan with `flake-parts`
 
-Clan supports integration with [flake.parts](https://flake.parts/) a tool which allows composing nixos modules in a modular way.
+Clan supports integration with [flake.parts](https://flake.parts/) a tool which
+allows composing nixos modules in a modular way.
 
 Here's how to set up Clan using `nix flakes` and `flake-parts`.
 
 ## 1. Update Your Flake Inputs
 
-To begin, you'll need to add `flake-parts` as a new dependency in your flake's inputs. This is alongside the already existing dependencies, such as `clan-core` and `nixpkgs`. Here's how you can update your `flake.nix` file:
+To begin, you'll need to add `flake-parts` as a new dependency in your flake's
+inputs. This is alongside the already existing dependencies, such as `clan-core`
+and `nixpkgs`. Here's how you can update your `flake.nix` file:
 
 ```nix
 # flake.nix
@@ -28,19 +31,22 @@ inputs = {
 
 ## 2. Import Clan-Core Flake Module
 
-After updating your flake inputs, the next step is to import the `clan-core` flake module. This will make the [clan options](https://git.clan.lol/clan/clan-core/src/branch/main/flakeModules/clan.nix) available within `mkFlake`.
+After updating your flake inputs, the next step is to import the `clan-core`
+flake module. This will make the
+[clan options](https://git.clan.lol/clan/clan-core/src/branch/main/flakeModules/clan.nix)
+available within `mkFlake`.
 
 ```nix
-  outputs =
-    inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } (
-      {
-        #
-        imports = [
-          inputs.clan-core.flakeModules.default
-        ];
-      }
-    );
+outputs =
+  inputs@{ flake-parts, ... }:
+  flake-parts.lib.mkFlake { inherit inputs; } (
+    {
+      #
+      imports = [
+        inputs.clan-core.flakeModules.default
+      ];
+    }
+  );
 ```
 
 ### 3. Configure Clan Settings and Define Machines
@@ -91,7 +97,8 @@ Below is a guide on how to structure this in your flake.nix:
     });
 ```
 
-For detailed information about configuring `flake-parts` and the available options within Clan,
-refer to the Clan module documentation located [here](https://git.clan.lol/clan/clan-core/src/branch/main/flakeModules/clan.nix).
+For detailed information about configuring `flake-parts` and the available
+options within Clan, refer to the Clan module documentation located
+[here](https://git.clan.lol/clan/clan-core/src/branch/main/flakeModules/clan.nix).
 
 ---

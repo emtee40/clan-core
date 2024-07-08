@@ -48,18 +48,17 @@ const obs: ObserverRegistry = operationNames.reduce(
     ...acc,
     [opName]: [],
   }),
-  {} as ObserverRegistry
+  {} as ObserverRegistry,
 );
 
 interface ReceiveOptions {
   /**
    * Calls only the registered function that has the same key as used with dispatch
-   *
    */
   fnKey: string;
 }
 function createFunctions<K extends OperationNames>(
-  operationName: K
+  operationName: K,
 ): {
   dispatch: (args: OperationArgs<K>) => void;
   receive: (fn: (response: OperationResponse<K>) => void) => void;
@@ -76,7 +75,7 @@ function createFunctions<K extends OperationNames>(
       });
     },
     receive: (
-      fn: (response: OperationResponse<K>) => void
+      fn: (response: OperationResponse<K>) => void,
       // options?: ReceiveOptions
     ) => {
       obs[operationName].push(fn);
@@ -94,16 +93,14 @@ type PyApi = {
   };
 };
 
-const deserialize =
-  <T>(fn: (response: T) => void) =>
-  (str: string) => {
-    try {
-      fn(JSON.parse(str) as T);
-    } catch (e) {
-      console.error(str);
-      alert(`Error parsing JSON: ${e}`);
-    }
-  };
+const deserialize = <T>(fn: (response: T) => void) => (str: string) => {
+  try {
+    fn(JSON.parse(str) as T);
+  } catch (e) {
+    console.error(str);
+    alert(`Error parsing JSON: ${e}`);
+  }
+};
 
 // Create the API object
 

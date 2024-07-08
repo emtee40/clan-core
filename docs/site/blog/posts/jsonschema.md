@@ -9,11 +9,18 @@ slug: jsonschema-converter
 
 ## Overview
 
-We’ve developed a new library designed to extract interfaces from NixOS modules and convert them into JSON schemas, paving the way for effortless GUI generation. This blog post outlines the motivations behind this development, demonstrates the capabilities of the library, and guides you through leveraging it to create GUIs seamlessly.
+We’ve developed a new library designed to extract interfaces from NixOS modules
+and convert them into JSON schemas, paving the way for effortless GUI
+generation. This blog post outlines the motivations behind this development,
+demonstrates the capabilities of the library, and guides you through leveraging
+it to create GUIs seamlessly.
 
 ## Motivation
 
-In recent months, our team has been exploring various graphical user interfaces (GUIs) to streamline NixOS machine configuration. While our opinionated Clan modules simplify NixOS configurations, there's a need to configure these modules from diverse frontends, such as:
+In recent months, our team has been exploring various graphical user interfaces
+(GUIs) to streamline NixOS machine configuration. While our opinionated Clan
+modules simplify NixOS configurations, there's a need to configure these modules
+from diverse frontends, such as:
 
 - Command-line interfaces (CLIs)
 - Web-based UIs
@@ -21,14 +28,18 @@ In recent months, our team has been exploring various graphical user interfaces 
 - Mobile applications
 - Large Language Models (LLMs)
 
-Given this need, a universal format like JSON is a natural choice. It is already possible as of now, to import json based NixOS configurations, as illustrated below:
+Given this need, a universal format like JSON is a natural choice. It is already
+possible as of now, to import json based NixOS configurations, as illustrated
+below:
 
 `configuration.json`:
+
 ```json
 { "networking": { "hostName": "my-machine" } }
 ```
 
 This configuration can be then imported inside a classic NixOS config:
+
 ```nix
 {config, lib, pkgs, ...}: {
   imports = [
@@ -37,14 +48,17 @@ This configuration can be then imported inside a classic NixOS config:
 }
 ```
 
-This straightforward approach allows us to build a frontend that generates JSON, enabling the configuration of NixOS machines. But, two critical questions arise:
+This straightforward approach allows us to build a frontend that generates JSON,
+enabling the configuration of NixOS machines. But, two critical questions arise:
 
 1. How does the frontend learn about existing configuration options?
 2. How can it verify user input without running Nix?
 
-Introducing [JSON schema](https://json-schema.org/), a widely supported standard that defines interfaces in JSON and validates input against them.
+Introducing [JSON schema](https://json-schema.org/), a widely supported standard
+that defines interfaces in JSON and validates input against them.
 
 Example schema for `networking.hostName`:
+
 ```json
 {
   "type": "object",
@@ -64,7 +78,9 @@ Example schema for `networking.hostName`:
 
 ## Client-Side Input Validation
 
-Validating input against JSON schemas is both efficient and well-supported across numerous programming languages. Using JSON schema validators, you can accurately check configurations like our `configuration.json`.
+Validating input against JSON schemas is both efficient and well-supported
+across numerous programming languages. Using JSON schema validators, you can
+accurately check configurations like our `configuration.json`.
 
 Validation example:
 
@@ -93,20 +109,28 @@ On instance['networking']['hostName']:
 
 ## Automatic GUI Generation
 
-Certain libraries facilitate straightforward GUI generation from JSON schemas. For instance, the [react-jsonschema-form playground](https://rjsf-team.github.io/react-jsonschema-form/) auto-generates a form for any given schema.
+Certain libraries facilitate straightforward GUI generation from JSON schemas.
+For instance, the
+[react-jsonschema-form playground](https://rjsf-team.github.io/react-jsonschema-form/)
+auto-generates a form for any given schema.
 
 ## NixOS Module to JSON Schema Converter
 
-To enable the development of responsive frontends, our library allows the extraction of interfaces from NixOS modules to JSON schemas. Open-sourced for community collaboration, this library supports building sophisticated user interfaces for NixOS.
+To enable the development of responsive frontends, our library allows the
+extraction of interfaces from NixOS modules to JSON schemas. Open-sourced for
+community collaboration, this library supports building sophisticated user
+interfaces for NixOS.
 
-Here’s a preview of our library's functions exposed through the [clan-core](https://git.clan.lol/clan/clan-core) flake:
+Here’s a preview of our library's functions exposed through the
+[clan-core](https://git.clan.lol/clan/clan-core) flake:
 
 - `lib.jsonschema.parseModule` - Generates a schema for a NixOS module.
 - `lib.jsonschema.parseOption` - Generates a schema for a single NixOS option.
-- `lib.jsonschema.parseOptions` - Generates a schema from an attrset of NixOS options.
+- `lib.jsonschema.parseOptions` - Generates a schema from an attrset of NixOS
+  options.
 
-Example:
-`module.nix`:
+Example: `module.nix`:
+
 ```nix
 {lib, config, pkgs, ...}: {
   # a simple service with two options
@@ -121,6 +145,7 @@ Example:
 ```
 
 Converted, using the `parseModule` function:
+
 ```shell
 $ cd clan-core
 $ nix eval --json --impure --expr \
@@ -142,7 +167,9 @@ This utility can also generate interfaces for existing NixOS modules or options.
 
 ## GUI for NGINX in Under a Minute
 
-Creating a prototype GUI for the NGINX module using our library and [react-jsonschema-form playground](https://rjsf-team.github.io/react-jsonschema-form/) can be done quickly:
+Creating a prototype GUI for the NGINX module using our library and
+[react-jsonschema-form playground](https://rjsf-team.github.io/react-jsonschema-form/)
+can be done quickly:
 
 1. Export all NGINX options into a JSON schema using a Nix expression:
 
@@ -157,11 +184,14 @@ in
 ```
 
 2. Write the schema into a file:
+
 ```shell
 $ nix eval --json -f ./export.nix | jq > nginx.json
 ```
 
-3. Open the [react-jsonschema-form playground](https://rjsf-team.github.io/react-jsonschema-form/), select `Blank` and paste the `nginx.json` contents.
+3. Open the
+   [react-jsonschema-form playground](https://rjsf-team.github.io/react-jsonschema-form/),
+   select `Blank` and paste the `nginx.json` contents.
 
 This provides a quick look at a potential GUI (screenshot is cropped).
 
@@ -171,19 +201,30 @@ This provides a quick look at a potential GUI (screenshot is cropped).
 
 ### Laziness
 
-JSON schema mandates the declaration of all required fields upfront, which might be configured implicitly or remain unused. For instance, `services.nginx.virtualHosts.<name>.sslCertificate` must be specified even if SSL isn’t enabled.
+JSON schema mandates the declaration of all required fields upfront, which might
+be configured implicitly or remain unused. For instance,
+`services.nginx.virtualHosts.<name>.sslCertificate` must be specified even if
+SSL isn’t enabled.
 
 ### Limited Types
 
-Certain NixOS module types, like `types.functionTo` and `types.package`, do not map straightforwardly to JSON. For full compatibility, adjustments to NixOS modules might be necessary, such as substituting `listOf package` with `listOf str`.
+Certain NixOS module types, like `types.functionTo` and `types.package`, do not
+map straightforwardly to JSON. For full compatibility, adjustments to NixOS
+modules might be necessary, such as substituting `listOf package` with
+`listOf str`.
 
 ### Parsing NixOS Modules
 
-Currently, our converter relies on the `options` attribute of evaluated NixOS modules, extracting information from the `type.name` attribute, which is suboptimal. Enhanced introspection capabilities within the NixOS module system would be beneficial.
+Currently, our converter relies on the `options` attribute of evaluated NixOS
+modules, extracting information from the `type.name` attribute, which is
+suboptimal. Enhanced introspection capabilities within the NixOS module system
+would be beneficial.
 
 ## Future Prospects
 
-We hope these experiments inspire the community, encourage contributions and further development in this space. Share your ideas and contributions through our issue tracker or matrix channel!
+We hope these experiments inspire the community, encourage contributions and
+further development in this space. Share your ideas and contributions through
+our issue tracker or matrix channel!
 
 ## Links
 

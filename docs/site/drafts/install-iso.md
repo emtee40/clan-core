@@ -1,6 +1,7 @@
 # Hardware Installation
 
-For installations on physical hardware, create a NixOS installer image and transfer it to a bootable USB drive as described below.
+For installations on physical hardware, create a NixOS installer image and
+transfer it to a bootable USB drive as described below.
 
 ## Creating a Bootable USB Drive on Linux
 
@@ -26,40 +27,42 @@ curl -L https://github.com/nix-community/nixos-images/releases/download/nixos-un
 
 2. Identify your flash drive with `lsblk`.
 
-    ```shellSession
-    lsblk
-    NAME                                          MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS
-    sdb                                             8:0    1 117,2G  0 disk
-    └─sdb1                                          8:1    1 117,2G  0 part  /run/media/qubasa/INTENSO
-    nvme0n1                                       259:0    0   1,8T  0 disk
-    ├─nvme0n1p1                                   259:1    0   512M  0 part  /boot
-    └─nvme0n1p2                                   259:2    0   1,8T  0 part
-      └─luks-f7600028-9d83-4967-84bc-dd2f498bc486 254:0    0   1,8T  0 crypt /nix/store
-    ```
+   ```shellSession
+   lsblk
+   NAME                                          MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS
+   sdb                                             8:0    1 117,2G  0 disk
+   └─sdb1                                          8:1    1 117,2G  0 part  /run/media/qubasa/INTENSO
+   nvme0n1                                       259:0    0   1,8T  0 disk
+   ├─nvme0n1p1                                   259:1    0   512M  0 part  /boot
+   └─nvme0n1p2                                   259:2    0   1,8T  0 part
+     └─luks-f7600028-9d83-4967-84bc-dd2f498bc486 254:0    0   1,8T  0 crypt /nix/store
+   ```
 
-    In this case it's `sdb`
+   In this case it's `sdb`
 
-3. Ensure all partitions on the drive are unmounted. Replace `sdX` in the command below with your device identifier (like `sdb`, etc.):
+3. Ensure all partitions on the drive are unmounted. Replace `sdX` in the
+   command below with your device identifier (like `sdb`, etc.):
 
-    ```shellSession
-    sudo umount /dev/sdb1
-    ```
+   ```shellSession
+   sudo umount /dev/sdb1
+   ```
 
 ### Write the Image to the USB Drive
 
 Use the `dd` utility to write the NixOS installer image to your USB drive:
 
-  ```shellSession
-  sudo dd bs=4M conv=fsync oflag=direct status=progress if=./nixos-installer-x86_64-linux.iso of=/dev/sd<X>
-  ```
+```shellSession
+sudo dd bs=4M conv=fsync oflag=direct status=progress if=./nixos-installer-x86_64-linux.iso of=/dev/sd<X>
+```
 
-  In this case, the USB device is `sdb` use `of=/dev/sdb`
+In this case, the USB device is `sdb` use `of=/dev/sdb`
 
 ### Boot and Connect
 
 After writing the installer to the USB drive, use it to boot the target machine.
 
-1. For this secure boot needs to be disabled. Go into your UEFI / Bios settings by pressing one of the keys outlined below while booting:
+1. For this secure boot needs to be disabled. Go into your UEFI / Bios settings
+   by pressing one of the keys outlined below while booting:
 
    - **Dell**: F2/Del (BIOS Setup)
    - **HP**: Esc (Startup Menu)
@@ -71,9 +74,11 @@ After writing the installer to the USB drive, use it to boot the target machine.
    - **Samsung**: F2 (BIOS Setup)
    - **MSI**: Del (BIOS Setup)
    - **Apple**: Option (Alt) Key (Boot Menu for Mac)
-   - If your hardware was not listed read the manufacturers instructions how to enter the boot Menu/BIOS Setup.
+   - If your hardware was not listed read the manufacturers instructions how to
+     enter the boot Menu/BIOS Setup.
 
-2. Inside the UEFI/Bios Menu go to `Security->Secure Boot` and disable secure boot
+2. Inside the UEFI/Bios Menu go to `Security->Secure Boot` and disable secure
+   boot
 
 3. Save your settings. Put in the USB stick and reboot.
 
@@ -91,43 +96,46 @@ After writing the installer to the USB drive, use it to boot the target machine.
        - **Apple**: Option (Alt) Key (Boot Menu for Mac)
        - If your hardware was not listed read the manufacturers instructions how to enter the boot Menu/BIOS Setup.
 
-
 5. Select `NixOS` to boot into the clan installer
 
-6. The installer will display an IP address and a root password, which you can use to connect via SSH.  
-    Alternatively you can also use the displayed QR code.
+6. The installer will display an IP address and a root password, which you can
+   use to connect via SSH.\
+   Alternatively you can also use the displayed QR code.
 
-7. Set your keyboard language (i.e. `de` for German keyboards, default is English). Important for writing passwords correctly.
+7. Set your keyboard language (i.e. `de` for German keyboards, default is
+   English). Important for writing passwords correctly.
 
-    ```shellSession
-    loadkeys de
-    ```
+   ```shellSession
+   loadkeys de
+   ```
 
 8. If you only have Wifi available, execute:
 
-    1. Bring up the `iwd` shell
+   1. Bring up the `iwd` shell
 
-        ```shellSession
-        iwctl
-        ```
+      ```shellSession
+      iwctl
+      ```
 
-    2. List available networks. Double press tab after station for autocompleting your wlan device. In this case `wlan0`
+   2. List available networks. Double press tab after station for autocompleting
+      your wlan device. In this case `wlan0`
 
-        ```shellSession
-        [iwd] station wlan0 get-networks
-        ```
+      ```shellSession
+      [iwd] station wlan0 get-networks
+      ```
 
-    3. Connect to a Wifi network. Replace `SSID` with the wlan network name.
+   3. Connect to a Wifi network. Replace `SSID` with the wlan network name.
 
-        ```shellSession
-        [iwd] station wlan0 connect SSID
-        ```
+      ```shellSession
+      [iwd] station wlan0 connect SSID
+      ```
 
-9. Now that you have internet re-execute the init script by pressing `Ctrl+D` or by executing:
+9. Now that you have internet re-execute the init script by pressing `Ctrl+D` or
+   by executing:
 
-    ```shellSession
-    bash
-    ```
+   ```shellSession
+   bash
+   ```
 
 10. Connect to the machine over ssh
 

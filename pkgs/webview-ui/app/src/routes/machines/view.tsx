@@ -1,11 +1,11 @@
 import {
+  type Component,
+  createEffect,
+  createSignal,
   For,
   Match,
   Show,
   Switch,
-  createEffect,
-  createSignal,
-  type Component,
 } from "solid-js";
 import { useMachineContext } from "../../Config";
 import { route } from "@/src/App";
@@ -69,7 +69,7 @@ export const MachineListView: Component = () => {
       toast.error("Error loading machines");
       response.errors.forEach((error) =>
         toast.error(
-          `${error.message}: ${error.description} From ${error.location}`
+          `${error.message}: ${error.description} From ${error.location}`,
         )
       );
     }
@@ -86,8 +86,7 @@ export const MachineListView: Component = () => {
                 title: "Open Clan",
                 mode: "select_folder",
               },
-            })
-          }
+            })}
         >
           <span class="material-icons ">folder_open</span>
         </button>

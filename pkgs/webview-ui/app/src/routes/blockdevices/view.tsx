@@ -1,6 +1,6 @@
 import { route } from "@/src/App";
 import { OperationResponse, pyApi } from "@/src/api";
-import { Component, For, Show, createEffect, createSignal } from "solid-js";
+import { Component, createEffect, createSignal, For, Show } from "solid-js";
 
 type DevicesModel = Extract<
   OperationResponse<"show_block_devices">,

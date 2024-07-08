@@ -1,6 +1,7 @@
 # Setup
 
-Create your own clan with these initial steps and manage a fleet of machines with one single testable git repository!
+Create your own clan with these initial steps and manage a fleet of machines
+with one single testable git repository!
 
 ### Prerequisites
 
@@ -35,9 +36,11 @@ Add the Clan CLI into your development workflow:
 nix shell git+https://git.clan.lol/clan/clan-core#clan-cli
 ```
 
-You can find reference documentation for the `clan` cli program [here](./reference/cli/index.md).
+You can find reference documentation for the `clan` cli program
+[here](./reference/cli/index.md).
 
 Alternatively you can check out the help pages directly:
+
 ```terminalSession
 clan --help
 ```
@@ -51,7 +54,8 @@ clan flakes create my-clan
 ```
 
 This command creates the `flake.nix` and `.clan-flake` files for your project.
-It will also generate files from a default template, to help show general clan usage patterns.
+It will also generate files from a default template, to help show general clan
+usage patterns.
 
 ### Step 3: Verify the Project Structure
 
@@ -64,7 +68,7 @@ tree
 
 This should yield the following:
 
-``` { .console .no-copy }
+```{ .console .no-copy }
 .
 ├── flake.nix
 ├── machines
@@ -84,7 +88,7 @@ This should yield the following:
 clan machines list
 ```
 
-``` { .console .no-copy }
+```{ .console .no-copy }
 jon
 sara
 ```
@@ -97,6 +101,7 @@ sara
 
 ### What's Next?
 
-- [**Installer**](getting-started/installer.md): Setting up new computers remotely is easy with an USB stick.
+- [**Installer**](getting-started/installer.md): Setting up new computers
+  remotely is easy with an USB stick.
 
 ---

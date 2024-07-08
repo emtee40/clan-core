@@ -11,6 +11,7 @@
       treefmt.programs.nixfmt.enable = true;
       treefmt.programs.nixfmt.package = pkgs.nixfmt-rfc-style;
       treefmt.programs.deadnix.enable = true;
+      treefmt.programs.deno.enable = true;
 
       treefmt.programs.mypy.directories = {
         "pkgs/clan-cli".extraPythonPackages = self'.packages.clan-cli.testDependencies;
@@ -20,6 +21,7 @@
       };
       treefmt.programs.ruff.check = true;
       treefmt.programs.ruff.format = true;
+      treefmt.settings.global.excludes = [ "*/sops/*" ];
 
       # FIXME: currently broken in CI
       #treefmt.settings.formatter.vale =

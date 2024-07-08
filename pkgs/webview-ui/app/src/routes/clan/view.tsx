@@ -1,5 +1,5 @@
 import { pyApi } from "@/src/api";
-import { Match, Switch, createEffect, createSignal } from "solid-js";
+import { createEffect, createSignal, Match, Switch } from "solid-js";
 import toast from "solid-toast";
 import { ClanDetails, ClanForm } from "./clanDetails";
 
@@ -56,9 +56,7 @@ export const clan = () => {
           <ClanForm
             actions={
               <div class="card-actions justify-end">
-                <button
-                  class="btn btn-primary"
-                  // onClick={() => {
+                <button class="btn btn-primary" // onClick={() => {
                   //   pyApi.open_file.dispatch({
                   //     file_request: { mode: "save" },
                   //   });

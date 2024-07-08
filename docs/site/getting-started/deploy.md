@@ -1,14 +1,19 @@
 # Deploy Machine
 
-Integrating a new machine into your Clan environment is an easy yet flexible process, allowing for a straight forward management of multiple NixOS configurations.
+Integrating a new machine into your Clan environment is an easy yet flexible
+process, allowing for a straight forward management of multiple NixOS
+configurations.
 
 We'll walk you through adding a new computer to your Clan.
 
 ## Installing a New Machine
 
-Clan CLI, in conjunction with [nixos-anywhere](https://github.com/nix-community/nixos-anywhere), provides a seamless method for installing NixOS on various machines.
+Clan CLI, in conjunction with
+[nixos-anywhere](https://github.com/nix-community/nixos-anywhere), provides a
+seamless method for installing NixOS on various machines.
 
-This process involves preparing a suitable hardware and disk partitioning configuration and ensuring the target machine is accessible via SSH.
+This process involves preparing a suitable hardware and disk partitioning
+configuration and ensuring the target machine is accessible via SSH.
 
 ### Step 0. Prerequisites
 
@@ -35,11 +40,10 @@ This process involves preparing a suitable hardware and disk partitioning config
 
         - Any cloud machine if it is reachable via SSH and supports `kexec`.
 
-
 ### Step 1. Deploy the machine
 
-**Finally deployment time!** Use the following command to build and deploy the image via SSH onto your machine.
-
+**Finally deployment time!** Use the following command to build and deploy the
+image via SSH onto your machine.
 
 === "**Image Installer**"
 
@@ -136,21 +140,20 @@ This process involves preparing a suitable hardware and disk partitioning config
     clan machines install [MACHINE] <target_host>
     ```
 
-
 If you are using our template `[MACHINE]` would be `jon`
 
-
-!!! success
-    Your machine is all set up. 🎉 🚀
-
+!!! success Your machine is all set up. 🎉 🚀
 
 ## Update Your Machines
 
-Clan CLI enables you to remotely update your machines over SSH. This requires setting up a target address for each target machine.
+Clan CLI enables you to remotely update your machines over SSH. This requires
+setting up a target address for each target machine.
 
 ### Setting the Target Host
 
-Replace `root@jon` with the actual hostname or IP address of your target machine:
+Replace `root@jon` with the actual hostname or IP address of your target
+machine:
+
 ```{.nix hl_lines="9" .no-copy}
 buildClan {
     # ...
@@ -166,10 +169,8 @@ buildClan {
 };
 ```
 
-
-!!! warning
-    The use of `root@` in the target address implies SSH access as the `root` user.
-    Ensure that the root login is secured and only used when necessary.
+!!! warning The use of `root@` in the target address implies SSH access as the
+`root` user. Ensure that the root login is secured and only used when necessary.
 
 ### Updating Machine Configurations
 
@@ -179,7 +180,8 @@ Execute the following command to update the specified machine:
 clan machines update jon
 ```
 
-You can also update all configured machines simultaneously by omitting the machine name:
+You can also update all configured machines simultaneously by omitting the
+machine name:
 
 ```bash
 clan machines update
@@ -187,10 +189,9 @@ clan machines update
 
 ### Setting a Build Host
 
-If the machine does not have enough resources to run the NixOS evaluation or build itself,
-it is also possible to specify a build host instead.
-During an update, the cli will ssh into the build host and run `nixos-rebuild` from there.
-
+If the machine does not have enough resources to run the NixOS evaluation or
+build itself, it is also possible to specify a build host instead. During an
+update, the cli will ssh into the build host and run `nixos-rebuild` from there.
 
 ```{.nix hl_lines="5" .no-copy}
 buildClan {
@@ -205,8 +206,9 @@ buildClan {
 
 ### Excluding a machine from `clan machine update`
 
-To exclude machines from being updated when running `clan machines update` without any machines specified,
-one can set the `clan.deployment.requireExplicitUpdate` option to true:
+To exclude machines from being updated when running `clan machines update`
+without any machines specified, one can set the
+`clan.deployment.requireExplicitUpdate` option to true:
 
 ```{.nix hl_lines="5" .no-copy}
 buildClan {
@@ -219,7 +221,8 @@ buildClan {
 };
 ```
 
-This is useful for machines that are not always online or are not part of the regular update cycle.
+This is useful for machines that are not always online or are not part of the
+regular update cycle.
 
 ---
 
@@ -228,4 +231,3 @@ This is useful for machines that are not always online or are not part of the re
 - [**Mesh VPN**](./mesh-vpn.md): Configuring a secure mesh network.
 
 ---
-

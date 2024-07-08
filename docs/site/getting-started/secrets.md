@@ -1,21 +1,26 @@
 # Secrets / Facts
 
-Clan enables encryption of secrets (such as passwords & keys) ensuring security and ease-of-use among users.
+Clan enables encryption of secrets (such as passwords & keys) ensuring security
+and ease-of-use among users.
 
-Clan utilizes the [sops](https://github.com/getsops/sops) format and integrates with [sops-nix](https://github.com/Mic92/sops-nix) on NixOS machines.
+Clan utilizes the [sops](https://github.com/getsops/sops) format and integrates
+with [sops-nix](https://github.com/Mic92/sops-nix) on NixOS machines.
 
 This guide will walk you through:
 
-- **Creating a Keypair for Your User**: Learn how to generate a keypair for $USER to securely control all secrets.
-- **Creating Your First Secret**: Step-by-step instructions on creating your initial secret.
-- **Assigning Machine Access to the Secret**: Understand how to grant a machine access to the newly created secret.
+- **Creating a Keypair for Your User**: Learn how to generate a keypair for
+  $USER to securely control all secrets.
+- **Creating Your First Secret**: Step-by-step instructions on creating your
+  initial secret.
+- **Assigning Machine Access to the Secret**: Understand how to grant a machine
+  access to the newly created secret.
 
 ## Create Your Admin Keypair
 
 To get started, you'll need to create **Your admin keypair**.
 
-!!! info
-    Don't worry — if you've already made one before, this step won't change or overwrite it.
+!!! info Don't worry — if you've already made one before, this step won't change
+or overwrite it.
 
 ```bash
 clan secrets key generate
@@ -30,12 +35,12 @@ Generated age private key at '/home/joerg/.config/sops/age/keys.txt' for your us
 Also add your age public key to the repository with 'clan secrets users add YOUR_USER age1wkth7uhpkl555g40t8hjsysr20drq286netu8zptw50lmqz7j95sw2t3l7' (replace YOUR_USER with your actual username)
 ```
 
-!!! warning
-    Make sure to keep a safe backup of the private key you've just created.
-    If it's lost, you won't be able to get to your secrets anymore because they all need the admin key to be unlocked.
+!!! warning Make sure to keep a safe backup of the private key you've just
+created. If it's lost, you won't be able to get to your secrets anymore because
+they all need the admin key to be unlocked.
 
-!!! note
-    It's safe to add any secrets created by the clan CLI and placed in your repository to version control systems like `git`.
+!!! note It's safe to add any secrets created by the clan CLI and placed in your
+repository to version control systems like `git`.
 
 ### Add Your Public Key
 
@@ -43,7 +48,8 @@ Also add your age public key to the repository with 'clan secrets users add YOUR
 clan secrets users add $USER <your_public_key>
 ```
 
-It's best to choose the same username as on your Setup/Admin Machine that you use to control the deployment with.
+It's best to choose the same username as on your Setup/Admin Machine that you
+use to control the deployment with.
 
 Once run this will create the following files:
 
@@ -53,7 +59,9 @@ sops/
     └── <your_username>/
         └── key.json
 ```
-If you followed the quickstart tutorial all necessary secrets are initialized at this point.
+
+If you followed the quickstart tutorial all necessary secrets are initialized at
+this point.
 
 ---
 
@@ -65,7 +73,8 @@ If you followed the quickstart tutorial all necessary secrets are initialized at
 
 ## More on Secrets
 
-If you want to know more about how to save and share passwords in your clan read further!
+If you want to know more about how to save and share passwords in your clan read
+further!
 
 ### Adding a Secret
 
@@ -90,8 +99,10 @@ clan secrets list
 
 A NixOS machine will automatically import all secrets that are encrypted for the
 current machine. At runtime it will use the host key to decrypt all secrets into
-an in-memory, non-persistent filesystem using [sops-nix](https://github.com/Mic92/sops-nix). 
-In your nixos configuration you can get a path to secrets like this `config.sops.secrets.<name>.path`. For example:
+an in-memory, non-persistent filesystem using
+[sops-nix](https://github.com/Mic92/sops-nix). In your nixos configuration you
+can get a path to secrets like this `config.sops.secrets.<name>.path`. For
+example:
 
 ```nix
 { config, ...}: {
@@ -106,12 +117,13 @@ In your nixos configuration you can get a path to secrets like this `config.sops
 
 ### Assigning Access
 
-When using `clan secrets set <secret>` without arguments, secrets are encrypted for the key of the user named like your current $USER.
+When using `clan secrets set <secret>` without arguments, secrets are encrypted
+for the key of the user named like your current $USER.
 
 To add machines/users to an existing secret use:
 
 ```bash
- clan secrets machines add-secret <machine_name> <secret_name>
+clan secrets machines add-secret <machine_name> <secret_name>
 ```
 
 Alternatively specify users and machines while creating a secret:
@@ -156,43 +168,49 @@ Here's how to get started:
 
 ### Adding Machine Keys
 
-New machines in Clan come with age keys stored in `./sops/machines/<machine_name>`. To list these machines:
+New machines in Clan come with age keys stored in
+`./sops/machines/<machine_name>`. To list these machines:
 
 ```bash
- clan secrets machines list
+clan secrets machines list
 ```
 
 For existing machines, add their keys:
 
 ```bash
- clan secrets machines add <machine_name> <age_key>
+clan secrets machines add <machine_name> <age_key>
 ```
 
 To fetch an age key from an SSH host key:
 
 ```bash
- ssh-keyscan <domain_name> | nix shell nixpkgs#ssh-to-age -c ssh-to-age
+ssh-keyscan <domain_name> | nix shell nixpkgs#ssh-to-age -c ssh-to-age
 ```
 
 ### Migration: Importing existing sops-based keys / sops-nix
 
-`clan secrets` stores each secret in a single file, whereas [sops](https://github.com/Mic92/sops-nix) commonly allows to put all secrets in a yaml or json document.
+`clan secrets` stores each secret in a single file, whereas
+[sops](https://github.com/Mic92/sops-nix) commonly allows to put all secrets in
+a yaml or json document.
 
-If you already happened to use sops-nix, you can migrate by using the `clan secrets import-sops` command by importing these files:
+If you already happened to use sops-nix, you can migrate by using the
+`clan secrets import-sops` command by importing these files:
 
 ```bash
 % clan secrets import-sops --prefix matchbox- --group admins --machine matchbox nixos/matchbox/secrets/secrets.yaml
 ```
 
-This will create secrets for each secret found in `nixos/matchbox/secrets/secrets.yaml` in a `./sops` folder of your repository.
-Each member of the group `admins` in this case will be able to decrypt the secrets with their respective key.
+This will create secrets for each secret found in
+`nixos/matchbox/secrets/secrets.yaml` in a `./sops` folder of your repository.
+Each member of the group `admins` in this case will be able to decrypt the
+secrets with their respective key.
 
-Since our clan secret module will auto-import secrets that are encrypted for a particular nixos machine,
-you can now remove `sops.secrets.<secrets> = { };` unless you need to specify more options for the secret like owner/group of the secret file.
-
+Since our clan secret module will auto-import secrets that are encrypted for a
+particular nixos machine, you can now remove `sops.secrets.<secrets> = { };`
+unless you need to specify more options for the secret like owner/group of the
+secret file.
 
 ## Indepth Explanation
-
 
 The secrets system conceptually knows two different entities:
 
@@ -201,37 +219,48 @@ The secrets system conceptually knows two different entities:
 
 **A Users** Can add or revoke machines' access to secrets.
 
-**A machine** Can decrypt secrets that where encrypted specifically for that machine.
+**A machine** Can decrypt secrets that where encrypted specifically for that
+machine.
 
-!!! Danger
-    **Always make sure at least one _User_ has access to a secret**. Otherwise you could lock yourself out from accessing the secret.
+!!! Danger **Always make sure at least one _User_ has access to a secret**.
+Otherwise you could lock yourself out from accessing the secret.
 
 ### Inherited implications
 
-By default clan uses [sops](https://github.com/getsops/sops) through [sops-nix](https://github.com/Mic92/sops-nix) for managing its secrets which inherits some implications that are important to understand:
+By default clan uses [sops](https://github.com/getsops/sops) through
+[sops-nix](https://github.com/Mic92/sops-nix) for managing its secrets which
+inherits some implications that are important to understand:
 
-- **Public/Private keys**: Entities are identified via their public keys. Each Entity can use their respective private key to decrypt a secret.
+- **Public/Private keys**: Entities are identified via their public keys. Each
+  Entity can use their respective private key to decrypt a secret.
 - **Public keys are stored**: All Public keys are stored inside the repository
-- **Secrets are stored Encrypted**: secrets are stored inside the repository encrypted with the respective public keys
-- **Secrets are deployed encrypted**: Fully encrypted secrets are deployed to machines at deployment time.
-- **Secrets are decrypted by sops on-demand**: Each machine decrypts its secrets at runtime and stores them at an ephemeral location.
-- **Machine key-pairs are auto-generated**: When a machine is created **no user-interaction is required** to setup public/private key-pairs.
-- **secrets are re-encrypted**: In case machines, users or groups are modified secrets get re-encrypted on demand.
+- **Secrets are stored Encrypted**: secrets are stored inside the repository
+  encrypted with the respective public keys
+- **Secrets are deployed encrypted**: Fully encrypted secrets are deployed to
+  machines at deployment time.
+- **Secrets are decrypted by sops on-demand**: Each machine decrypts its secrets
+  at runtime and stores them at an ephemeral location.
+- **Machine key-pairs are auto-generated**: When a machine is created **no
+  user-interaction is required** to setup public/private key-pairs.
+- **secrets are re-encrypted**: In case machines, users or groups are modified
+  secrets get re-encrypted on demand.
 
-    !!! Important
-        After revoking access to a secret you should also change the underlying secret. i.e. change the API key, or the password.
+  !!! Important After revoking access to a secret you should also change the
+  underlying secret. i.e. change the API key, or the password.
 
 ---
 
 ### Machine and user keys
 
-The following diagrams illustrates how a user can provide a secret (i.e. a Password).
+The following diagrams illustrates how a user can provide a secret (i.e. a
+Password).
 
-- By using the **Clan CLI** a user encrypts the password with both the **User public-key** and the **machine's public-key**
+- By using the **Clan CLI** a user encrypts the password with both the **User
+  public-key** and the **machine's public-key**
 
-- The *Machine* can decrypt the password with its private-key on demand.
+- The _Machine_ can decrypt the password with its private-key on demand.
 
-- The *User* is able to decrypt the password to make changes to it.
+- The _User_ is able to decrypt the password to make changes to it.
 
 ```plantuml
 @startuml
@@ -248,14 +277,14 @@ Rel_R(secret, machine, "Decrypt", "", "machine privkey" )
 @enduml
 ```
 
-
 #### User groups
 
 Here we illustrate how machine groups work.
 
 Common use cases:
 
-- **Shared Management**: Access among multiple users. I.e. a subset of secrets/machines that have two admins
+- **Shared Management**: Access among multiple users. I.e. a subset of
+  secrets/machines that have two admins
 
 ```plantuml
 @startuml
@@ -309,11 +338,8 @@ Rel(secret, c1, "Decrypt", "", "Both machine A or B can decrypt using their priv
 
 <!-- TODO: See also [Groups Reference](#groups-reference) -->
 
-
-
 See the [readme](https://github.com/Mic92/sops-nix) of sops-nix for more
 examples.
-
 
 ---
 

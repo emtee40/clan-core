@@ -2,23 +2,27 @@
 
 ## Introduction to Backups
 
-When you're managing your own services, creating regular backups is crucial to ensure your data's safety.
-This guide introduces you to Clan's built-in backup functionalities.
-Clan supports backing up your data to both local storage devices (like USB drives) and remote servers, using well-known tools like borgbackup and rsnapshot.
-We might add more options in the future, but for now, let's dive into how you can secure your data.
+When you're managing your own services, creating regular backups is crucial to
+ensure your data's safety. This guide introduces you to Clan's built-in backup
+functionalities. Clan supports backing up your data to both local storage
+devices (like USB drives) and remote servers, using well-known tools like
+borgbackup and rsnapshot. We might add more options in the future, but for now,
+let's dive into how you can secure your data.
 
 ## Backing Up Locally with Localbackup
 
 ### What is Localbackup?
 
-Localbackup lets you backup your data onto physical storage devices connected to your computer,
-such as USB hard drives or network-attached storage. It uses a tool called rsnapshot for this purpose.
+Localbackup lets you backup your data onto physical storage devices connected to
+your computer, such as USB hard drives or network-attached storage. It uses a
+tool called rsnapshot for this purpose.
 
 ### Setting Up Localbackup
 
 1. **Identify Your Backup Device:**
 
-First, figure out which device you'll use for backups. You can see all connected devices by running this command in your terminal:
+First, figure out which device you'll use for backups. You can see all connected
+devices by running this command in your terminal:
 
 ```bash
 lsblk --output NAME,PTUUID,FSTYPE,SIZE,MOUNTPOINT
@@ -29,7 +33,8 @@ Look for the device you intend to use for backups and note its details.
 2. **Configure Your Backup Device:**
 
 Once you've identified your device, you'll need to add it to your configuration.
-Here's an example NixOS configuration for a device located at `/dev/sda2` with an `ext4` filesystem:
+Here's an example NixOS configuration for a device located at `/dev/sda2` with
+an `ext4` filesystem:
 
 ```nix
 {
@@ -41,9 +46,11 @@ Here's an example NixOS configuration for a device located at `/dev/sda2` with a
 }
 ```
 
-Replace `/dev/sda2` with your device and `/mnt/hdd` with your preferred mount point.
+Replace `/dev/sda2` with your device and `/mnt/hdd` with your preferred mount
+point.
 
-3. **Set Backup Targets:** Next, define where on your device you'd like the backups to be stored:
+3. **Set Backup Targets:** Next, define where on your device you'd like the
+   backups to be stored:
 
    ```nix
    {
@@ -66,22 +73,23 @@ Replace `/dev/sda2` with your device and `/mnt/hdd` with your preferred mount po
 
 5. **Listing Backups:** To see available backups, run:
 
-  ```bash
-  clan backups list mymachine
-  ```
+```bash
+clan backups list mymachine
+```
 
 ## Remote Backups with Borgbackup
 
 ### Overview of Borgbackup
 
-Borgbackup splits the backup process into two parts: a backup client that sends data to a backup server.
-The server stores the backups.
+Borgbackup splits the backup process into two parts: a backup client that sends
+data to a backup server. The server stores the backups.
 
 ### Setting Up the Borgbackup Client
 
 1. **Specify Backup Server:**
 
-Start by indicating where your backup data should be sent. Replace `hostname` with your server's address:
+Start by indicating where your backup data should be sent. Replace `hostname`
+with your server's address:
 
 ```nix
 {
@@ -95,7 +103,8 @@ Start by indicating where your backup data should be sent. Replace `hostname` wi
 
 2. **Select Folders to Backup:**
 
-Decide which folders you want to back up. For example, to backup your home and root directories:
+Decide which folders you want to back up. For example, to backup your home and
+root directories:
 
 ```nix
 { clan.core.state.userdata.folders = [ "/home" "/root" ]; }
@@ -103,13 +112,15 @@ Decide which folders you want to back up. For example, to backup your home and r
 
 3. **Generate Backup Credentials:**
 
-Run `clan facts generate <yourmachine>` to prepare your machine for backup, creating necessary SSH keys and credentials.
+Run `clan facts generate <yourmachine>` to prepare your machine for backup,
+creating necessary SSH keys and credentials.
 
 ### Setting Up the Borgbackup Server
 
 1. **Configure Backup Repository:**
 
-On the server where backups will be stored, enable the SSH daemon and set up a repository for each client:
+On the server where backups will be stored, enable the SSH daemon and set up a
+repository for each client:
 
 ```nix
 {
@@ -124,13 +135,15 @@ On the server where backups will be stored, enable the SSH daemon and set up a r
 
 Ensure the path to the public key is correct.
 
-2. **Update Your Systems:** Apply your changes by running `clan machines update` to both the server and your client
+2. **Update Your Systems:** Apply your changes by running `clan machines update`
+   to both the server and your client
 
 ### Managing Backups
 
 - **Scheduled Backups:**
 
-  Backups are automatically performed nightly. To check the next scheduled backup, use:
+  Backups are automatically performed nightly. To check the next scheduled
+  backup, use:
 
   ```bash
   systemctl list-timers | grep -E 'NEXT|borg'

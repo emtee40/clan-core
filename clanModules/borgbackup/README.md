@@ -2,6 +2,7 @@
 description = "Efficient, deduplicating backup program with optional compression and secure encryption."
 categories = ["backup"]
 ---
+
 BorgBackup (short: Borg) gives you:
 
 - Space efficient storage of backups.

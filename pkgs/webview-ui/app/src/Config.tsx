@@ -1,16 +1,17 @@
 import {
-  createSignal,
   createContext,
-  useContext,
-  JSXElement,
   createEffect,
+  createSignal,
+  JSXElement,
+  useContext,
 } from "solid-js";
 import { OperationResponse, pyApi } from "./api";
 import { currClanURI } from "./App";
 
 export const makeMachineContext = () => {
-  const [machines, setMachines] =
-    createSignal<OperationResponse<"list_machines">>();
+  const [machines, setMachines] = createSignal<
+    OperationResponse<"list_machines">
+  >();
   const [loading, setLoading] = createSignal(false);
 
   pyApi.list_machines.receive((machines) => {

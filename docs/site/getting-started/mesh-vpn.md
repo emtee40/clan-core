@@ -1,13 +1,14 @@
 # Mesh VPN
 
 This guide provides detailed instructions for configuring
-[ZeroTier VPN](https://zerotier.com) within Clan. Follow the
-outlined steps to set up a machine as a VPN controller (`<CONTROLLER>`) and to
-include a new machine into the VPN.
+[ZeroTier VPN](https://zerotier.com) within Clan. Follow the outlined steps to
+set up a machine as a VPN controller (`<CONTROLLER>`) and to include a new
+machine into the VPN.
 
 ## Concept
 
-By default all machines within one clan are connected via a chosen network technology.
+By default all machines within one clan are connected via a chosen network
+technology.
 
 ```{.no-copy}
 Clan 
@@ -16,13 +17,15 @@ Clan
     Node B
 ```
 
-If you select multiple network technologies at the same time. e.g. (zerotier + yggdrassil)
-You must choose one of them as primary network and the machines are always connected via the primary network.
+If you select multiple network technologies at the same time. e.g. (zerotier +
+yggdrassil) You must choose one of them as primary network and the machines are
+always connected via the primary network.
 
 ## 1. Set-Up the VPN Controller
 
 The VPN controller is initially essential for providing configuration to new
-peers. Once addresses are allocated, the controller's continuous operation is not essential.
+peers. Once addresses are allocated, the controller's continuous operation is
+not essential.
 
 1. **Designate a Machine**: Label a machine as the VPN controller in the clan,
    referred to as `<CONTROLLER>` henceforth in this guide.
@@ -44,8 +47,9 @@ peers. Once addresses are allocated, the controller's continuous operation is no
 
 To introduce a new machine to the VPN, adhere to the following steps:
 
-1. **Update Configuration**: On the new machine, incorporate the following to its
-   configuration, substituting `<CONTROLLER>` with the controller machine name:
+1. **Update Configuration**: On the new machine, incorporate the following to
+   its configuration, substituting `<CONTROLLER>` with the controller machine
+   name:
    ```nix
    { config, ... }: {
      clan.networking.zerotier.networkId = builtins.readFile (config.clan.core.clanDir + "/machines/<CONTROLLER>/facts/zerotier-network-id");
@@ -57,24 +61,15 @@ To introduce a new machine to the VPN, adhere to the following steps:
    ```
    Replace `<NEW_MACHINE>` with the designated new machine name.
 
-    !!! Note "For Private Networks"
-        1. **Retrieve the ZeroTier ID**: On the `new_machine`, execute:
-             ```bash
-             $ sudo zerotier-cli info
-             ```
-             Example Output: 
-             ```{.console, .no-copy}
-             200 info d2c71971db 1.12.1 OFFLINE
-             ```
-             , where `d2c71971db` is the ZeroTier ID.
-        2. **Authorize the New Machine on the Controller**: On the controller machine,
-             execute:
-             ```bash
-             $ sudo zerotier-members allow <ID>
-             ```
-             Substitute `<ID>` with the ZeroTier ID obtained previously.
+   !!! Note "For Private Networks" 1. **Retrieve the ZeroTier ID**: On the
+   `new_machine`, execute: `bash $ sudo zerotier-cli info` Example Output:
+   `{.console, .no-copy} 200 info d2c71971db 1.12.1 OFFLINE` , where
+   `d2c71971db` is the ZeroTier ID. 2. **Authorize the New Machine on the
+   Controller**: On the controller machine, execute:
+   `bash $ sudo zerotier-members allow <ID>` Substitute `<ID>` with the ZeroTier
+   ID obtained previously.
 
-2. **Verify Connection**: On the `new_machine`, re-execute:
+1. **Verify Connection**: On the `new_machine`, re-execute:
    ```bash
    $ sudo zerotier-cli info
    ```
@@ -83,15 +78,17 @@ To introduce a new machine to the VPN, adhere to the following steps:
    200 info d2c71971db 1.12.1 ONLINE
    ```
 
-!!! success "Congratulations!"
-    The new machine is now part of the VPN, and the ZeroTier
-    configuration on NixOS within the Clan project is complete.
+!!! success "Congratulations!" The new machine is now part of the VPN, and the
+ZeroTier configuration on NixOS within the Clan project is complete.
 
 ## Further
 
-Currently you can only use **Zerotier** as networking technology because this is the first network stack we aim to support.
-In the future we plan to add additional network technologies like tinc, head/tailscale, yggdrassil and mycelium.
+Currently you can only use **Zerotier** as networking technology because this is
+the first network stack we aim to support. In the future we plan to add
+additional network technologies like tinc, head/tailscale, yggdrassil and
+mycelium.
 
-We chose zerotier because in our tests it was a straight forwards solution to bootstrap.
-It allows you to selfhost a controller and the controller doesn't need to be globally reachable.
-Which made it a good fit for starting the project.
+We chose zerotier because in our tests it was a straight forwards solution to
+bootstrap. It allows you to selfhost a controller and the controller doesn't
+need to be globally reachable. Which made it a good fit for starting the
+project.

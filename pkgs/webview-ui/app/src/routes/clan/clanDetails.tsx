@@ -1,18 +1,18 @@
 import { OperationResponse, pyApi } from "@/src/api";
 import {
+  createEffect,
+  createSignal,
   For,
   JSX,
   Match,
   Show,
   Switch,
-  createEffect,
-  createSignal,
 } from "solid-js";
 import {
-  SubmitHandler,
   createForm,
   email,
   required,
+  SubmitHandler,
 } from "@modular-forms/solid";
 
 interface ClanDetailsProps {
@@ -172,9 +172,9 @@ export const ClanDetails = (props: ClanDetailsProps) => {
   const [loading, setLoading] = createSignal(false);
   const [errors, setErrors] = createSignal<
     | Extract<
-        OperationResponse<"show_clan_meta">,
-        { status: "error" }
-      >["errors"]
+      OperationResponse<"show_clan_meta">,
+      { status: "error" }
+    >["errors"]
     | null
   >(null);
   const [data, setData] = createSignal<ClanMeta>();
