@@ -7,7 +7,7 @@ from pathlib import Path
 
 from clan_cli.api.util import JSchemaTypeError, type_to_dict
 from clan_cli.errors import ClanError
-
+from clan_cli.api import API
 
 def find_dataclasses_in_directory(
     directory: Path, exclude_paths: list[str] = []
@@ -121,6 +121,7 @@ def test_all_dataclasses() -> None:
     for file, dataclass in dataclasses:
         print(f"checking dataclass {dataclass} in file: {file}")
         try:
+            API.reset()
             dclass = load_dataclass_from_file(file, dataclass, str(cli_path.parent))
             type_to_dict(dclass)
         except JSchemaTypeError as e:
