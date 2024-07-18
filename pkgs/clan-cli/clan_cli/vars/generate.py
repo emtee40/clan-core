@@ -237,7 +237,7 @@ def _generate_vars_for_machine(
         for dep in dependencies:
             if dep not in graph:
                 raise ClanError(
-                    f"Generator {gen_name} has a dependency on {dep}, which does not exist"
+                    f"Generator {gen_name} has a dependency on {dep}, which does not exist for machine {machine.name}"
                 )
 
     # process generators in topological order

@@ -27,6 +27,8 @@ let
     argcomplete # Enables shell completions
   ];
 
+  clanStaticDeps = lib.genAttrs includedRuntimeDeps (name: lib.getBin (pkgs.${name}));
+
   # load nixpkgs runtime dependencies from a json file
   # This file represents an allow list at the same time that is checked by the run_cmd
   #   implementation in nix.py
@@ -99,16 +101,12 @@ python3.pkgs.buildPythonApplication {
       "${gitMinimal}/bin/git"
     ]
     # include selected runtime dependencies in the PATH
-    ++ lib.concatMap (p: [
-      "--prefix"
-      "PATH"
-      ":"
-      p
-    ]) includedRuntimeDeps
     ++ [
       "--set"
-      "CLAN_STATIC_PROGRAMS"
-      (lib.concatStringsSep ":" includedRuntimeDeps)
+      "CLAN_STATIC_DEPS"
+      (pkgs.writeText "static-deps.json" (
+        builtins.toJSON (lib.genAttrs includedRuntimeDeps (name: lib.getBin (pkgs.${name})))
+      ))
     ];
 
   nativeBuildInputs = [
@@ -162,7 +160,7 @@ python3.pkgs.buildPythonApplication {
   passthru.testDependencies = testDependencies;
   passthru.pythonWithTestDeps = pythonWithTestDeps;
   passthru.runtimeDependencies = runtimeDependencies;
-  passthru.runtimeDependenciesAsSet = runtimeDependenciesAsSet;
+  passthru.clanStaticDeps = clanStaticDeps;
 
   postInstall = ''
     cp -r ${nixpkgs'} $out/${python3.sitePackages}/clan_cli/nixpkgs

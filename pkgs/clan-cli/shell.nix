@@ -1,5 +1,4 @@
 {
-  lib,
   nix-unit,
   clan-cli,
   clan-cli-full,
@@ -29,9 +28,7 @@ mkShell {
 
   PYTHONBREAKPOINT = "ipdb.set_trace";
 
-  CLAN_STATIC_PROGRAMS = lib.concatStringsSep ":" (
-    lib.attrNames clan-cli-full.passthru.runtimeDependenciesAsSet
-  );
+  CLAN_STATIC_DEPS = builtins.toJSON (clan-cli-full.passthru.clanStaticDeps);
 
   shellHook = ''
     export GIT_ROOT="$(git rev-parse --show-toplevel)"

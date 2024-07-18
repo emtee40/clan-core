@@ -1,8 +1,9 @@
 import json
 import os
+import subprocess
 import tempfile
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 from ..cmd import run, run_no_stdout
 from ..dirs import nixpkgs_flake, nixpkgs_source
@@ -113,47 +114,74 @@ def nix_shell(packages: list[str], cmd: list[str]) -> list[str]:
     ]
 
 
-# lazy loads list of allowed and static programs
+# Cache for requested dependencies
 class Programs:
-    allowed_programs = None
-    static_programs = None
+    _allowed_programs = None
+    _clan_static_deps = None
+    _cached_paths: ClassVar[dict[str, list[str]]] = {}
+    _to_resolve: ClassVar[list[str]] = []
 
     @classmethod
-    def is_allowed(cls: type["Programs"], program: str) -> bool:
-        if cls.allowed_programs is None:
-            with open(Path(__file__).parent / "allowed-programs.json") as f:
-                cls.allowed_programs = json.load(f)
-        return program in cls.allowed_programs
+    def add_program(cls: type["Programs"], flake_ref: str) -> None:
+        if cls._allowed_programs is None:
+            cls._allowed_programs = set(
+                json.loads(
+                    (Path(__file__).parent / "allowed-programs.json").read_text()
+                )
+            )
+        if cls._clan_static_deps is None:
+            cls._clan_static_deps = json.loads(os.environ.get("CLAN_STATIC_DEPS", "{}"))
+        if flake_ref in cls._cached_paths:
+            return
+        if flake_ref.startswith("nixpkgs#"):
+            name = flake_ref.split("#")[1]
+            if name not in cls._allowed_programs:
+                raise ValueError(
+                    f"Program {name} is not allowed as it is not in the allowed-programs.json file."
+                )
+            if name in cls._clan_static_deps:
+                cls._cached_paths[flake_ref] = [cls._clan_static_deps[name]]
+                return
+        cls._to_resolve.append(flake_ref)
 
     @classmethod
-    def is_static(cls: type["Programs"], program: str) -> bool:
-        """
-        Determines if a program is statically shipped with this clan distribution
-        """
-        if cls.static_programs is None:
-            cls.static_programs = os.environ.get("CLAN_STATIC_PROGRAMS", "").split(":")
-        return program in cls.static_programs
+    # TODO: optimize via multiprocessing
+    def resolve_all(cls: type["Programs"]) -> None:
+        for flake_ref in cls._to_resolve:
+            if flake_ref in cls._cached_paths:
+                continue
+            build = subprocess.run(
+                nix_command(
+                    [
+                        "build",
+                        "--inputs-from",
+                        f"{nixpkgs_flake()!s}",
+                        "--no-link",
+                        "--print-out-paths",
+                        flake_ref,
+                    ]
+                ),
+                capture_output=True,
+            )
+            paths = build.stdout.decode().strip().splitlines()
+            cls._cached_paths[flake_ref] = list(map(lambda path: path + "/bin", paths))
+        cls._to_resolve = []
+
+    @classmethod
+    def bin_paths(cls: type["Programs"], names_or_refs: list[str]) -> list[str]:
+        for name_or_ref in names_or_refs:
+            cls.add_program(name_or_ref)
+        cls.resolve_all()
+        paths = []
+        for name_or_ref in names_or_refs:
+            paths.extend(cls._cached_paths[name_or_ref])
+        return paths
 
 
-# Alternative implementation of nix_shell() to replace nix_shell() at some point
-#   Features:
-#     - allow list for programs (need to be specified in allowed-programs.json)
-#     - be abe to compute a closure of all deps for testing
-#     - build clan distributions that ship some or all packages (eg. clan-cli-full)
-def run_cmd(programs: list[str], cmd: list[str]) -> list[str]:
-    for program in programs:
-        if not Programs.is_allowed(program):
-            raise ValueError(f"Program not allowed: {program}")
-    if os.environ.get("IN_NIX_SANDBOX"):
-        return cmd
-    missing_packages = [
-        f"nixpkgs#{program}" for program in programs if not Programs.is_static(program)
-    ]
-    if not missing_packages:
-        return cmd
-    return [
-        *nix_command(["shell", "--inputs-from", f"{nixpkgs_flake()!s}"]),
-        *missing_packages,
-        "-c",
-        *cmd,
-    ]
+def path_for_programs(packages: list[str]) -> str:
+    bin_paths = Programs.bin_paths(packages)
+    return ":".join(bin_paths)
+
+
+def env_for_programs(packages: list[str]) -> dict[str, str]:
+    return os.environ | {"PATH": path_for_programs(packages)}

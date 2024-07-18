@@ -2,7 +2,7 @@ from pathlib import Path
 
 # from clan_cli.dirs import find_git_repo_root
 from clan_cli.errors import ClanError
-from clan_cli.nix import run_cmd
+from clan_cli.nix import env_for_programs
 
 from .cmd import Log, run
 from .locked_open import locked_open
@@ -60,43 +60,29 @@ def _commit_file_to_git(
     """
     with locked_open(repo_dir / ".git" / "clan.lock", "w+"):
         for file_path in file_paths:
-            cmd = run_cmd(
-                ["git"],
-                ["git", "-C", str(repo_dir), "add", str(file_path)],
-            )
             # add the file to the git index
-
             run(
-                cmd,
+                ["git", "-C", str(repo_dir), "add", str(file_path)],
+                env=env_for_programs(["nixpkgs#git"]),
                 log=Log.BOTH,
                 error_msg=f"Failed to add {file_path} file to git index",
             )
 
-        # check if there is a diff
-        cmd = run_cmd(
-            ["git"],
+        result = run(
             ["git", "-C", str(repo_dir), "diff", "--cached", "--exit-code"]
             + [str(file_path) for file_path in file_paths],
+            env=env_for_programs(["nixpkgs#git"]),
+            check=False,
+            cwd=repo_dir,
+            error_msg=f"Failed to check if there is a diff in the git repository {repo_dir}",
         )
-        result = run(cmd, check=False, cwd=repo_dir)
         # if there is no diff, return
         if result.returncode == 0:
             return
 
-        # commit only that file
-        cmd = run_cmd(
-            ["git"],
-            [
-                "git",
-                "-C",
-                str(repo_dir),
-                "commit",
-                "-m",
-                commit_message,
-            ]
-            + [str(file_path) for file_path in file_paths],
-        )
-
         run(
-            cmd, error_msg=f"Failed to commit {file_paths} to git repository {repo_dir}"
+            ["git", "-C", str(repo_dir), "commit", "-m", commit_message]
+            + [str(file_path) for file_path in file_paths],
+            env=env_for_programs(["nixpkgs#git"]),
+            error_msg=f"Failed to commit {file_paths} to git repository {repo_dir}",
         )
