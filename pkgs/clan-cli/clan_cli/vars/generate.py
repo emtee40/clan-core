@@ -4,7 +4,7 @@ import logging
 import os
 import subprocess
 import sys
-from collections.abc import Callable
+from getpass import getpass
 from graphlib import TopologicalSorter
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -35,11 +35,10 @@ def read_multiline_input(prompt: str = "Finish with Ctrl-D") -> str:
     """
     print(prompt, flush=True)
     proc = subprocess.run(["cat"], stdout=subprocess.PIPE, text=True)
-    log.info("Input received. Processing...")
     return proc.stdout
 
 
-def bubblewrap_cmd(generator: str, generator_dir: Path, dep_tmpdir: Path) -> list[str]:
+def bubblewrap_cmd(generator: str, generator_dir: Path, tmpdir: Path) -> list[str]:
     # fmt: off
     return nix_shell(
         [
@@ -52,7 +51,7 @@ def bubblewrap_cmd(generator: str, generator_dir: Path, dep_tmpdir: Path) -> lis
             "--tmpfs",  "/usr/lib/systemd",
             "--dev", "/dev",
             "--bind", str(generator_dir), str(generator_dir),
-            "--ro-bind", str(dep_tmpdir), str(dep_tmpdir),
+            "--ro-bind", str(tmpdir), str(tmpdir),
             "--unshare-all",
             "--unshare-user",
             "--uid", "1000",
@@ -92,7 +91,7 @@ def decrypt_dependencies(
 def dependencies_as_dir(
     decrypted_dependencies: dict[str, dict[str, bytes]],
     tmpdir: Path,
-) -> Path:
+) -> None:
     for dep_generator, files in decrypted_dependencies.items():
         dep_generator_dir = tmpdir / dep_generator
         dep_generator_dir.mkdir()
@@ -102,7 +101,6 @@ def dependencies_as_dir(
             file_path.touch()
             file_path.chmod(0o600)
             file_path.write_bytes(file)
-    return tmpdir
 
 
 def execute_generator(
@@ -112,7 +110,6 @@ def execute_generator(
     secret_vars_store: SecretStoreBase,
     public_vars_store: FactStoreBase,
     dep_tmpdir: Path,
-    prompt: Callable[[str], str],
 ) -> bool:
     generator_dir = dep_tmpdir / generator_name
     # check if all secrets exist and generate them if at least one is missing
@@ -124,11 +121,7 @@ def execute_generator(
         msg = f"flake is not a Path: {machine.flake}"
         msg += "fact/secret generation is only supported for local flakes"
 
-    # compatibility for old outputs.nix users
     generator = machine.vars_generators[generator_name]["finalScript"]
-    # if machine.vars_data[generator_name]["generator"]["prompt"]:
-    #     prompt_value = prompt(machine.vars_data[generator_name]["generator"]["prompt"])
-    #     env["prompt_value"] = prompt_value
 
     # build temporary file tree of dependencies
     decrypted_dependencies = decrypt_dependencies(
@@ -138,10 +131,26 @@ def execute_generator(
     generator_dir.mkdir(parents=True)
     env["out"] = str(generator_dir)
     with TemporaryDirectory() as tmp:
-        dep_tmpdir = dependencies_as_dir(decrypted_dependencies, Path(tmp))
+        tmpdir = Path(tmp)
+        deps_tempdir = tmpdir / "deps"
+        prompts_tmpdir = tmpdir / "prompts"
+        # populate dependency inputs
+        dependencies_as_dir(decrypted_dependencies, deps_tempdir)
+        # populate prompted values
+        # TODO: make this rest API friendly
+        if machine.vars_generators[generator_name]["prompts"]:
+            prompts_tmpdir.mkdir()
+            env["prompts"] = str(prompts_tmpdir)
+            for prompt_name, prompt in machine.vars_generators[generator_name][
+                "prompts"
+            ].items():
+                prompt_file = prompts_tmpdir / prompt_name
+                value = prompt_func(prompt["description"], prompt["type"])
+                prompt_file.write_text(value)
+
         env["in"] = str(dep_tmpdir)
         if sys.platform == "linux":
-            cmd = bubblewrap_cmd(generator, generator_dir, dep_tmpdir=dep_tmpdir)
+            cmd = bubblewrap_cmd(generator, generator_dir, tmpdir=tmpdir)
         else:
             cmd = ["bash", "-c", generator]
         run(
@@ -177,9 +186,18 @@ def execute_generator(
     return True
 
 
-def prompt_func(text: str) -> str:
-    print(f"{text}: ")
-    return read_multiline_input()
+def prompt_func(description: str, input_type: str) -> str:
+    print(f"Enter the value for {description}: ")
+    if input_type == "line":
+        result = input()
+    elif input_type == "multiline":
+        result = read_multiline_input()
+    elif input_type == "hidden":
+        result = getpass()
+    else:
+        raise ClanError(f"Unknown input type: {input_type} for prompt {description}")
+    log.info("Input received. Processing...")
+    return result
 
 
 def _get_subgraph(graph: dict[str, set], vertex: str) -> dict[str, set]:
@@ -198,7 +216,6 @@ def _generate_vars_for_machine(
     generator_name: str | None,
     regenerate: bool,
     tmpdir: Path,
-    prompt: Callable[[str], str] = prompt_func,
 ) -> bool:
     local_temp = tmpdir / machine.name
     local_temp.mkdir()
@@ -215,13 +232,6 @@ def _generate_vars_for_machine(
         raise ClanError(
             f"Could not find generator with name: {generator_name}. The following generators are available: {generators}"
         )
-
-    # if generator_name:
-    #     machine_generator_facts = {
-    #         generator_name: machine.vars_generators[generator_name]
-    #     }
-    # else:
-    #     machine_generator_facts = machine.vars_generators
 
     graph = {
         gen_name: set(generator["dependencies"])
@@ -251,7 +261,6 @@ def _generate_vars_for_machine(
             secret_vars_store=secret_vars_store,
             public_vars_store=public_vars_store,
             dep_tmpdir=local_temp,
-            prompt=prompt,
         )
     if machine_updated:
         # flush caches to make sure the new secrets are available in evaluation
@@ -263,7 +272,6 @@ def generate_vars(
     machines: list[Machine],
     generator_name: str | None,
     regenerate: bool,
-    prompt: Callable[[str], str] = prompt_func,
 ) -> bool:
     was_regenerated = False
     with TemporaryDirectory() as tmp:
@@ -273,7 +281,7 @@ def generate_vars(
             errors = 0
             try:
                 was_regenerated |= _generate_vars_for_machine(
-                    machine, generator_name, regenerate, tmpdir, prompt
+                    machine, generator_name, regenerate, tmpdir
                 )
             except Exception as exc:
                 log.error(f"Failed to generate facts for {machine.name}: {exc}")
